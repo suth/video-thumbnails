@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: Video, YouTube, Vimeo, Thumbnails
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 Video Thumbnails is a simple plugin that makes it easier to display video thumbnails in your template.
 
@@ -18,7 +18,7 @@ Video Thumbnails currently supports:
 *   Vimeo
 *   JR Embed (uses `[youtube id=VIDEO_ID]` to embed videos, I've modified mine to also allow `[vimeo id=VIDEO_ID]`)
 
-If no thumbnail is found, a default thumbnail is returned, which can be changed by replacing /wp-content/plugins/video-thumbnails/default.jpg
+If no thumbnail is found, a default thumbnail is returned, which can be changed by replacing the `default.jpg` file found in your `/plugins/video-thumbnails/` directory.
 
 This is just a start, so don't hesitate to share suggestions and let me know if you find any problems.
 
@@ -34,10 +34,6 @@ This is just a start, so don't hesitate to share suggestions and let me know if 
 
 If the service allows a way to retrieve thumbnails, I'll do my best to add it.
 
-= The default image isn't working, what's wrong? =
-
-I suspect there may be an issue with the way I construct the URL to the default image, so if you have an issues just let me know.
-
 = I don't want a thumbnail for posts without a video, what should I do? =
 
 I have several additions in mind, and better handling of this type of situation is one of them.
@@ -47,6 +43,9 @@ I have several additions in mind, and better handling of this type of situation 
 Coming Soon
 
 == Changelog ==
+
+= 0.1.2 =
+Fixed a possible issue with how the default image URL is created
 
 = 0.1.1 =
 Fixed an issue with the plugin directory's name that caused the default URL to be broken

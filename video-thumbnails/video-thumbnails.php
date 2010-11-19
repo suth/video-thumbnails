@@ -5,7 +5,7 @@ Plugin URI: http://sutherlandboswell.com/2010/11/wordpress-video-thumbnails/
 Description: A plugin designed to fetch video thumbnails. Use <code>&lt;?php video_thumbnail(); ?&gt;</code> in a loop to return a URL for the thumbnail of the first video in a post. Currently works with YouTube and Vimeo, and with the JR_embed plugin.
 Author: Sutherland Boswell
 Author URI: http://sutherlandboswell.com
-Version: 0.1.1
+Version: 0.1.2
 License: GPL2
 */
 /*  Copyright 2010 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
@@ -79,7 +79,7 @@ function video_thumbnail() {
 	
 	// If we still don't find anything, display a default thumbnail
 	else {
-		echo get_bloginfo('wpurl') . "/wp-content/plugins/video-thumbnails/default.jpg";
+		echo plugins_url() . "/video-thumbnails/default.jpg";
 	}
 };
 

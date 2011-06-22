@@ -1,16 +1,16 @@
 === Video Thumbnails ===
 Contributors: sutherlandboswell
 Donate link: http://amzn.com/w/1L25YG6FO8AZ1
-Tags: Video, YouTube, Vimeo, Blip.tv, Justin.tv, Thumbnails
+Tags: Video, Thumbnails, YouTube, Vimeo, Blip.tv, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.5
+Tested up to: 3.1.2
+Stable tag: 1.7.4
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
 == Description ==
 
-Video Thumbnails makes it easy to automatically display video thumbnails in your template. This plugin will find the first video in your post, find the thumbnail, and can then save the video thumbnail to your media library. There's even an option to automatically set this as the featured image!
+Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and locate the thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types!
 
 Video Thumbnails currently supports these video services:
 
@@ -18,13 +18,15 @@ Video Thumbnails currently supports these video services:
 * Vimeo
 * Justin.tv
 * Blip.tv
+* Dailymotion
+* Metacafe
 
 Video Thumbnails even works with most video embedding plugins, including:
 
 * [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
 * [Simple Video Embedder](http://wordpress.org/extend/plugins/simple-video-embedder/)
 * [Vimeo Shortcode](http://blog.esimplestudios.com/2010/08/embedding-vimeo-videos-in-wordpress/)
-* [JR Embed](http://plugins.jakeruston.co.uk/wordpress/wordpress-plugin-jr-embed/)
+* [WP YouTube Lyte](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 Some functions are available to advanced users who want to customize their theme:
 
@@ -49,6 +51,10 @@ Yes, but be sure to include the post ID as a parameter. For example: `<?php $thu
 = My video service/embedding plugin isn't included, can you add it? =
 
 If the service allows a way to retrieve thumbnails, I'll do my best to add it.
+
+= How do I use this plugin with custom post types? =
+
+The settings page includes a checklist of all your post types so you can pick and choose.
 
 = I am editing my theme and only want to display a thumbnail if one is found. How do I do this? =
 
@@ -77,6 +83,23 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. The Video Thumbnail meta box on the Edit Post page
 
 == Changelog ==
+
+= 1.7.4 =
+* Fixed Dailymotion bug (thanks [Gee](http://wordpress.org/support/profile/geekxx))
+* Added detection for Dailymotion URLs (thanks [Gee](http://wordpress.org/support/profile/geekxx))
+* Added support for [WP YouTube Lyte](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
+
+= 1.7.3 =
+* More comprehensive search for embedded YouTube videos
+
+= 1.7.2 =
+* Added support for Dailymotion and Metacafe
+
+= 1.7 =
+* Added new option to scan past posts for video thumbnails
+
+= 1.6 =
+* Added support for custom post types
 
 = 1.5 =
 * Video thumbnails are now only saved when a post's status changes to published.
@@ -183,8 +206,7 @@ This version adds the thumbnail URL to the post's meta data, meaning any outside
 
 == Known Issues ==
 
-* "Scan for Video Thumbnails" button can cause errors and has been removed until it can be fixed.
-* Posts with thumbnails manually set are overwritten by thumbnails found by the plugin, a solution is to save the post then select a different thumbnail without saving the whole post again
+* Because the plugin politely removes its settings when being deactivated, settings may revert back to the defaults when upgrading the plugin automatically. I believe this is an issue that will be fixed in WordPress 3.1.
 
 == Roadmap ==
 

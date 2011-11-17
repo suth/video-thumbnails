@@ -1,10 +1,10 @@
 === Video Thumbnails ===
 Contributors: sutherlandboswell
-Donate link: http://amzn.com/w/1L25YG6FO8AZ1
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=sutherland%2eboswell%40gmail%2ecom&lc=US&item_name=Sutherland%20Boswell&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 Tags: Video, Thumbnails, YouTube, Vimeo, Blip.tv, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.0
 Tested up to: 3.1.2
-Stable tag: 1.7.4
+Stable tag: 1.7.6
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -43,6 +43,10 @@ Some functions are available to advanced users who want to customize their theme
 = My theme isn't showing thumbnails, what's wrong? =
 
 The most likely problem is that your theme doesn't support post thumbnails. If thumbnails are supported, you should see a box titled "Featured Image" on the edit post page. If thumbnails aren't supported, your theme will have to be modified to support Featured Images or to support one of our custom functions.
+
+= I'm using a custom field to store the video and it isn't working, is there a solution? =
+
+Yes, [this thread](http://wordpress.org/support/topic/plugin-video-thumbnails-cant-find-youtube-thumbnails) has a solution for searching a custom field instead of the post's main content.
 
 = Can I use the functions outside of a loop? =
 
@@ -83,6 +87,13 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. The Video Thumbnail meta box on the Edit Post page
 
 == Changelog ==
+
+= 1.7.6 =
+* Fixed plugin link
+* Added donate button
+
+= 1.7.5 =
+* Bugfix for array error on line 408
 
 = 1.7.4 =
 * Fixed Dailymotion bug (thanks [Gee](http://wordpress.org/support/profile/geekxx))

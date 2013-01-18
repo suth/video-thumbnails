@@ -1,16 +1,16 @@
 === Video Thumbnails ===
 Contributors: sutherlandboswell
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=sutherland%2eboswell%40gmail%2ecom&lc=US&item_name=Sutherland%20Boswell&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
+Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Blip.tv, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 1.7.7
+Tested up to: 3.4.2
+Stable tag: 1.8.2
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
 == Description ==
 
-Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and locate the thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types!
+Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and locate the thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
 
 Video Thumbnails currently supports these video services:
 
@@ -44,9 +44,9 @@ Some functions are available to advanced users who want to customize their theme
 
 The most likely problem is that your theme doesn't support post thumbnails. If thumbnails are supported, you should see a box titled "Featured Image" on the edit post page. If thumbnails aren't supported, your theme will have to be modified to support Featured Images or to support one of our custom functions.
 
-= I'm using a custom field to store the video and it isn't working, is there a solution? =
+= How can I use Video Thumbnails if I use a custom field to store the video? =
 
-Yes, [this thread](http://wordpress.org/support/topic/plugin-video-thumbnails-cant-find-youtube-thumbnails) has a solution for searching a custom field instead of the post's main content.
+On the Video Thumbnails settings page just enter the name of the custom field and the plugin will scan it.
 
 = Can I use the functions outside of a loop? =
 
@@ -62,13 +62,13 @@ The settings page includes a checklist of all your post types so you can pick an
 
 = I am editing my theme and only want to display a thumbnail if one is found. How do I do this? =
 
-`<?php if( ( $video_thumbnail = get_video_thumbnail() ) != null ) { echo "<img src='" . $video_thumbnail . "' />"; } ?>` will only display a thumbnail when one exists.
+`<?php if( ( $video_thumbnail = get_video_thumbnail() ) != null ) { echo "<img src='" . $video_thumbnail . "' />"; } ?>` will only display a thumbnail when one exists, but I recommend using the Featured Image setting and [the_post_thumbnail](http://codex.wordpress.org/Function_Reference/the_post_thumbnail) template tag.
 
 = I edited my theme and now I'm getting huge thumbnails, how can I resize them? =
 
-Adding a width attribute to the image element should scale the image in most modern browsers. Ex: `<?php if( ( $video_thumbnail = get_video_thumbnail() ) != null ) { echo "<img src='" . $video_thumbnail . "' width='300' />"; } ?>`
+The best solution is to use the Featured Image setting and [the_post_thumbnail](http://codex.wordpress.org/Function_Reference/the_post_thumbnail) template tag.
 
-You can also assign a class to the element and style it with CSS, or even use a library like [TimThumb](http://code.google.com/p/timthumb/) to resize your images.
+As an alternative you could assign a class to the element and style it with CSS, or even use a library like [TimThumb](http://code.google.com/p/timthumb/) to resize your images.
 
 = I edited my theme and now I'm seeing the thumbnail and the video, how do I only display the thumbnail? =
 
@@ -87,6 +87,19 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. The Video Thumbnail meta box on the Edit Post page
 
 == Changelog ==
+
+= 1.8.2 =
+* Fixes issue where some servers were unable to download thumbnails from YouTube
+* Fixes possible issue setting new thumbnail as featured image
+
+= 1.8.1 =
+* Plugin now scans posts added using XML-RPC which makes posting videos from iOS or other apps work smoothly
+
+= 1.8 =
+* Added support for custom fields via a new setting
+* Added support for YouTube's privacy-enhanced domain (youtube-nocookie.com)
+* Fixed image duplication bug
+* Now more consistent with [WordPress Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards) (thanks [Daedalon](http://wordpress.org/support/profile/daedalon))
 
 = 1.7.7 =
 * Better cURL error handling
@@ -223,12 +236,8 @@ This version adds the thumbnail URL to the post's meta data, meaning any outside
 
 == Known Issues ==
 
-* Because the plugin politely removes its settings when being deactivated, settings may revert back to the defaults when upgrading the plugin automatically. I believe this is an issue that will be fixed in WordPress 3.1.
+* In some cases you may have to manually search for thumbnails on the post editor
 
 == Roadmap ==
 
-This plugin is still very young, and has a future planned as the ultimate plugin for video thumbnails. Here's some of the planned additions:
-
-* Better Blip.tv support
-* More services
-* Option to display video thumbnails on the admin post list page
+Version 2.0 is in the works and will mainly include code reorganization and optimizations, but suggestions for new features are always welcome.

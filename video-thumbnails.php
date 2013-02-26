@@ -11,7 +11,7 @@ License: GPL2
 /*  Copyright 2010 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
 	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License, version 2, as 
+	it under the terms of the GNU General Public License, version 2, as
 	published by the Free Software Foundation.
 
 	This program is distributed in the hope that it will be useful,
@@ -330,7 +330,7 @@ function get_video_thumbnail( $post_id = null ) {
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
 				wp_update_attachment_metadata( $attach_id, $attach_data );
-			
+
 			}
 
 			// Add hidden custom field with thumbnail URL
@@ -596,6 +596,15 @@ add_action( 'admin_menu', 'video_thumbnails_menu' );
 
 function video_thumbnails_menu() {
 	add_options_page( 'Video Thumbnail Options', 'Video Thumbnails', 'manage_options', 'video-thumbnail-options', 'video_thumbnail_options' );
+
+	add_option( 'video_thumbnails_save_media', '1' );
+	add_option( 'video_thumbnails_set_featured', '1' );
+	add_option( 'video_thumbnails_custom_field', '' );
+	add_option( 'video_thumbnails_post_types', array( 'post' ) );
+
+//	add_settings_section('video_thumbnail_options', 'Video Thumbnails Settings', 'video_thumbnail_options', 'videothumbnailoptions');
+
+//	add_settings_field()
 }
 
 function video_thumbnails_checkbox_option( $option_name, $option_description ) { ?>
@@ -610,6 +619,15 @@ function video_thumbnail_options() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
+	if(isset($_POST['video_thumbnails_save_media']))
+		update_option('video_thumbnails_save_media', $_POST['video_thumbnails_save_media']);
+	if(isset($_POST['video_thumbnails_set_featured']))
+		update_option('video_thumbnails_set_featured', $_POST['video_thumbnails_set_featured']);
+	if(isset($_POST['video_thumbnails_custom_field']))
+		update_option('video_thumbnails_custom_field', $_POST['video_thumbnails_custom_field']);
+	if(isset($_POST['video_thumbnails_post_types']))
+		update_option('video_thumbnails_post_types', $_POST['video_thumbnails_post_types']);
+
 ?>
 
 <div class="wrap">
@@ -618,8 +636,8 @@ function video_thumbnail_options() {
 
 	<p>Say thanks by donating, any amount is appreciated!<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"></form></p>
 
-	<form method="post" action="options.php">
-	<?php wp_nonce_field( 'update-options' ); ?>
+	<form method="post" action="">
+	<?php //wp_nonce_field( 'update-options' ); ?>
 
 	<table class="form-table">
 
@@ -646,10 +664,10 @@ function video_thumbnail_options() {
 		<?php endforeach; ?>
 	</td>
 	</tr>
-	
+
 	<tr valign="top">
-	<th scope="row">Custom Field (Optional: If your video is stored in a custom field, enter the name of that field here. Otherwise, leave this field blank.)</th> 
-	<td><fieldset><legend class="screen-reader-text"><span>Custom Field (Optional: If your video is stored in a custom field, enter the name of that field here. Otherwise, leave this field blank.)</span></legend> 
+	<th scope="row">Custom Field (Optional: If your video is stored in a custom field, enter the name of that field here. Otherwise, leave this field blank.)</th>
+	<td><fieldset><legend class="screen-reader-text"><span>Custom Field (Optional: If your video is stored in a custom field, enter the name of that field here. Otherwise, leave this field blank.)</span></legend>
 	<input name="video_thumbnails_custom_field" type="text" id="video_thumbnails_custom_field" value="<?php echo get_option( 'video_thumbnails_custom_field' ); ?>" />
 	</fieldset></td>
 	</tr>
@@ -667,7 +685,7 @@ function video_thumbnail_options() {
 	<p>For more detailed instructions, check out the page for <a href="http://wordpress.org/extend/plugins/video-thumbnails/">Video Thumbnails on the official plugin directory</a>.</p>
 
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="video_thumbnails_save_media,video_thumbnails_set_featured,video_thumbnails_post_types,video_thumbnails_custom_field" />
+	<input type="hidden" name="page_options" value="video_thumbnails_save_media,video_thumbnails_set_featured,video_thumbnails_post_types,video_thumbnails_custom_field" /-->
 
 	</form>
 

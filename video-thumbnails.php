@@ -105,7 +105,7 @@ function getMetacafeThumbnail( $id ) {
 //
 // The Main Event
 //
-function get_video_thumbnail( $post_id = null ) {
+function get_video_thumbnail( $post_id = null, $post_meta_key = null ) {
 
 	// Get the post ID if none is provided
 	if ( $post_id == null OR $post_id == '' ) $post_id = get_the_ID();
@@ -120,6 +120,8 @@ function get_video_thumbnail( $post_id = null ) {
 		// Get the post or custom field to search
 		if ( $video_key = get_option( 'video_thumbnails_custom_field' ) ) {
 			$markup = get_post_meta( $post_id, $video_key, true );
+		} else if ( $post_meta_key ) {
+			$markup = get_post_meta( $post_id, $post_meta_key, true );
 		} else {
 			$post_array = get_post( $post_id );
 			$markup = $post_array->post_content;
@@ -368,7 +370,10 @@ function video_thumbnail_admin_init() {
 function video_thumbnail_admin() {
 	global $post;
 	$custom = get_post_custom( $post->ID );
-	$video_thumbnail = $custom["_video_thumbnail"][0];
+	if(isset($custom["_video_thumbnail"]))
+		$video_thumbnail = $custom["_video_thumbnail"][0];
+	else
+		$video_thumbnail = '';
 
 	if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
 		echo '<p id="video-thumbnails-preview"><img src="' . $video_thumbnail . '" style="max-width:100%;" /></p>';	}

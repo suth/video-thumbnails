@@ -5,7 +5,7 @@ Plugin URI: http://sutherlandboswell.com/projects/wordpress-video-thumbnails/
 Description: Automatically retrieve video thumbnails for your posts and display them in your theme. Currently supports YouTube, Vimeo, Facebook, Blip.tv, Justin.tv, Dailymotion, Metacafe, Wistia, Youku, Funny or Die, and MPORA.
 Author: Sutherland Boswell
 Author URI: http://sutherlandboswell.com
-Version: 2.0 Beta 7
+Version: 2.0 Beta 8
 License: GPL2
 */
 /*  Copyright 2013 Sutherland Boswell  (email : sutherland.boswell@gmail.com)

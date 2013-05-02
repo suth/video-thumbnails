@@ -160,21 +160,6 @@ function scan_video_thumbnails(){
 		} else {
 			echo '<p><span style="color:red">&#10006;</span> <strong>Error</strong>: Could not verify nonce.</p>';
 		}
-		// global $wpdb; // this is how you get access to the database
-
-		// $post_id = $_POST['post_id'];
-
-		// echo get_the_title( $post_id ) . ' - ';
-
-		// $video_thumbnail = get_video_thumbnail( $post_id );
-
-		// if ( is_wp_error( $video_thumbnail ) ) {
-		// 	echo $video_thumbnail->get_error_message();
-		// } else if ( $video_thumbnail != null ) {
-		// 	echo '<span style="color:green">&#10004;</span> Success!';
-		// } else {
-		// 	echo '<span style="color:red">&#10006;</span> Couldn\'t find a video thumbnail for this post.';
-		// }
 
 		die();
 	}

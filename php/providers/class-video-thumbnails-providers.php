@@ -25,7 +25,9 @@ class Video_Thumbnails_Providers {
 		if ( isset( $this->options_section ) ) add_action( 'admin_init', array( &$this, 'initialize_options' ) );
 		// Get current settings for this provider
 		$options = get_option( 'video_thumbnails' );
-		$this->options = $options['providers'][$this->service_slug];
+		if ( isset( $options['providers'][$this->service_slug] ) ) {
+			$this->options = $options['providers'][$this->service_slug];
+		}
 	}
 
 	function initialize_options() {

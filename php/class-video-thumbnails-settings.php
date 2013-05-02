@@ -16,13 +16,19 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+// Upgrade function
+require_once( VIDEO_THUMBNAILS_PATH . '/php/upgrades.php' );
+
 class Video_Thumbnails_Settings {
 
 	public $options;
 
 	function __construct() {
+		// Activation and deactivation hooks
+		register_activation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_activation' ) );
+		register_deactivation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_deactivation' ) );
 		// Get current options
-		$this->options = get_option( 'video_thumbnails' );
+		$this->options = $this->get_options();
 		// Add options page to menu
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		// Initialize options
@@ -42,6 +48,33 @@ class Video_Thumbnails_Settings {
 			// Ajax past posts script
 			add_action( 'admin_head', array( &$this, 'ajax_past_script' ) );
 		}
+	}
+
+	// Activation hook
+	function plugin_activation() {
+		$default_options = array(
+			'save_media'   => 1,
+			'set_featured' => 1,
+			'post_types'   => array( 'post' ),
+			'custom_field' => '',
+			'version'      => VIDEO_THUMBNAILS_VERSION
+		);
+		add_option( 'video_thumbnails', $default_options );
+	}
+
+	// Deactivation hook
+	function plugin_deactivation() {
+		delete_option( 'video_thumbnails' );
+	}
+
+	// Get options & possibly upgrade
+	function get_options() {
+		// Get the current options from the database
+		$options = get_option( 'video_thumbnails' );
+		// Check if our options need upgrading
+		$options = upgrade_video_thumbnails_options( $options );
+		// Return our options
+		return $options;
 	}
 
 	function admin_menu() {

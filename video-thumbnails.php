@@ -30,46 +30,6 @@ define( 'VIDEO_THUMBNAILS_PATH', dirname(__FILE__) );
 define( 'VIDEO_THUMBNAILS_FIELD', '_video_thumbnail' );
 define( 'VIDEO_THUMBNAILS_VERSION', '2.0' );
 
-// Get plugin options
-$video_thumbnails_options = get_option( 'video_thumbnails' );
-
-// If consolidated options don't exist, assume version 1.8.2
-// Otherwise, get the stored version
-if ( ! isset( $video_thumbnails_options['version'] ) ) $video_thumbnails_options['version'] = '1.8.2';
-
-// Lemme lemme upgrade u
-if ( version_compare( VIDEO_THUMBNAILS_VERSION, $video_thumbnails_options['version'], '>' ) ) {
-
-	// 2.0 - settings are consolidated into single entry
-	if ( version_compare( '2.0', $video_thumbnails_options['version'], '>' ) ) {
-
-		$video_thumbnails_options['save_media'] = get_option( 'video_thumbnails_save_media' );
-		delete_option( 'video_thumbnails_save_media' );
-
-		$video_thumbnails_options['set_featured'] = get_option( 'video_thumbnails_set_featured' );
-		delete_option( 'video_thumbnails_set_featured' );
-
-		$video_thumbnails_options['custom_field'] = get_option( 'video_thumbnails_custom_field' );
-		delete_option( 'video_thumbnails_custom_field' );
-
-		$video_thumbnails_options['post_types'] = get_option( 'video_thumbnails_post_types' );
-		delete_option( 'video_thumbnails_post_types' );
-
-		// Set the version number
-		$video_thumbnails_options['version'] = '2.0';
-
-	}
-
-	// Set the version number
-	$video_thumbnails_options['version'] = VIDEO_THUMBNAILS_VERSION;
-
-	// Save options
-	update_option( 'video_thumbnails', $video_thumbnails_options );
-
-}
-
-// delete_option( 'video_thumbnails' );
-
 // Providers
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-video-thumbnails-providers.php' );
 
@@ -94,10 +54,6 @@ class Video_Thumbnails {
 		// Settings
 		$this->settings = new Video_Thumbnails_Settings();
 
-		// Activation and deactivation hooks
-		register_activation_hook( __FILE__, array( &$this, 'plugin_activation' ) );
-		register_deactivation_hook( __FILE__, array( &$this, 'plugin_deactivation' ) );
-
 		// Initialize meta box
 		add_action( 'admin_init', array( &$this, 'meta_box_init' ) );
 
@@ -120,23 +76,6 @@ class Video_Thumbnails {
 		// Add action for Ajax reset callback
 		add_action( 'wp_ajax_reset_video_thumbnail', array( &$this, 'ajax_reset_callback' ) );
 
-	}
-
-	// Activation hook
-	function plugin_activation() {
-		$default_options = array(
-			'save_media'   => 1,
-			'set_featured' => 1,
-			'post_types'   => array( 'post' ),
-			'custom_field' => '',
-			'version'      => VIDEO_THUMBNAILS_VERSION
-		);
-		add_option( 'video_thumbnails', $default_options );
-	}
-
-	// Deactivation hook
-	function plugin_deactivation() {
-		delete_option( 'video_thumbnails' );
 	}
 
 	// Initialize meta box on edit page

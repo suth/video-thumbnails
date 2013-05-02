@@ -384,11 +384,11 @@ function scan_video_thumbnails(){
 		} else {
 			$selected_types = array();
 		}
+		$html = '';
 		foreach ( $args['options'] as $option ) {
 			$checked = ( in_array( $option, $selected_types ) ? 'checked="checked"' : '' );
 			$html .= '<label for="' . $args['slug'] . '_' . $option . '"><input type="checkbox" id="' . $args['slug'] . '_' . $option . '" name="video_thumbnails[' . $args['slug'] . '][]" value="' . $option . '" ' . $checked . '/> ' . $option . '</label><br>';			
 		}
-		// $html = '<label for="' . $args['slug'] . '"><input type="checkbox" id="' . $args['slug'] . '" name="' . $args['slug'] . '" value="1" ' . checked( 1, $this->options[$args['slug']], false ) . '/> ' . $args['description'] . '</label><br>';
 		echo $html;
 	}
 

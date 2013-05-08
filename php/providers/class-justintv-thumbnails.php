@@ -46,7 +46,7 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 			$result = new WP_Error( 'justintv_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
 		} else {
 			$xml = new SimpleXMLElement( $response['body'] );
-			$result = (string) $xml->object->image_url_huge;
+			$result = (string) $xml->object->image_url_large;
 		}
 		return $result;
 	}
@@ -54,8 +54,8 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => '<object type="application/x-shockwave-flash" height="300" width="400" id="clip_embed_player_flash" data="http://www.justin.tv/widgets/archive_embed_player.swf" bgcolor="#000000"><param name="movie" value="http://www.justin.tv/widgets/archive_embed_player.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="auto_play=false&start_volume=25&title=Weird Things 4/24/12&channel=scamschoolbrian&archive_id=315979133" /></object><br /><a href="http://www.justin.tv/scamschoolbrian#r=-rid-&amp;s=em" class="trk" style="padding:2px 0px 4px; display:block; width: 320px; font-weight:normal; font-size:10px; text-decoration:underline; text-align:center;">Watch live video from scamschoolbrian on Justin.tv</a>',
-			'expected' => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-315979133-630x473.jpg',
+			'markup' => '<object type="application/x-shockwave-flash" height="300" width="400" id="clip_embed_player_flash" data="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" bgcolor="#000000"><param name="movie" value="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="auto_play=false&start_volume=25&title=Title&channel=scamschoolbrian&archive_id=392481524" /></object>',
+			'expected' => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-392481524-320x240.jpg',
 			'name' => 'Embed'
 		),
 	);

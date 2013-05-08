@@ -88,7 +88,7 @@ class Video_Thumbnails_Settings {
 			$post_types = get_option( 'video_thumbnails_post_types' );
 
 			// If there is a a post type option we know there should be others
-			if ( $post_types ) {
+			if ( $post_types !== false ) {
 
 				$options['post_types'] = $post_types;
 				delete_option( 'video_thumbnails_post_types' );

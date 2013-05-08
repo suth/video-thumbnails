@@ -16,19 +16,23 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Upgrade function
-require_once( VIDEO_THUMBNAILS_PATH . '/php/upgrades.php' );
-
 class Video_Thumbnails_Settings {
 
 	public $options;
+
+	var $default_options = array(
+		'save_media'   => 1,
+		'set_featured' => 1,
+		'post_types'   => array( 'post' ),
+		'custom_field' => ''
+	);
 
 	function __construct() {
 		// Activation and deactivation hooks
 		register_activation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_activation' ) );
 		register_deactivation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_deactivation' ) );
-		// Get current options
-		$this->options = $this->get_options();
+		// Set current options
+		add_action( 'plugins_loaded', array( &$this, 'set_options' ) );
 		// Add options page to menu
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		// Initialize options
@@ -52,14 +56,7 @@ class Video_Thumbnails_Settings {
 
 	// Activation hook
 	function plugin_activation() {
-		$default_options = array(
-			'save_media'   => 1,
-			'set_featured' => 1,
-			'post_types'   => array( 'post' ),
-			'custom_field' => '',
-			'version'      => VIDEO_THUMBNAILS_VERSION
-		);
-		add_option( 'video_thumbnails', $default_options );
+		add_option( 'video_thumbnails', $this->default_options );
 	}
 
 	// Deactivation hook
@@ -67,14 +64,59 @@ class Video_Thumbnails_Settings {
 		delete_option( 'video_thumbnails' );
 	}
 
-	// Get options & possibly upgrade
-	function get_options() {
+	// Set options & possibly upgrade
+	function set_options() {
 		// Get the current options from the database
 		$options = get_option( 'video_thumbnails' );
+		// If there aren't any options, load the defaults
+		if ( ! $options ) $options = $this->default_options;
 		// Check if our options need upgrading
-		$options = upgrade_video_thumbnails_options( $options );
-		// Return our options
+		$options = $this->upgrade_options( $options );
+		// Set the options class variable
+		$this->options = $options;
+	}
+
+	function upgrade_options( $options ) {
+
+		// Boolean for if options need updating
+		$options_need_updating = false;
+
+		// If there isn't a settings version we need to check for pre 2.0 settings
+		if ( ! isset( $options['version'] ) ) {
+
+			// Check for post type setting
+			$post_types = get_option( 'video_thumbnails_post_types' );
+
+			// If there is a a post type option we know there should be others
+			if ( $post_types ) {
+
+				$options['post_types'] = $post_types;
+				delete_option( 'video_thumbnails_post_types' );
+
+				$options['save_media'] = get_option( 'video_thumbnails_save_media' );
+				delete_option( 'video_thumbnails_save_media' );
+
+				$options['set_featured'] = get_option( 'video_thumbnails_set_featured' );
+				delete_option( 'video_thumbnails_set_featured' );
+
+				$options['custom_field'] = get_option( 'video_thumbnails_custom_field' );
+				delete_option( 'video_thumbnails_custom_field' );
+
+			}
+
+			// Updates the options version to 2.0
+			$options['version'] = '2.0';
+			$options_need_updating = true;
+
+		}
+
+		// Save options to database if they've been updated
+		if ( $options_need_updating ) {
+			update_option( 'video_thumbnails', $options );
+		}
+
 		return $options;
+
 	}
 
 	function admin_menu() {

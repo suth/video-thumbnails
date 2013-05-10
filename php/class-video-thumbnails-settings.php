@@ -110,6 +110,11 @@ class Video_Thumbnails_Settings {
 
 		}
 
+		if ( version_compare( $options['version'], VIDEO_THUMBNAILS_VERSION, '<' ) ) {
+			$options['version'] = VIDEO_THUMBNAILS_VERSION;
+			$options_need_updating = true;
+		}
+
 		// Save options to database if they've been updated
 		if ( $options_need_updating ) {
 			update_option( 'video_thumbnails', $options );

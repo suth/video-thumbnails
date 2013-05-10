@@ -35,7 +35,8 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-		'#"http://www.facebook.com/v/([0-9]+)"#' // Facebook Embed
+		'#"http://www\.facebook\.com/v/([0-9]+)"#', // Flash Embed
+		'#"https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)"#' // iFrame Embed
 	);
 
 	// Thumbnail URL
@@ -48,7 +49,12 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 		array(
 			'markup' => '<object width=420 height=180><param name=allowfullscreen value=true></param><param name=allowscriptaccess value=always></param><param name=movie value="http://www.facebook.com/v/2560032632599"></param><embed src="http://www.facebook.com/v/2560032632599" type="application/x-shockwave-flash" allowscriptaccess=always allowfullscreen=true width=420 height=180></embed></object>',
 			'expected' => 'https://graph.facebook.com/2560032632599/picture',
-			'name' => 'Embed'
+			'name' => 'Flash Embed'
+		),
+		array(
+			'markup' => '<iframe src="https://www.facebook.com/video/embed?video_id=2560032632599" width="960" height="720" frameborder="0"></iframe>',
+			'expected' => 'https://graph.facebook.com/2560032632599/picture',
+			'name' => 'iFrame Embed'
 		),
 	);
 

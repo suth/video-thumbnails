@@ -659,8 +659,10 @@ class phpVimeo
 
 }
 
-class VimeoAPIException extends Exception {}
-
 endif;
+
+if( !class_exists( 'VimeoAPIException' ) ) {
+    class VimeoAPIException extends Exception {}
+}
 
 ?>

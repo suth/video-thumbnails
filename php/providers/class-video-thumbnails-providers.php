@@ -57,7 +57,8 @@ class Video_Thumbnails_Providers {
 	}
 
 	function text_setting_callback( $args ) {
-		$html = '<input type="text" id="' . $args['slug'] . '" name="video_thumbnails[providers][' . $this->service_slug . '][' . $args['slug'] . ']" value="' . $this->options[$args['slug']] . '"/>';
+		$value = ( isset( $this->options[$args['slug']] ) ? $this->options[$args['slug']] : '' );
+		$html = '<input type="text" id="' . $args['slug'] . '" name="video_thumbnails[providers][' . $this->service_slug . '][' . $args['slug'] . ']" value="' . $value . '"/>';
 		$html .= '<label for="' . $args['slug'] . '"> ' . $args['description'] . '</label>';
 		echo $html;
 	}

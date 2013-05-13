@@ -72,8 +72,13 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
+        // Get our settings
+        $client_id = ( isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
+        $client_secret = ( isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );
+        $access_token = ( isset( $this->options['access_token'] ) && $this->options['access_token'] != '' ? $this->options['access_token'] : false );
+        $access_token_secret = ( isset( $this->options['access_token_secret'] ) && $this->options['access_token_secret'] != '' ? $this->options['access_token_secret'] : false );
 		// If API credentials are entered, use the API
-		if ( $this->options['client_id'] && $this->options['client_secret'] && $this->options['access_token'] && $this->options['access_token_secret'] ) {
+		if ( $client_id && $client_secret && $access_token && $access_token_secret ) {
 			$vimeo = new phpVimeo( $this->options['client_id'], $this->options['client_secret'] );
 			$vimeo->setToken( $this->options['access_token'], $this->options['access_token_secret'] );
 			$response = $vimeo->call('vimeo.videos.getThumbnailUrls', array('video_id'=>$id));

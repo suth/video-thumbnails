@@ -262,21 +262,29 @@ function scan_video_thumbnails(){
 			$passed = 0;
 			$failed = 0;
 			foreach ( $video_thumbnails->providers as $provider ) {
-				foreach ( $provider->test_cases as $test_case ) {				
-					$result = $provider->scan_for_thumbnail( $test_case['markup'] );
-					$result = explode( '?', $result );
-					$result = $result[0];
+				foreach ( $provider->test_cases as $test_case ) {
 					echo '<tr>';
 					echo '<td><strong>' . $provider->service_name . '</strong> - ' . $test_case['name'] . '</td>';
-					if ( $result == $test_case['expected'] ) {
-						echo '<td style="color:green;">&#10004; Passed</td>';
-						$passed++;
-					} else {
+					$result = $provider->scan_for_thumbnail( $test_case['markup'] );
+					if ( is_wp_error( $result ) ) {
+						$error_string = $result->get_error_message();
 						echo '<td style="color:red;">&#10007; Failed</td>';
+						echo '<td>';
+						echo '<div class="error"><p>' . $error_string . '</p></div>';
+						echo '</td>';
 						$failed++;
-						if ( is_wp_error( $result ) ) echo $result->get_error_message();
+					} else {
+						$result = explode( '?', $result );
+						$result = $result[0];
+						if ( $result == $test_case['expected'] ) {
+							echo '<td style="color:green;">&#10004; Passed</td>';
+							$passed++;
+						} else {
+							echo '<td style="color:red;">&#10007; Failed</td>';
+							$failed++;
+						}
+						echo '<td>' . $result . '</td>';
 					}
-					echo '<td>' . $result . '</td>';
 					echo '</tr>';
 				}
 			} ?>

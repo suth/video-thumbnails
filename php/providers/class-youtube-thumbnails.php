@@ -35,9 +35,9 @@ class YouTube_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-	    '#<object[^>]+>.+?https?://www\.youtube(?:\-nocookie)?\.com/[ve]/([A-Za-z0-9\-_]+).+?</object>#s', // Old standard YouTube embed
-	    '#https?://www\.youtube(?:\-nocookie)?\.com/[ve]/([A-Za-z0-9\-_]+)#', // More comprehensive search for old YouTube embed (probably can be removed)
-	    '#https?://www\.youtube(?:\-nocookie)?\.com/embed/([A-Za-z0-9\-_]+)#', // YouTube iframe, the new standard since at least 2011
+	    '#<object[^>]+>.+?(?:https?:)?//www\.youtube(?:\-nocookie)?\.com/[ve]/([A-Za-z0-9\-_]+).+?</object>#s', // Old standard YouTube embed
+	    '#(?:https?:)?//www\.youtube(?:\-nocookie)?\.com/[ve]/([A-Za-z0-9\-_]+)#', // More comprehensive search for old YouTube embed (probably can be removed)
+	    '#(?:https?:)?//www\.youtube(?:\-nocookie)?\.com/embed/([A-Za-z0-9\-_]+)#', // YouTube iframe, the new standard since at least 2011
 	    '#(?:https?(?:a|vh?)?://)?(?:www\.)?youtube(?:\-nocookie)?\.com/watch\?.*v=([A-Za-z0-9\-_]+)#', // Any YouTube URL. After http(s) support a or v for Youtube Lyte and v or vh for Smart Youtube plugin
 	    '#(?:https?(?:a|vh?)?://)?youtu\.be/([A-Za-z0-9\-_]+)#', // Any shortened youtu.be URL. After http(s) a or v for Youtube Lyte and v or vh for Smart Youtube plugin
 	    '#<div class="lyte" id="([A-Za-z0-9\-_]+)"#' // YouTube Lyte

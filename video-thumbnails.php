@@ -207,7 +207,7 @@ class Video_Thumbnails {
 			elseif ( $image_extension == 'image/png' ) $image_extension = '.png';
 
 			// Construct a file name using post slug and extension
-			$new_filename = basename( get_permalink( $post_id ) ) . $image_extension;
+			$new_filename = urldecode( basename( get_permalink( $post_id ) ) ) . $image_extension;
 
 			// Save the image bits using the new filename
 			$upload = wp_upload_bits( $new_filename, null, $image_contents );

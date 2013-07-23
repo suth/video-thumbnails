@@ -35,25 +35,33 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-	    '#http://blip\.tv/play/([^.]+)\.#' // Embed URL
+		'#(https?\:\/\/blip\.tv\/[^\r\n\'\"]+)#' // Blip URL
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
-		$request = "http://blip.tv/players/episode/$id?skin=rss";
+	public function get_thumbnail_url( $url ) {
+		$request = "http://blip.tv/oembed?url=$url";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
 			$result = new WP_Error( 'blip_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
 		} else {
-			$xml = new SimpleXMLElement( $response['body'] );
-			$result = $xml->xpath( "/rss/channel/item/media:thumbnail/@url" );
-			$result = (string) $result[0]['url'];
+			$json = json_decode( $response['body'] );
+			if ( isset( $json->error ) ) {
+				$result = new WP_Error( 'blip_invalid_url', __( 'Error retrieving video information for <a href="' . $url . '">' . $url . '</a>. Check to be sure this is a valid Blip video URL.' ) );
+			} else {
+				$result = $json->thumbnail_url;
+			}
 		}
 		return $result;
 	}
 
 	// Test cases
 	public $test_cases = array(
+		array(
+			'markup' => 'http://blip.tv/cranetv/illustrator-katie-scott-6617917',
+			'expected' => 'http://a.images.blip.tv/CraneTV-IllustratorKatieScott610.jpg',
+			'name' => 'Video URL'
+		),
 		array(
 			'markup' => '<iframe src="http://blip.tv/play/AYL1uFkC.html?p=1" width="780" height="438" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#AYL1uFkC" style="display:none"></embed>',
 			'expected' => 'http://a.images.blip.tv/ReelScience-TheScientificMethodOfOz139.jpg',

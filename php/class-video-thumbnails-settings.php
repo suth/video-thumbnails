@@ -609,7 +609,7 @@ function scan_video_thumbnails(){
 						<td></td>
 					</tr>
 					<tr>
-						<td><strong>Active Providers</strong></td>
+						<td><strong>Providers</strong></td>
 						<td>
 							<?php global $video_thumbnails; ?>
 								<?php $provider_names = array(); foreach ( $video_thumbnails->providers as $provider ) { $provider_names[] = $provider->service_name; }; ?>

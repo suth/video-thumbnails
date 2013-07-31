@@ -142,7 +142,10 @@ class Video_Thumbnails {
 				// Filter for extensions to modify what markup is scanned
 				$markup = apply_filters( 'video_thumbnail_markup', $markup, $post_id );
 
-				foreach ( $this->providers as $key => $provider ) {
+				// Filter to modify providers immediately before scanning
+				$providers = apply_filters( 'video_thumbnail_providers_pre_scan', $this->providers );
+
+				foreach ( $providers as $key => $provider ) {
 					$new_thumbnail = $provider->scan_for_thumbnail( $markup );
 					if ( $new_thumbnail != null ) break;
 				}

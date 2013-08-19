@@ -162,7 +162,7 @@ class Video_Thumbnails {
 				// Set attachment as featured image if enabled
 				if ( $this->settings->options['set_featured'] == 1 && $this->settings->options['save_media'] == 1 ) {
 					// Make sure there isn't already a post thumbnail
-					if ( intval( get_post_thumbnail_id( $post_id ) ) === 0 ) {
+					if ( !ctype_digit( get_post_thumbnail_id( $post_id ) ) ) {
 						set_post_thumbnail( $post_id, $attachment_id );
 					}
 				}

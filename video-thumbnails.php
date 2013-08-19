@@ -58,12 +58,7 @@ class Video_Thumbnails {
 		add_action( 'admin_init', array( &$this, 'meta_box_init' ) );
 
 		// Add actions to save video thumbnails when saving
-		add_action( 'new_to_draft', array( &$this, 'save_video_thumbnail' ), 10, 1 );
-		add_action( 'new_to_publish', array( &$this, 'save_video_thumbnail' ), 10, 1 );
-		add_action( 'draft_to_publish', array( &$this, 'save_video_thumbnail' ), 10, 1 );
-		add_action( 'pending_to_publish', array( &$this, 'save_video_thumbnail' ), 10, 1 );
-		add_action( 'future_to_publish', array( &$this, 'save_video_thumbnail' ), 10, 1 );
-		add_action( 'private_to_publish', array( &$this, 'save_video_thumbnail' ), 10, 1 );
+		add_action( 'save_post', array( &$this, 'save_video_thumbnail' ), 100, 1 );
 
 		// Add actions to save video thumbnails when posting from XML-RPC (this action passes the post ID as an argument so 'get_video_thumbnail' is used instead)
 		add_action( 'xmlrpc_publish_post', 'get_video_thumbnail', 10, 1 );
@@ -165,8 +160,11 @@ class Video_Thumbnails {
 				if ( !update_post_meta( $post_id, VIDEO_THUMBNAILS_FIELD, $new_thumbnail ) ) add_post_meta( $post_id, VIDEO_THUMBNAILS_FIELD, $new_thumbnail, true );
 
 				// Set attachment as featured image if enabled
-				if ( $this->settings->options['set_featured'] == 1 && $this->settings->options['save_media'] == 1 && !get_post_thumbnail_id( $post_id ) ) {
-					set_post_thumbnail( $post_id, $attachment_id );
+				if ( $this->settings->options['set_featured'] == 1 && $this->settings->options['save_media'] == 1 ) {
+					// Make sure there isn't already a post thumbnail
+					if ( intval( get_post_thumbnail_id( $post_id ) ) === 0 ) {
+						set_post_thumbnail( $post_id, $attachment_id );
+					}
 				}
 			}
 			return $new_thumbnail;
@@ -174,18 +172,20 @@ class Video_Thumbnails {
 		}
 	}
 
-	// Runs when post is saved
-	function save_video_thumbnail( $post ) {
-		$post_type = get_post_type( $post->ID );
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return null;
+	/**
+	 * Gets a video thumbnail when a published post is saved
+	 * @param  int $post_id The post ID
+	 */
+	function save_video_thumbnail( $post_id ) {
+		// Don't save video thumbnails during autosave or for unpublished posts
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return null;
+		if ( get_post_status( $post_id ) != 'publish' ) return null;
+		// Check that Video Thumbnails are enabled for current post type
+		$post_type = get_post_type( $post_id );
+		if ( in_array( $post_type, (array) $this->settings->options['post_types'] ) || $post_type == $this->settings->options['post_types'] ) {
+			$this->get_video_thumbnail( $post_id );
 		} else {
-			// Check that Video Thumbnails are enabled for current post type
-			if ( in_array( $post_type, (array) $this->settings->options['post_types'] ) || $post_type == $this->settings->options['post_types'] ) {
-				get_video_thumbnail( $post->ID );
-			} else {
-				return null;
-			}
+			return null;
 		}
 	}
 

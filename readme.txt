@@ -29,8 +29,9 @@ Video Thumbnails currently supports these video services:
 
 Video Thumbnails even works with most video embedding plugins, including:
 
-* [Automatic Youtube Video Posts Plugin](http://wordpress.org/extend/plugins/automatic-youtube-video-posts/)
+* [Refactored Video Importer](https://refactored.co/plugins/video-importer)
 * [Viper's Video Quicktags](http://wordpress.org/extend/plugins/vipers-video-quicktags/)
+* [Automatic Youtube Video Posts Plugin](http://wordpress.org/extend/plugins/automatic-youtube-video-posts/)
 * [Simple Video Embedder](http://wordpress.org/extend/plugins/simple-video-embedder/)
 * [Vimeo Shortcode](http://blog.esimplestudios.com/2010/08/embedding-vimeo-videos-in-wordpress/)
 * [WP YouTube Lyte](http://wordpress.org/extend/plugins/wp-youtube-lyte/)

@@ -62,7 +62,7 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 	// Regex strings
 	public $regexes = array(
 	    '#<object[^>]+>.+?http://vimeo\.com/moogaloop.swf\?clip_id=([A-Za-z0-9\-_]+)&.+?</object>#s', // Standard Vimeo embed code
-	    '#http://player\.vimeo\.com/video/([0-9]+)#', // Vimeo iframe player
+	    '#(?:https?:)?//player\.vimeo\.com/video/([0-9]+)#', // Vimeo iframe player
 	    '#\[vimeo id=([A-Za-z0-9\-_]+)]#', // JR_embed shortcode
 	    '#\[vimeo clip_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Another shortcode
 	    '#\[vimeo video_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Yet another shortcode

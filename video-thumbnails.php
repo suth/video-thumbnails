@@ -207,7 +207,7 @@ class Video_Thumbnails {
 
 			// Translate MIME type into an extension
 			if ( $image_type == 'image/jpeg' ) $image_extension = '.jpg';
-			elseif ( $image_extension == 'image/png' ) $image_extension = '.png';
+			elseif ( $image_type == 'image/png' ) $image_extension = '.png';
 
 			// Construct a file name using post slug and extension
 			$new_filename = urldecode( basename( get_permalink( $post_id ) ) ) . $image_extension;

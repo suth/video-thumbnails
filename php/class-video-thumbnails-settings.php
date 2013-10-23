@@ -159,17 +159,12 @@ function video_thumbnails_past(id) {
 
 };
 <?php
-$posts = get_posts( array(
+$id_array = get_posts( array(
 	'showposts' => -1,
-	'post_type' => $this->options['post_types']
+	'post_type' => $this->options['post_types'],
+	'fields' => 'ids'
 ) );
-
-if ( $posts ) {
-	foreach ( $posts as $post ) {
-		$post_ids[] = $post->ID;
-	}
-	$ids = implode( ', ', $post_ids );
-}
+$ids = implode( ', ', $id_array );
 ?>
 
 var scanComplete = false;

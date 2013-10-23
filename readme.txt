@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Blip, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -96,6 +96,9 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.0.10 =
+* Reduced overhead on settings pages
 
 = 2.0.9 =
 * Fixed Vimeo protocol-relative embeds

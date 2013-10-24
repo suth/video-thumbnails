@@ -71,6 +71,16 @@ class Video_Thumbnails_Providers {
 		}
 	}
 
+	public function scan_for_videos( $markup ) {
+		$videos = array();
+		foreach ( $this->regexes as $regex ) {
+			if ( preg_match_all( $regex, $markup, $matches, PREG_OFFSET_CAPTURE ) ) {
+				$videos = array_merge( $videos, $matches[1] );
+			}
+		}
+		return $videos;
+	}
+
 	// // Requires PHP 5.3.0+	
 	// public static function register_provider( $providers ) {
 	// 	$providers[] = new static;

@@ -107,6 +107,27 @@ class Video_Thumbnails {
 		}
 	}
 
+	/**
+	 * Find all the videos in a post
+	 * @param  string $markup Markup to scan for videos
+	 * @return array          An array of video information
+	 */
+	function find_videos( $markup ) {
+
+		$videos = array();
+
+		// Filter to modify providers immediately before scanning
+		$providers = apply_filters( 'video_thumbnail_providers_pre_scan', $this->providers );
+
+		foreach ( $providers as $key => $provider ) {
+			$provider_videos = $provider->scan_for_videos( $markup );
+			if ( !empty( $provider_videos ) ) $videos[$key] = $provider_videos;
+		}
+
+		return $videos;
+
+	}
+
 	// The main event
 	function get_video_thumbnail( $post_id = null ) {
 

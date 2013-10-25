@@ -44,33 +44,25 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 		return $providers;
 	}
 
-	public function scan_for_thumbnail( $markup ) {
-		// Find thumbnail URL if embedded in player
-		$thumb_regex = '#https://wistia\.sslcs\.cdngc\.net/deliveries/[0-9a-zA-Z]+\.jpg#';
-		if ( preg_match( $thumb_regex, urldecode( $markup ), $matches ) ) {
-			return $matches[0];
-		}
-		$oembed_regex = '#https?://(.+)?(wistia\.com|wistia\.net|wi\.st)/(medias|embed)/(?:[\+~%\/\.\w\-]*)#';
-		if ( preg_match( $oembed_regex, urldecode( $markup ), $matches ) ) {
-			return $this->get_thumbnail_url( $matches[0] );
-		}
-		// Run regex for oEmbed API
-		foreach ( $this->regexes as $regex ) {
-			if ( preg_match( $regex, $markup, $matches ) ) {
-				return $this->get_thumbnail_url( 'http://fast.wistia.net/embed/iframe/' . $matches[1] );
-			}
-		}
-	}
-
 	// Regex strings
 	public $regexes = array(
 		'#Wistia\.embed\("([0-9a-zA-Z]+)"#', // JavaScript API embedding
+		'#(https?://(?:.+)?(?:wistia\.com|wistia\.net|wi\.st)/(?:medias|embed)/(?:[\+~%\/\.\w\-]*))#', // Embed URL
+		'#(https://wistia\.sslcs\.cdngc\.net/deliveries/[0-9a-zA-Z]+\.jpg)#' // Thumbnail image
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $url ) {
-		$url = urlencode( $url );
-		$request = "http://fast.wistia.com/oembed?url=$url";
+	public function get_thumbnail_url( $id ) {
+
+		// ID is an image URL, return it
+		if ( substr( $id, -4 ) == '.jpg' ) return $id;
+
+		// ID is actually an ID, convert it to a URL
+		if ( substr( $id, 0, 4 ) != 'http' ) $id = 'http://fast.wistia.net/embed/iframe/' . $id;
+
+		// ID should now be an embed URL, use oEmbed to find thumbnail URL
+		$id = urlencode( $id );
+		$request = "http://fast.wistia.com/oembed?url=$id";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
 			$result = new WP_Error( 'wistia_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
@@ -78,7 +70,9 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 			$result = json_decode( $response['body'] );
 			$result = $result->thumbnail_url;
 		}
+
 		return $result;
+
 	}
 
 	// Test cases

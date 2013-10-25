@@ -262,7 +262,7 @@ function scan_video_thumbnails(){
 				foreach ( $provider->test_cases as $test_case ) {
 					echo '<tr>';
 					echo '<td><strong>' . $provider->service_name . '</strong> - ' . $test_case['name'] . '</td>';
-					$result = $provider->scan_for_thumbnail( $test_case['markup'] );
+					$result = $video_thumbnails->get_first_thumbnail_url( $test_case['markup'] );
 					if ( is_wp_error( $result ) ) {
 						$error_string = $result->get_error_message();
 						echo '<td style="color:red;">&#10007; Failed</td>';
@@ -318,10 +318,7 @@ function scan_video_thumbnails(){
 
 		global $video_thumbnails;
 
-		foreach ( $video_thumbnails->providers as $provider ) {
-			$new_thumbnail = $provider->scan_for_thumbnail( stripslashes( $_POST['markup'] ) );
-			if ( $new_thumbnail != null ) break;
-		}
+		$new_thumbnail = $video_thumbnails->get_first_thumbnail_url( stripslashes( $_POST['markup'] ) );
 
 		if ( $new_thumbnail == null ) {
 			echo '<p><span style="color:red;">&#10006;</span> No thumbnail found</p>';

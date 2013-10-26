@@ -3,7 +3,7 @@ Contributors: sutherlandboswell
 Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Blip, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.1
-Tested up to: 3.6
+Tested up to: 3.7
 Stable tag: 2.0.10
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.

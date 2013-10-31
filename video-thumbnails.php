@@ -342,6 +342,8 @@ class Video_Thumbnails {
 
 $video_thumbnails = new Video_Thumbnails();
 
+do_action( 'video_thumbnails_plugin_loaded' );
+
 // End class
 
 // Get video thumbnail function

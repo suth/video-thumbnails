@@ -102,5 +102,6 @@ require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-wistia-thumbnails.ph
 // require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-kaltura-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youku-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-collegehumor-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-rutube-thumbnails.php' );
 
 ?>

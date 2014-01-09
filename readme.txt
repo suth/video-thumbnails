@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Blip, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 2.2
+Stable tag: 2.3
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -27,6 +27,7 @@ Video Thumbnails currently supports these video services:
 * Youku
 * CollegeHumor
 * Rutube
+* Twitch
 
 Video Thumbnails even works with most video embedding plugins, including:
 
@@ -97,6 +98,10 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.3 =
+* Added support for archived Twitch videos
+* Fixed issue with Funny or Die thumbnails
 
 = 2.2 =
 * Added support for Rutube

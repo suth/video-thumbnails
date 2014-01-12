@@ -71,6 +71,32 @@ class Video_Thumbnails {
 		// Add action for Ajax reset callback
 		add_action( 'wp_ajax_reset_video_thumbnail', array( &$this, 'ajax_reset_callback' ) );
 
+		// Add admin menus
+		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
+
+		// Add JavaScript and CSS to admin pages
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_scripts' ), 20 );
+
+		// Get the posts to be scanned in bulk
+		add_action('wp_ajax_video_thumbnails_bulk_posts_query', array( &$this, 'bulk_posts_query_callback' ) );
+		// Get the thumbnail for an individual post
+		add_action('wp_ajax_video_thumbnails_get_thumbnail_for_post', array( &$this, 'get_thumbnail_for_post_callback' ) );
+
+	}
+
+	/**
+	 * Adds the admin menu items
+	 */
+	function admin_menu() {
+		add_management_page( 'Bulk Video Thumbnails', 'Bulk Video Thumbs', 'manage_options', 'video-thumbnails-bulk', array( &$this, 'bulk_scanning_page' ) );
+	}
+
+	function admin_scripts( $hook ) {
+		// Bulk tool page
+		if ( 'tools_page_video-thumbnails-bulk' == $hook ) {
+			wp_enqueue_script( 'video-thumbnails-bulk-js', plugins_url( '/js/bulk.js' , __FILE__ ), array( 'jquery' ), VIDEO_THUMBNAILS_VERSION );
+			wp_enqueue_style( 'video-thumbnails-bulk-css', plugins_url('/css/bulk.css', __FILE__), false, VIDEO_THUMBNAILS_VERSION );
+		}
 	}
 
 	// Initialize meta box on edit page
@@ -336,6 +362,77 @@ class Video_Thumbnails {
 		}
 
 		die();
+	}
+
+	function bulk_posts_query_callback() {
+		$args = array(
+			'showposts' => -1,
+			'post_type' => $this->settings->options['post_types'],
+			'fields'    => 'ids'
+		);
+		$query = new WP_Query( $args );
+		echo json_encode( $query->posts );
+		die();
+	}
+
+	function get_thumbnail_for_post_callback() {
+
+		$post_id = $_POST['post_id'];
+		$thumb = get_post_meta( $post_id, VIDEO_THUMBNAILS_FIELD, true );
+
+		if ( $thumb == '' ) {
+			global $video_thumbnails;
+			$thumb = $video_thumbnails->get_video_thumbnail( $post_id );
+			if ( $thumb ) {
+				$type = 'new';
+			}
+		} else {
+			$type = 'existing';
+		}
+
+		if ( $thumb != '' ) {
+			$result = array(
+				'type' => $type,
+				'url' => $thumb
+			);
+		} else {
+			$result = array();
+		}
+
+		echo json_encode( $result );
+		die();
+	}
+
+	function bulk_scanning_page() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+		}
+
+		?>
+		<div class="wrap">
+
+			<div id="icon-tools" class="icon32"></div><h2>Bulk Video Thumbnail Generator</h2>
+
+			<p>Use this tool to scan all of your posts for Video Thumbnails.</p>
+
+			<p><a id="video-thumbnails-scan-all-posts" href="#" class="button button-primary">Scan All Posts</a></p>
+
+			<div id="vt-bulk-scan-results">
+				<div class="progress-bar-container">
+					<span class="percentage">0%</span>
+					<div class="progress-bar">&nbsp;</div>
+				</div>
+				<div class="stats">
+					<div class="scanned"></div>
+					<div class="found"></div>
+				</div>
+				<ul class="log"></ul>
+			</div>
+
+		</div>
+		<?php
+
 	}
 
 }

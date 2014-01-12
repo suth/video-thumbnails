@@ -37,9 +37,7 @@ class Video_Thumbnails_Settings {
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		// Initialize options
 		add_action( 'admin_init', array( &$this, 'initialize_options' ) );
-		// Ajax past search callback
-		add_action( 'wp_ajax_past_video_thumbnail', array( &$this, 'ajax_past_callback' ) );
-		// Ajax past search callback
+		// Ajax clear all callback
 		add_action( 'wp_ajax_clear_all_video_thumbnails', array( &$this, 'ajax_clear_all_callback' ) );
 		// Ajax test callbacks
 		add_action( 'wp_ajax_video_thumbnail_provider_test', array( &$this, 'provider_test_callback' ) ); // Provider test
@@ -49,10 +47,6 @@ class Video_Thumbnails_Settings {
 		if ( isset ( $_GET['page'] ) && ( $_GET['page'] == 'video_thumbnails' ) ) {
 			// Admin scripts
 			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_scripts' ) );
-		}
-		// Ajax past posts script
-		if ( isset ( $_GET['page'] ) && ( $_GET['page'] == 'video_thumbnails' ) && isset ( $_GET['tab'] ) && ( $_GET['tab'] == 'mass_actions' ) ) {
-			add_action( 'admin_head', array( &$this, 'ajax_past_script' ) );
 		}
 	}
 
@@ -139,81 +133,6 @@ class Video_Thumbnails_Settings {
 	function admin_scripts() {
 		wp_enqueue_script( 'video_thumbnails_test', plugins_url( 'js/test.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ) );
 		wp_enqueue_script( 'video_thumbnails_clear', plugins_url( 'js/clear.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ) );
-	}
-
-	function ajax_past_script() {
-
-?><!-- Video Thumbnails Past Post Ajax -->
-<script type="text/javascript">
-function video_thumbnails_past(id) {
-
-	var data = {
-		action: 'past_video_thumbnail',
-		post_id: id
-	};
-
-	// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-	jQuery.post(ajaxurl, data, function(response){
-
-		document.getElementById(id+'_result').innerHTML = response;
-
-	});
-
-};
-<?php
-$id_array = get_posts( array(
-	'showposts' => -1,
-	'post_type' => $this->options['post_types'],
-	'fields' => 'ids'
-) );
-$ids = implode( ', ', $id_array );
-?>
-
-var scanComplete = false;
-
-function scan_video_thumbnails(){
-
-	if(scanComplete==false){
-		scanComplete = true;
-		var ids = new Array(<?php echo $ids; ?>);
-		for (var i = 0; i < ids.length; i++){
-			var container = document.getElementById('video-thumbnails-past');
-			var new_element = document.createElement('li');
-			new_element.setAttribute('id',ids[i]+'_result');
-			new_element.innerHTML = 'Waiting...';
-			container.insertBefore(new_element, container.firstChild);
-		}
-		for (var i = 0; i < ids.length; i++){
-			document.getElementById(ids[i]+'_result').innerHTML = '<span style="color:yellow">&#8226;</span> Working...';
-			video_thumbnails_past(ids[i]);
-		}
-	} else {
-		alert('Scan has already been run, please reload the page before trying again.')
-	}
-
-}
-</script><?php
-
-	}
-
-	function ajax_past_callback() {
-		global $wpdb; // this is how you get access to the database
-
-		$post_id = $_POST['post_id'];
-
-		echo get_the_title( $post_id ) . ' - ';
-
-		$video_thumbnail = get_video_thumbnail( $post_id );
-
-		if ( is_wp_error( $video_thumbnail ) ) {
-			echo $video_thumbnail->get_error_message();
-		} else if ( $video_thumbnail != null ) {
-			echo '<span style="color:green">&#10004;</span> Success!';
-		} else {
-			echo '<span style="color:red">&#10006;</span> Couldn\'t find a video thumbnail for this post.';
-		}
-
-		die();
 	}
 
 	function ajax_clear_all_callback() {
@@ -519,10 +438,7 @@ function scan_video_thumbnails(){
 
 			<p>Scan all of your past posts for video thumbnails. Be sure to save any settings before running the scan.</p>
 
-			<p><input type="submit" class="button-primary" onclick="scan_video_thumbnails();" value="Scan Past Posts" /></p>
-
-			<ol id="video-thumbnails-past">
-			</ol>
+			<p><a class="button-primary" href="<?php echo admin_url( 'tools.php?page=video-thumbnails-bulk' ); ?>">Scan Past Posts</a></p>
 
 			<h3>Clear all Video Thumbnails</h3>
 

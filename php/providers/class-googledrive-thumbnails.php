@@ -29,7 +29,7 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 	const service_slug = 'googledrive';
 
 	public $options_section = array(
-		'description' => '<p><strong>Optional</strong>: Only required if using videos from Google Drive.</p>',
+		'description' => '<p><strong>Optional</strong>: Only required if using videos from Google Drive.</p><p><strong>Directions</strong>: Go to the <a href="https://cloud.google.com/console/project">Google Developers Console</a>, create a project, then enable the Drive API. Next go to the credentials section and create a new public API access key. Choose server key, then leave allowed IPs blank and click create. Copy and paste your new API key below.</p>',
 		'fields' => array(
 			'api_key' => array(
 				'name' => 'API Key',

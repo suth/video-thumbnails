@@ -212,8 +212,11 @@ class Video_Thumbnails_Settings {
 							$failed++;
 						}
 						echo '<td>';
-						if ( $matched ) {
-							echo '<code>' . $this->get_file_hash( $result ) . '</code> <a href="' . $result . '">View Image</a>';
+						if ( $result_hash ) {
+							echo '<code>' . $result_hash . '</code>';
+						}
+						if ( $result ) {
+							echo ' <a href="' . $result . '">View Image</a>';
 						}
 						echo '</td>';
 					}

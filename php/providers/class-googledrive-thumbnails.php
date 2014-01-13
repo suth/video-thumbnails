@@ -74,19 +74,22 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => '<iframe src="https://docs.google.com/file/d/0B2tG5YeQL99ZUHNja3l6am9jSGM/preview?pli=1" width="640" height="385"></iframe>',
-			'expected' => 'https://lh3.googleusercontent.com/QL3d7Wh7V_qcXnMpXT6bio77RS0veyCZZ0zQbMX6gd-qH7aeIXBkXlcSJVDEyftiiA=s480',
-			'name' => 'iFrame embed'
+			'markup'        => '<iframe src="https://docs.google.com/file/d/0B2tG5YeQL99ZUHNja3l6am9jSGM/preview?pli=1" width="640" height="385"></iframe>',
+			'expected'      => 'https://lh3.googleusercontent.com/QL3d7Wh7V_qcXnMpXT6bio77RS0veyCZZ0zQbMX6gd-qH7aeIXBkXlcSJVDEyftiiA=s480',
+			'expected_hash' => '3bc674d8d77b342e633ab9e93e345462',
+			'name'          => 'iFrame embed'
 		),
 		array(
-			'markup' => '<iframe height="385" src="https://docs.google.com/a/svpanthers.org/file/d/0BxQsabDaO6USYUgxSUJ3T0ZBa3M/preview" width="100%"></iframe>',
-			'expected' => 'https://lh6.googleusercontent.com/WeOdCsaplJ3am25To1uLZiVYkyrilAQ5rxzhjnyyFc5GAF4QeCF1eq3EMpbP7O5dFg=s480',
-			'name' => 'iFrame embed (Apps account)'
+			'markup'        => '<iframe height="385" src="https://docs.google.com/a/svpanthers.org/file/d/0BxQsabDaO6USYUgxSUJ3T0ZBa3M/preview" width="100%"></iframe>',
+			'expected'      => 'https://lh6.googleusercontent.com/WeOdCsaplJ3am25To1uLZiVYkyrilAQ5rxzhjnyyFc5GAF4QeCF1eq3EMpbP7O5dFg=s480',
+			'expected_hash' => 'f120755bbd1d35e381cb84a829ac0dfa',
+			'name'          => 'iFrame embed (Apps account)'
 		),
 		array(
-			'markup' => '<object width="500" height="385" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><embed width="500" height="385" type="application/x-shockwave-flash" src="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" allowFullScreen="true" allowScriptAccess="always" allowfullscreen="true" allowscriptaccess="always" /></object>',
-			'expected' => 'https://lh3.googleusercontent.com/U_lqaX1o7E9iU75XwCrHZ4pdSi-Vch2F_GK5Ib7WAxgwKTvTl0kMHXm2GxKo1Pcp3Q=s480',
-			'name' => 'Flash embed'
+			'markup'        => '<object width="500" height="385" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><embed width="500" height="385" type="application/x-shockwave-flash" src="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" allowFullScreen="true" allowScriptAccess="always" allowfullscreen="true" allowscriptaccess="always" /></object>',
+			'expected'      => 'https://lh3.googleusercontent.com/U_lqaX1o7E9iU75XwCrHZ4pdSi-Vch2F_GK5Ib7WAxgwKTvTl0kMHXm2GxKo1Pcp3Q=s480',
+			'expected_hash' => '31cf8e05f981c1beb6e04823ad54d267',
+			'name'          => 'Flash embed'
 		),
 	);
 

@@ -1,10 +1,10 @@
 === Video Thumbnails ===
 Contributors: sutherlandboswell
 Donate link: http://wie.ly/u/donate
-Tags: Video, Thumbnails, YouTube, Vimeo, Blip, Justin.tv, Dailymotion, Metacafe, Image, Featured Image, Post Thumbnail
+Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 2.3
+Stable tag: 2.4
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -17,17 +17,19 @@ Video Thumbnails currently supports these video services:
 * YouTube
 * Vimeo
 * Facebook
-* Blip
+* Vine
 * Justin.tv
+* Twitch
 * Dailymotion
 * Metacafe
+* Blip
+* Google Drive
 * Funny or Die
+* CollegeHumor
 * MPORA
 * Wistia
 * Youku
-* CollegeHumor
 * Rutube
-* Twitch
 
 Video Thumbnails even works with most video embedding plugins, including:
 
@@ -49,6 +51,16 @@ Some functions are available to advanced users who want to customize their theme
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
+
+= No video thumbnail for this post =
+
+1. Ensure you have saved any changes to your post.
+1. If you are using a a plugin or theme that stores videos in a special location other than the main post content area, be sure you've entered the correct custom field on the settings page. If you don't know the name of the field your video is being saved in, please contact the developer of that theme or plugin.
+1. Copy and paste your embed code into the "Test Markup for Video" section of the Debugging page. If this doesn't find the thumbnail, you'll want to be sure to include the embed code you scanned when you request support. If it does find a thumbnail, please double check that you have the Custom Field set correctly in the settings page if you are using a a plugin or theme that stores videos in a special location.
+1. Go to the Debugging page and click "Test Image Downloading" to test your server's ability to save an image from a video source.
+1. Try posting a video from other sources to help narrow down the problem.
+1. Check the support threads to see if anyone has had the same issue.
+1. If you are still unable to resolve the problem, start a thread with a good descriptive title ("Error" or "No thumbnails" is a bad title) and be sure to include the results of your testing as well. Also be sure to include the name of your theme, any video plugins you're using, and any other details you can think of.
 
 = My theme isn't showing thumbnails, what's wrong? =
 
@@ -98,6 +110,13 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.4 =
+* Added support for Vine
+* Added support for Google Drive videos
+* Rewritten bulk video thumbnail scanner
+* Added troubleshooting link in meta box when no video thumbnail is found
+* Changed provider test to compare file hashes in case thumbnail URLs change
 
 = 2.3 =
 * Added support for archived Twitch videos

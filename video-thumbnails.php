@@ -2,13 +2,13 @@
 /*
 Plugin Name: Video Thumbnails
 Plugin URI: http://refactored.co/plugins/video-thumbnails
-Description: Automatically retrieve video thumbnails for your posts and display them in your theme. Currently supports YouTube, Vimeo, Facebook, Blip.tv, Justin.tv, Dailymotion, Metacafe, Wistia, Youku, Funny or Die, and MPORA.
+Description: Automatically retrieve video thumbnails for your posts and display them in your theme. Supports YouTube, Vimeo, Facebook, Blip, Justin.tv, Dailymotion, Metacafe, Funny or Die, MPORA, Wistia, Youku, CollegeHumor, Rutube, and Twitch.
 Author: Sutherland Boswell
 Author URI: http://sutherlandboswell.com
 Version: 2.3
 License: GPL2
 */
-/*  Copyright 2013 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
+/*  Copyright 2014 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -110,6 +110,25 @@ class Video_Thumbnails {
 
 	// Construct the meta box
 	function meta_box() {
+
+		// Add hidden troubleshooting info
+		add_thickbox();
+		?>
+		<div id="video-thumbnail-not-found-troubleshooting" style="display:none;">
+			<h2><?php _e( 'Troubleshooting Video Thumbnails' ); ?></h2>
+			<h3>No video thumbnail for this post</h3>
+			<ol>
+				<li>Ensure you have saved any changes to your post.</li>
+				<li>If you are using a a plugin or theme that stores videos in a special location other than the main post content area, be sure you've entered the correct custom field on the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a>. If you don't know the name of the field your video is being saved in, please contact the developer of that theme or plugin.</li>
+				<li>Copy and paste your embed code into the "Test Markup for Video" section of the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a>. If this doesn't find the thumbnail, you'll want to be sure to include the embed code you scanned when you request support. If it does find a thumbnail, please double check that you have the Custom Field set correctly in the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a> if you are using a a plugin or theme that stores videos in a special location.</li>
+				<li>Go to the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a> and click "Test Image Downloading" to test your server's ability to save an image from a video source.</li>
+				<li>Try posting a video from other sources to help narrow down the problem.</li>
+				<li>Check the <a href="http://wordpress.org/support/plugin/video-thumbnails">support threads</a> to see if anyone has had the same issue.</li>
+				<li>If you are still unable to resolve the problem, <a href="http://wordpress.org/support/plugin/video-thumbnails">start a thread</a> with a good descriptive title ("Error" or "No thumbnails" is a bad title) and be sure to include the results of your testing as well. Also be sure to include the name of your theme, any video plugins you're using, and any other details you can think of.</li>
+			</ol>
+		</div>
+		<?php
+
 		global $post;
 		$custom = get_post_custom( $post->ID );
 		if ( isset( $custom[VIDEO_THUMBNAILS_FIELD][0] ) ) $video_thumbnail = $custom[VIDEO_THUMBNAILS_FIELD][0];
@@ -121,8 +140,8 @@ class Video_Thumbnails {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
 				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">Reset Video Thumbnail</a></p>';
 			} else {
-				echo '<p id="video-thumbnails-preview">We didn\'t find a video thumbnail for this post.</p>';
-				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">Search Again</a></p>';
+				echo '<p id="video-thumbnails-preview">No video thumbnail for this post.</p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">Search Again</a> <a href="#TB_inline?width=400&height=600&inlineId=video-thumbnail-not-found-troubleshooting" class="thickbox" style="float:right;">Troubleshoot<a/></p>';
 			}
 		} else {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
@@ -358,7 +377,7 @@ class Video_Thumbnails {
 		} else if ( $video_thumbnail != null ) {
 			echo '<img src="' . $video_thumbnail . '" style="max-width:100%;" />';
 		} else {
-			echo 'We didn\'t find a video thumbnail for this post. (be sure you have saved changes first)';
+			echo 'No video thumbnail for this post.';
 		}
 
 		die();

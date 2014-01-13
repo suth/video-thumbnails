@@ -285,7 +285,7 @@ class Video_Thumbnails_Settings {
 		register_setting( 'video_thumbnails', 'video_thumbnails', array( &$this, 'sanitize_callback' ) );
 	}
 
-	function sanitize_callback( $input ) {   
+	function sanitize_callback( $input ) {
 		$current_settings = get_option( 'video_thumbnails' );
 		$output = array();
 		// General settings

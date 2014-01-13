@@ -92,6 +92,7 @@ class Video_Thumbnails_Providers {
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youtube-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-vimeo-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-facebook-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-vine-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-blip-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-justintv-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-dailymotion-thumbnails.php' );

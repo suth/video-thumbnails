@@ -1,6 +1,6 @@
 <?php
 
-/*  Copyright 2013 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
+/*  Copyright 2014 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -105,5 +105,6 @@ require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youku-thumbnails.php
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-collegehumor-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-rutube-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-twitch-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-googledrive-thumbnails.php' );
 
 ?>

@@ -54,9 +54,10 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => '<object type="application/x-shockwave-flash" height="300" width="400" id="clip_embed_player_flash" data="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" bgcolor="#000000"><param name="movie" value="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="auto_play=false&start_volume=25&title=Title&channel=scamschoolbrian&archive_id=392481524" /></object>',
-			'expected' => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-392481524-320x240.jpg',
-			'name' => 'Embed'
+			'markup'        => '<object type="application/x-shockwave-flash" height="300" width="400" id="clip_embed_player_flash" data="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" bgcolor="#000000"><param name="movie" value="http://www-cdn.justin.tv/widgets/archive_embed_player.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="auto_play=false&start_volume=25&title=Title&channel=scamschoolbrian&archive_id=392481524" /></object>',
+			'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-392481524-320x240.jpg',
+			'expected_hash' => '7f260a2ce6ae75a3c2e5012108f161b7',
+			'name'          => 'Embed'
 		),
 	);
 

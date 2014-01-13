@@ -47,14 +47,16 @@ class Mpora_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => '<object width="480" height="270" id="mporaplayer_wEr2CBooV_N" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" type="application/x-shockwave-flash" ><param name="movie" value="http://video.mpora.com/ep/wEr2CBooV/"></param><param name="wmode" value="transparent"></param><param name="allowScriptAccess" value="always"></param><param name="allowFullScreen" value="true"></param><embed src="http://video.mpora.com/ep/wEr2CBooV/" width="480" height="270" wmode="transparent" allowfullscreen="true" allowscriptaccess="always" type="application/x-shockwave-flash"></embed></object>',
-			'expected' => 'http://ugc4.mporatrons.com/thumbs/wEr2CBooV_640x360_0000.jpg',
-			'name' => 'Flash player'
+			'markup'        => '<object width="480" height="270" id="mporaplayer_wEr2CBooV_N" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" type="application/x-shockwave-flash" ><param name="movie" value="http://video.mpora.com/ep/wEr2CBooV/"></param><param name="wmode" value="transparent"></param><param name="allowScriptAccess" value="always"></param><param name="allowFullScreen" value="true"></param><embed src="http://video.mpora.com/ep/wEr2CBooV/" width="480" height="270" wmode="transparent" allowfullscreen="true" allowscriptaccess="always" type="application/x-shockwave-flash"></embed></object>',
+			'expected'      => 'http://ugc4.mporatrons.com/thumbs/wEr2CBooV_640x360_0000.jpg',
+			'expected_hash' => '95075bd4941251ebecbab3b436a90c49',
+			'name'          => 'Flash player'
 		),
 		array(
-			'markup' => '<iframe width="640" height="360" src="http://mpora.com/videos/AAdfegovdop0/embed" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-			'expected' => 'http://ugc4.mporatrons.com/thumbs/AAdfegovdop0_640x360_0000.jpg',
-			'name' => 'iFrame player'
+			'markup'        => '<iframe width="640" height="360" src="http://mpora.com/videos/AAdfegovdop0/embed" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
+			'expected'      => 'http://ugc4.mporatrons.com/thumbs/AAdfegovdop0_640x360_0000.jpg',
+			'expected_hash' => '45db22a2ba5ef20163f52ba562b89259',
+			'name'          => 'iFrame player'
 		),
 	);
 }

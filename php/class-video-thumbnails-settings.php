@@ -160,6 +160,16 @@ class Video_Thumbnails_Settings {
 		die();
 	}
 
+	function get_file_hash( $url ) {
+		$response = wp_remote_get( $url, array( 'sslverify' => false ) );
+		if( is_wp_error( $response ) ) {
+			$result = false;
+		} else {
+			$result = md5( $response['body'] );
+		}
+		return $result;
+	}
+
 	function provider_test_callback() {
 
 		global $video_thumbnails;
@@ -192,14 +202,20 @@ class Video_Thumbnails_Settings {
 					} else {
 						$result = explode( '?', $result );
 						$result = $result[0];
-						if ( $result == $test_case['expected'] ) {
+						$result_hash = $this->get_file_hash( $result );
+						$matched = ( $result_hash == $test_case['expected_hash'] ? true : false );
+						if ( $matched ) {
 							echo '<td style="color:green;">&#10004; Passed</td>';
 							$passed++;
 						} else {
 							echo '<td style="color:red;">&#10007; Failed</td>';
 							$failed++;
 						}
-						echo '<td>' . $result . '</td>';
+						echo '<td>';
+						if ( $matched ) {
+							echo '<code>' . $this->get_file_hash( $result ) . '</code> <a href="' . $result . '">View Image</a>';
+						}
+						echo '</td>';
 					}
 					echo '</tr>';
 				}

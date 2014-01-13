@@ -55,14 +55,16 @@ class Twitch_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => 'http://www.twitch.tv/vanillatv/c/1537974',
-			'expected' => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-328087483-320x240.jpg',
-			'name' => 'Video link'
+			'markup'        => 'http://www.twitch.tv/vanillatv/c/1537974',
+			'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-328087483-320x240.jpg',
+			'expected_hash' => 'f3921b65f799aa648ef6dae29871c137',
+			'name'          => 'Video link'
 		),
 		array(
-			'markup' => '<object bgcolor="#000000" data="http://www.twitch.tv/widgets/archive_embed_player.swf" height="378" id="clip_embed_player_flash" type="application/x-shockwave-flash" width="620"><param name="movie" value="http://www.twitch.tv/widgets/archive_embed_player.swf"><param name="allowScriptAccess" value="always"><param name="allowNetworking" value="all"><param name="allowFullScreen" value="true"><param name="flashvars" value="title=VanillaTV%2B-%2BSweden%2Bvs%2BRussia%2B-%2BETF2L%2BNations%2BCup%2B-%2BSnakewater%2B%255BMap3%255D%2B-%2BPart%2B3&amp;channel=vanillatv&amp;auto_play=false&amp;start_volume=25&amp;chapter_id=1537974"></object>',
-			'expected' => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-328087483-320x240.jpg',
-			'name' => 'Flash embed'
+			'markup'        => '<object bgcolor="#000000" data="http://www.twitch.tv/widgets/archive_embed_player.swf" height="378" id="clip_embed_player_flash" type="application/x-shockwave-flash" width="620"><param name="movie" value="http://www.twitch.tv/widgets/archive_embed_player.swf"><param name="allowScriptAccess" value="always"><param name="allowNetworking" value="all"><param name="allowFullScreen" value="true"><param name="flashvars" value="title=VanillaTV%2B-%2BSweden%2Bvs%2BRussia%2B-%2BETF2L%2BNations%2BCup%2B-%2BSnakewater%2B%255BMap3%255D%2B-%2BPart%2B3&amp;channel=vanillatv&amp;auto_play=false&amp;start_volume=25&amp;chapter_id=1537974"></object>',
+			'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-328087483-320x240.jpg',
+			'expected_hash' => 'f3921b65f799aa648ef6dae29871c137',
+			'name'          => 'Flash embed'
 		),
 	);
 

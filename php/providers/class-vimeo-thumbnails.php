@@ -61,22 +61,22 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-	    '#<object[^>]+>.+?http://vimeo\.com/moogaloop.swf\?clip_id=([A-Za-z0-9\-_]+)&.+?</object>#s', // Standard Vimeo embed code
-	    '#(?:https?:)?//player\.vimeo\.com/video/([0-9]+)#', // Vimeo iframe player
-	    '#\[vimeo id=([A-Za-z0-9\-_]+)]#', // JR_embed shortcode
-	    '#\[vimeo clip_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Another shortcode
-	    '#\[vimeo video_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Yet another shortcode
-	    '#(?:https?://)?(?:www\.)?vimeo\.com/([0-9]+)#', // Vimeo URL
-	    '#(?:https?://)?(?:www\.)?vimeo\.com/channels/(?:[A-Za-z0-9]+)/([0-9]+)#' // Channel URL
+		'#<object[^>]+>.+?http://vimeo\.com/moogaloop.swf\?clip_id=([A-Za-z0-9\-_]+)&.+?</object>#s', // Standard Vimeo embed code
+		'#(?:https?:)?//player\.vimeo\.com/video/([0-9]+)#', // Vimeo iframe player
+		'#\[vimeo id=([A-Za-z0-9\-_]+)]#', // JR_embed shortcode
+		'#\[vimeo clip_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Another shortcode
+		'#\[vimeo video_id="([A-Za-z0-9\-_]+)"[^>]*]#', // Yet another shortcode
+		'#(?:https?://)?(?:www\.)?vimeo\.com/([0-9]+)#', // Vimeo URL
+		'#(?:https?://)?(?:www\.)?vimeo\.com/channels/(?:[A-Za-z0-9]+)/([0-9]+)#' // Channel URL
 	);
 
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
-        // Get our settings
-        $client_id = ( isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
-        $client_secret = ( isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );
-        $access_token = ( isset( $this->options['access_token'] ) && $this->options['access_token'] != '' ? $this->options['access_token'] : false );
-        $access_token_secret = ( isset( $this->options['access_token_secret'] ) && $this->options['access_token_secret'] != '' ? $this->options['access_token_secret'] : false );
+		// Get our settings
+		$client_id = ( isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
+		$client_secret = ( isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );
+		$access_token = ( isset( $this->options['access_token'] ) && $this->options['access_token'] != '' ? $this->options['access_token'] : false );
+		$access_token_secret = ( isset( $this->options['access_token_secret'] ) && $this->options['access_token_secret'] != '' ? $this->options['access_token_secret'] : false );
 		// If API credentials are entered, use the API
 		if ( $client_id && $client_secret && $access_token && $access_token_secret ) {
 			$vimeo = new phpVimeo( $this->options['client_id'], $this->options['client_secret'] );
@@ -101,19 +101,22 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public $test_cases = array(
 		array(
-			'markup' => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-			'expected' => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
-			'name' => 'iFrame'
+			'markup'        => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
+			'expected'      => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
+			'expected_hash' => 'c60989d7ef599cfd07ec196c35a43623',
+			'name'          => 'iFrame'
 		),
 		array(
-			'markup' => '<object width="500" height="281"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="281"></embed></object>',
-			'expected' => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
-			'name' => 'Old embed'
+			'markup'        => '<object width="500" height="281"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="281"></embed></object>',
+			'expected'      => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
+			'expected_hash' => 'c60989d7ef599cfd07ec196c35a43623',
+			'name'          => 'Old embed'
 		),
 		array(
-			'markup' => 'https://vimeo.com/channels/soundworkscollection/44520894',
-			'expected' => 'http://b.vimeocdn.com/ts/313/130/313130530_640.jpg',
-			'name' => 'Channel URL'
+			'markup'        => 'https://vimeo.com/channels/soundworkscollection/44520894',
+			'expected'      => 'http://b.vimeocdn.com/ts/313/130/313130530_640.jpg',
+			'expected_hash' => 'e9fd72872a39272f6c540ee66b1ecf28',
+			'name'          => 'Channel URL'
 		),
 	);
 

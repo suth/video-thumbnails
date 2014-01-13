@@ -212,11 +212,11 @@ class Video_Thumbnails_Settings {
 							$failed++;
 						}
 						echo '<td>';
-						if ( $result_hash ) {
-							echo '<code>' . $result_hash . '</code>';
-						}
 						if ( $result ) {
-							echo ' <a href="' . $result . '">View Image</a>';
+							echo '<a href="' . $result . '">View Image</a>';
+						}
+						if ( $result_hash ) {
+							echo ' <code>' . $result_hash . '</code>';
 						}
 						echo '</td>';
 					}

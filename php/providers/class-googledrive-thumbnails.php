@@ -48,6 +48,7 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 	public $regexes = array(
 		'#(?:https?:)?//docs\.google\.com/(?:a/[^/]+/)?file/d/([A-Za-z0-9]+)/preview#', // iFrame URL
 		'#(?:https?:)?//video\.google\.com/get_player\?docid=([A-Za-z0-9]+)#', // Flash URL
+		'#<param value="(?:[^"]+)?docid=([A-Za-z0-9]+)(?:[^"]+)?" name="flashvars">#', // Flash (YouTube player)
 	);
 
 	// Thumbnail URL
@@ -90,6 +91,12 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 			'expected'      => 'https://lh3.googleusercontent.com/U_lqaX1o7E9iU75XwCrHZ4pdSi-Vch2F_GK5Ib7WAxgwKTvTl0kMHXm2GxKo1Pcp3Q=s480',
 			'expected_hash' => '31cf8e05f981c1beb6e04823ad54d267',
 			'name'          => 'Flash embed'
+		),
+		array(
+			'markup'        => '<object style="" id="" data="https://youtube.com/get_player?el=leaf" wmode="opaque" allowfullscreen="true" allowscriptaccess="always" type="application/x-shockwave-flash" height="720px" width="1280px"><param value="true" name="allowFullScreen"><param value="always" name="allowscriptaccess"><param value="opaque" name="wmode"><param value="allow_embed=0&partnerid=30&autoplay=1&showinfo=0&docid=0B9VJd4kStxIVellHZEdXdmdSamM&el=leaf" name="flashvars"></object>',
+			'expected'      => 'https://lh5.googleusercontent.com/mHn5gESachhZHi-kbPCRbR6RVXZm3bR7oNNXL97LyYjpzV3Eqty71J2Waw0DPnXKKw=s480',
+			'expected_hash' => '2d0ad4881e4b38de0510a103d2f40dd1',
+			'name'          => 'Flash embed (YouTube player)'
 		),
 	);
 

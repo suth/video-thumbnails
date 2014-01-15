@@ -202,8 +202,14 @@ class Video_Thumbnails_Settings {
 					} else {
 						$result = explode( '?', $result );
 						$result = $result[0];
-						$result_hash = $this->get_file_hash( $result );
-						$matched = ( $result_hash == $test_case['expected_hash'] ? true : false );
+						$result_hash = false;
+						if ( $result == $test_case['expected'] ) {
+							$matched = true;
+						} else {
+							$result_hash = $this->get_file_hash( $result );
+							$matched = ( $result_hash == $test_case['expected_hash'] ? true : false );
+						}
+						
 						if ( $matched ) {
 							echo '<td style="color:green;">&#10004; Passed</td>';
 							$passed++;

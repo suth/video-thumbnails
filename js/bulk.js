@@ -106,20 +106,30 @@ jQuery(function ($) {
 				post_id: this.posts[this.currentItem]
 			};
 			var self = this;
-			$.post(ajaxurl, data, function(response) {
-				var result = $.parseJSON( response );
-				if ( result.length == 0 ) {
-					self.log( '[' + self.posts[self.currentItem] + '] No thumbnail' );
-				} else {
-					self.log( '[' + self.posts[self.currentItem] + '] ' + result.url + ' (' + result.type + ')' );
-					if ( result.type == 'new' ) {
-						self.newThumbnails++;
+			$.ajax({
+				url: ajaxurl,
+				type: "POST",
+				data: data,
+				success: function(response) {
+					var result = $.parseJSON( response );
+					if ( result.length == 0 ) {
+						self.log( '[' + self.posts[self.currentItem] + '] No thumbnail' );
 					} else {
-						self.existingThumbnails++;
+						self.log( '[' + self.posts[self.currentItem] + '] ' + result.url + ' (' + result.type + ')' );
+						if ( result.type == 'new' ) {
+							self.newThumbnails++;
+						} else {
+							self.existingThumbnails++;
+						}
 					}
+					self.updateStats();
+					self.scheduleNextItem();
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					self.log( '[' + self.posts[self.currentItem] + '] Error: ' + errorThrown );
+					self.updateStats();
+					self.scheduleNextItem();
 				}
-				self.updateStats();
-				self.scheduleNextItem();
 			});
 
 		} else {

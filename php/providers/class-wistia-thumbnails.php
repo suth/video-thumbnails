@@ -79,7 +79,7 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 	public $test_cases = array(
 		array(
 			'markup'        => '<iframe src="http://fast.wistia.net/embed/iframe/po4utu3zde?controlsVisibleOnLoad=true&version=v1&videoHeight=360&videoWidth=640&volumeControl=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="640" height="360"></iframe>',
-			'expected'      => 'http://embed-0.wistia.com/deliveries/6928fcba8355e38de4d95863a659e1de23cb2071.jpg',
+			'expected'      => 'https://embed-ssl.wistia.com/deliveries/6928fcba8355e38de4d95863a659e1de23cb2071.jpg',
 			'expected_hash' => 'bc4a2cec9ac97e2ccdae2c7387a01cb4',
 			'name'          => 'Inline player'
 		),

@@ -38,7 +38,8 @@ class YouTube_Thumbnails extends Video_Thumbnails_Providers {
 		'#(?:https?:)?//www\.youtube(?:\-nocookie)?\.com/(?:v|e|embed)/([A-Za-z0-9\-_]+)#', // Comprehensive search for both iFrame and old school embeds
 		'#(?:https?(?:a|vh?)?://)?(?:www\.)?youtube(?:\-nocookie)?\.com/watch\?.*v=([A-Za-z0-9\-_]+)#', // Any YouTube URL. After http(s) support a or v for Youtube Lyte and v or vh for Smart Youtube plugin
 		'#(?:https?(?:a|vh?)?://)?youtu\.be/([A-Za-z0-9\-_]+)#', // Any shortened youtu.be URL. After http(s) a or v for Youtube Lyte and v or vh for Smart Youtube plugin
-		'#<div class="lyte" id="([A-Za-z0-9\-_]+)"#' // YouTube Lyte
+		'#<div class="lyte" id="([A-Za-z0-9\-_]+)"#', // YouTube Lyte
+		'#data-youtube-id="([A-Za-z0-9\-_]+)"#' // LazyYT.js
 	);
 
 	// Thumbnail URL

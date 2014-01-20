@@ -288,7 +288,7 @@ class Video_Thumbnails {
 	 * @param  int    $post_id The ID of the post to create the filename for
 	 * @return string          A filename (without the extension)
 	 */
-	function construct_filename( $post_id ) {
+	static function construct_filename( $post_id ) {
 		$filename = get_the_title( $post_id );
 		$filename = sanitize_title( $filename, $post_id );
 		$filename = urldecode( $filename );
@@ -320,7 +320,7 @@ class Video_Thumbnails {
 			elseif ( $image_type == 'image/png' ) $image_extension = '.png';
 
 			// Construct a file name with extension
-			$new_filename = $this->construct_filename( $post_id ) . $image_extension;
+			$new_filename = self::construct_filename( $post_id ) . $image_extension;
 
 			// Save the image bits using the new filename
 			$upload = wp_upload_bits( $new_filename, null, $image_contents );

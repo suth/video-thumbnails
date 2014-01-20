@@ -331,6 +331,8 @@ class Video_Thumbnails {
 				return $error;
 			} else {
 
+				do_action( 'video_thumbnails/image_downloaded', $upload['file'] );
+
 				$image_url = $upload['url'];
 
 				$filename = $upload['file'];

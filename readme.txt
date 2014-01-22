@@ -2,7 +2,7 @@
 Contributors: sutherlandboswell
 Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
-Requires at least: 3.1
+Requires at least: 3.2
 Tested up to: 3.8
 Stable tag: 2.4.2
 

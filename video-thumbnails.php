@@ -323,7 +323,9 @@ class Video_Thumbnails {
 			$new_filename = self::construct_filename( $post_id ) . $image_extension;
 
 			// Save the image bits using the new filename
+			do_action( 'video_thumbnails/pre_upload_bits', $image_contents );
 			$upload = wp_upload_bits( $new_filename, null, $image_contents );
+			do_action( 'video_thumbnails/after_upload_bits', $upload );
 
 			// Stop for any errors while saving the data or else continue adding the image to the media library
 			if ( $upload['error'] ) {

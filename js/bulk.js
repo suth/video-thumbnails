@@ -1,3 +1,5 @@
+var video_thumbnails_bulk_scanner;
+
 jQuery(function ($) {
 
 	function VideoThumbnailsBulkScanner( posts ) {
@@ -17,13 +19,37 @@ jQuery(function ($) {
 		console.log(text);
 	};
 
+	VideoThumbnailsBulkScanner.prototype.disableSubmit = function(text) {
+		$('#video-thumbnails-bulk-scan-options input[type="submit"]').attr('disabled','disabled');
+	};
+
+	VideoThumbnailsBulkScanner.prototype.enableSubmit = function(text) {
+		$('#video-thumbnails-bulk-scan-options input[type="submit"]').removeAttr('disabled');
+	};
+
+	VideoThumbnailsBulkScanner.prototype.findPosts = function(text) {
+		var data = {
+			action: 'video_thumbnails_bulk_posts_query',
+			params: $('#video-thumbnails-bulk-scan-options').serialize()
+		};
+		var self = this;
+		this.disableSubmit();
+		$('#queue-count').text('working...');
+		$.post(ajaxurl, data, function(response) {
+			self.posts = $.parseJSON( response );
+			$('#queue-count').text(self.posts.length+' posts');
+			self.enableSubmit();
+		});
+	};
+
 	VideoThumbnailsBulkScanner.prototype.startScan = function() {
+		this.disableSubmit();
 		this.paused = false;
 		if ( this.currentItem == 0 ) {
 			this.log( 'Started Scanning' );
 			this.progressBar.show();
 			this.resetProgressBar();
-			$('#video-thumbnails-scan-all-posts').parent().slideUp();
+			$('#video-thumbnails-bulk-scan-options').slideUp();
 		} else {
 			this.log( 'Resumed Scanning' );
 		}
@@ -139,21 +165,16 @@ jQuery(function ($) {
 
 	};
 
-	$('#video-thumbnails-scan-all-posts').on('click',function(e){
+	video_thumbnails_bulk_scanner = new VideoThumbnailsBulkScanner();
+	video_thumbnails_bulk_scanner.findPosts();
+
+	$('#video-thumbnails-bulk-scan-options').on('change',function(e){
+		video_thumbnails_bulk_scanner.findPosts();
+	});
+
+	$('#video-thumbnails-bulk-scan-options').on('submit',function(e){
 		e.preventDefault();
-		var data = {
-			action: 'video_thumbnails_bulk_posts_query'
-		};
-		$.post(ajaxurl, data, function(response) {
-			var posts = $.parseJSON( response );
-			var r = confirm("This will scan " + posts.length + " posts, continue?");
-			if ( r == true ) {
-				x = new VideoThumbnailsBulkScanner( posts );
-				x.startScan();
-			} else {
-				x = "You pressed Cancel!";
-			}
-		});
+		video_thumbnails_bulk_scanner.startScan();
 	});
 
 });

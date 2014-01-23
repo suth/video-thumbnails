@@ -300,7 +300,7 @@ class Video_Thumbnails {
 	}
 
 	// Saves to media library
-	public function save_to_media_library( $image_url, $post_id ) {
+	public static function save_to_media_library( $image_url, $post_id ) {
 
 		$error = '';
 		$response = wp_remote_get( $image_url, array( 'sslverify' => false ) );

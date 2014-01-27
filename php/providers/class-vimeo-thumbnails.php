@@ -90,6 +90,8 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 				$result = new WP_Error( 'vimeo_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
 			} elseif ( $response['response']['code'] == 404 ) {
 				$result = new WP_Error( 'vimeo_info_retrieval', __( 'The Vimeo endpoint located at <a href="' . $request . '">' . $request . '</a> returned a 404 error.<br />Details: ' . $response['response']['message'] ) );
+			} elseif ( $response['response']['code'] == 403 ) {
+				$result = new WP_Error( 'vimeo_info_retrieval', __( 'The Vimeo endpoint located at <a href="' . $request . '">' . $request . '</a> returned a 403 error.<br />This can occur when a video has embedding disabled or restricted to certain domains. Try entering API credentials in the provider settings.' ) );
 			} else {
 				$xml = new SimpleXMLElement( $response['body'] );
 				$result = (string) $xml->thumbnail_url;

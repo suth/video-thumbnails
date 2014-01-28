@@ -4,13 +4,15 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8
-Stable tag: 2.4.2
+Stable tag: 2.5
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
 == Description ==
 
 Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and locate the thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
+
+**New!** Get even more power with [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails). Enjoy features like maximum image sizes, more powerful bulk scanning options, a customizable upload directory, and more!
 
 Video Thumbnails currently supports these video services:
 
@@ -39,6 +41,8 @@ Video Thumbnails even works with most video embedding plugins, including:
 * [Simple Video Embedder](http://wordpress.org/extend/plugins/simple-video-embedder/)
 * [Vimeo Shortcode](http://blog.esimplestudios.com/2010/08/embedding-vimeo-videos-in-wordpress/)
 * [WP YouTube Lyte](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
+
+Video Thumbnails will always be totally free while remaining a full-featured plugin, but if you'd like to support the developer consider purchasing [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails). The pro version runs alongside the standard version and adds additional features like maximum image sizes, more powerful bulk scanning options, a customizable upload directory, and more!
 
 Some functions are available to advanced users who want to customize their theme:
 
@@ -110,6 +114,10 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.5 =
+* Added support for [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails), our new solution for power users and professional bloggers
+* Various bugfixes and improvements
 
 = 2.4.2 =
 * Fixed bug with image download test

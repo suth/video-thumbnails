@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8
-Stable tag: 2.5
+Stable tag: 2.5.1
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -114,6 +114,9 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.5.1 =
+* Fixed improper error handling
 
 = 2.5 =
 * Added support for [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails), our new solution for power users and professional bloggers

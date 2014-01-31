@@ -67,7 +67,7 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 				$result = str_replace( '=s220', '=s480', $result );
 			}
 		} else {
-			$result = new WP_Error( 'googledrive_api_key', __( 'You must enter an API key to retrieve thumbnails from Google Drive' ) );
+			$result = new WP_Error( 'googledrive_api_key', __( 'You must enter an API key in the <a href="' . admin_url( 'options-general.php?page=video_thumbnails&tab=provider_settings' ) . '">provider settings</a> to retrieve thumbnails from Google Drive.' ) );
 		}
 		return $result;
 	}

@@ -240,7 +240,7 @@ class Video_Thumbnails {
 			}
 
 			// Return the new thumbnail variable and update meta if one is found
-			if ( $new_thumbnail != null ) {
+			if ( $new_thumbnail != null && !is_wp_error( $new_thumbnail ) ) {
 
 				// Save as Attachment if enabled
 				if ( $this->settings->options['save_media'] == 1 ) {
@@ -260,6 +260,7 @@ class Video_Thumbnails {
 					}
 				}
 			}
+
 			return $new_thumbnail;
 
 		}

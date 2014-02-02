@@ -116,16 +116,7 @@ class Video_Thumbnails {
 		?>
 		<div id="video-thumbnail-not-found-troubleshooting" style="display:none;">
 			<h2><?php _e( 'Troubleshooting Video Thumbnails' ); ?></h2>
-			<h3>No video thumbnail for this post</h3>
-			<ol>
-				<li>Ensure you have saved any changes to your post.</li>
-				<li>If you are using a a plugin or theme that stores videos in a special location other than the main post content area, be sure you've entered the correct custom field on the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a>. If you don't know the name of the field your video is being saved in, please contact the developer of that theme or plugin.</li>
-				<li>Copy and paste your embed code into the "Test Markup for Video" section of the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a>. If this doesn't find the thumbnail, you'll want to be sure to include the embed code you scanned when you request support. If it does find a thumbnail, please double check that you have the Custom Field set correctly in the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a> if you are using a a plugin or theme that stores videos in a special location.</li>
-				<li>Go to the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a> and click "Test Image Downloading" to test your server's ability to save an image from a video source.</li>
-				<li>Try posting a video from other sources to help narrow down the problem.</li>
-				<li>Check the <a href="http://wordpress.org/support/plugin/video-thumbnails">support threads</a> to see if anyone has had the same issue.</li>
-				<li>If you are still unable to resolve the problem, <a href="http://wordpress.org/support/plugin/video-thumbnails">start a thread</a> with a good descriptive title ("Error" or "No thumbnails" is a bad title) and be sure to include the results of your testing as well. Also be sure to include the name of your theme, any video plugins you're using, and any other details you can think of.</li>
-			</ol>
+			<?php $this->no_video_thumbnail_troubleshooting_instructions(); ?>
 		</div>
 		<?php
 		$custom = get_post_custom( $post->ID );
@@ -148,6 +139,24 @@ class Video_Thumbnails {
 				echo '<p>A video thumbnail will be found for this post when it is published.</p>';
 			}
 		}
+	}
+
+	/**
+	 * Prints a guide for troubleshooting no video thumbnails
+	 */
+	public static function no_video_thumbnail_troubleshooting_instructions() {
+		?>
+		<h3>Fixing "No video thumbnail for this post"</h3>
+		<ol>
+			<li>Ensure you have saved any changes to your post.</li>
+			<li>If you are using a a plugin or theme that stores videos in a special location other than the main post content area, be sure you've entered the correct custom field on the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a>. If you don't know the name of the field your video is being saved in, please contact the developer of that theme or plugin.</li>
+			<li>Copy and paste your embed code into the "Test Markup for Video" section of the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a>. If this doesn't find the thumbnail, you'll want to be sure to include the embed code you scanned when you request support. If it does find a thumbnail, please double check that you have the Custom Field set correctly in the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails' ); ?>">settings page</a> if you are using a a plugin or theme that stores videos in a special location.</li>
+			<li>Go to the <a href="<?php echo admin_url( 'options-general.php?page=video_thumbnails&tab=debugging' ); ?>">Debugging page</a> and click "Test Image Downloading" to test your server's ability to save an image from a video source.</li>
+			<li>Try posting a video from other sources to help narrow down the problem.</li>
+			<li>Search the <a href="http://wordpress.org/support/plugin/video-thumbnails">support threads</a> to see if anyone has had the same issue.</li>
+			<li>If you are still unable to resolve the problem, <a href="http://wordpress.org/support/plugin/video-thumbnails">start a thread</a> with a good descriptive title ("Error" or "No thumbnails" is a bad title) and be sure to include the results of your testing as well. Also be sure to include the name of your theme, any video plugins you're using, and any other details you can think of.</li>
+		</ol>
+		<?php
 	}
 
 	/**

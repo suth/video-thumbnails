@@ -423,6 +423,7 @@ class Video_Thumbnails_Settings {
 				<a href="?page=video_thumbnails&tab=provider_settings" class="nav-tab <?php echo $active_tab == 'provider_settings' ? 'nav-tab-active' : ''; ?>">Providers</a>
 				<a href="?page=video_thumbnails&tab=mass_actions" class="nav-tab <?php echo $active_tab == 'mass_actions' ? 'nav-tab-active' : ''; ?>">Mass Actions</a>
 				<a href="?page=video_thumbnails&tab=debugging" class="nav-tab <?php echo $active_tab == 'debugging' ? 'nav-tab-active' : ''; ?>">Debugging</a>
+				<a href="?page=video_thumbnails&tab=support" class="nav-tab <?php echo $active_tab == 'support' ? 'nav-tab-active' : ''; ?>">Support</a>
 			</h2>
 
 			<?php
@@ -566,6 +567,13 @@ class Video_Thumbnails_Settings {
 
 			<?php
 			// End debugging
+			}
+			// Support
+			if ( $active_tab == 'support' ) {
+
+				Video_Thumbnails::no_video_thumbnail_troubleshooting_instructions();
+
+			// End support
 			}
 			?>
 

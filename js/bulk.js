@@ -37,8 +37,10 @@ jQuery(function ($) {
 		$('#queue-count').text('working...');
 		$.post(ajaxurl, data, function(response) {
 			self.posts = $.parseJSON( response );
-			$('#queue-count').text(self.posts.length+' posts');
-			self.enableSubmit();
+			$('#queue-count').text(self.posts.length+' posts in queue');
+			if ( self.posts.length > 0 ) {
+				self.enableSubmit();
+			}
 		});
 	};
 

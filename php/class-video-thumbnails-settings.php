@@ -267,12 +267,27 @@ class Video_Thumbnails_Settings {
 		$new_thumbnail = $video_thumbnails->get_first_thumbnail_url( stripslashes( $_POST['markup'] ) );
 
 		if ( $new_thumbnail == null ) {
+			// No thumbnail
 			echo '<p><span style="color:red;">&#10006;</span> No thumbnail found</p>';
 		} elseif ( is_wp_error( $new_thumbnail ) ) {
+			// Error finding thumbnail
 			echo '<p><span style="color:red;">&#10006;</span> Error: ' . $new_thumbnail->get_error_message() . '</p>';
 		} else {
-			echo '<p><span style="color:green;">&#10004;</span> Thumbnail found! <a href="' . $new_thumbnail . '" target="_blank">View full size</a></p>';
-			echo '<p><img src="' . $new_thumbnail . '" style="max-width: 500px;"></p>';
+			// Found a thumbnail
+			$remote_response = wp_remote_head( $new_thumbnail );
+			if ( is_wp_error( $remote_response ) ) {
+				// WP Error trying to read image from remote server
+				echo '<p><span style="color:red;">&#10006;</span> Thumbnail found, but there was an error retrieving the URL.</p>';
+				echo '<p>Error Details: ' . $remote_response->get_error_message() . '</p>';
+			} elseif ( $remote_response['response']['code'] != '200' ) {
+				// Response code isn't okay
+				echo '<p><span style="color:red;">&#10006;</span> Thumbnail found, but it may not exist on the source server. If opening the URL below in your web browser returns an error, the source is providing an invalid URL.</p>';
+				echo '<p>Thumbnail URL: <a href="' . $new_thumbnail . '" target="_blank">' . $new_thumbnail . '</a>';
+			} else {
+				// Everything is okay!
+				echo '<p><span style="color:green;">&#10004;</span> Thumbnail found! Image should appear below. <a href="' . $new_thumbnail . '" target="_blank">View full size</a></p>';
+				echo '<p><img src="' . $new_thumbnail . '" style="max-width: 500px;"></p>';
+			}
 		}
 
 		die();

@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -114,6 +114,11 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.5.3 =
+* Fixed bug with Automatic YouTube Video Posts when automatic publishing is disabled or when rescanning existing posts
+* Fixed bug with bulk scanner when 0 posts are queued
+* Improved markup test by checking if server can reach the resulting thumbnail URL
 
 = 2.5.2 =
 * Better support for Automatic YouTube Video Posts

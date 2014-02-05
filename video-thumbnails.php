@@ -326,8 +326,13 @@ class Video_Thumbnails {
 		} else {
 
 			// Translate MIME type into an extension
-			if ( $image_type == 'image/jpeg' ) $image_extension = '.jpg';
-			elseif ( $image_type == 'image/png' ) $image_extension = '.png';
+			if ( $image_type == 'image/jpeg' ) {
+				$image_extension = '.jpg';
+			} elseif ( $image_type == 'image/png' ) {
+				$image_extension = '.png';
+			} else {
+				return new WP_Error( 'thumbnail_upload', __( 'Unsupported MIME type:' ) . ' ' . $image_type );
+			}
 
 			// Construct a file name with extension
 			$new_filename = self::construct_filename( $post_id ) . $image_extension;

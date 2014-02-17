@@ -97,6 +97,7 @@ require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-blip-thumbnails.php'
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-justintv-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-dailymotion-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-metacafe-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-vk-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-funnyordie-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-mpora-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-wistia-thumbnails.php' );

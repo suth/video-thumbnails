@@ -522,6 +522,8 @@ class Video_Thumbnails_Settings {
 
 			<p>This test checks for issues with the process of saving a remote thumbnail to your local media library.</p>
 
+			<p>Also be sure to test that you can manually upload an image to your site. If you're unable to upload images, you may need to <a href="http://codex.wordpress.org/Changing_File_Permissions">change file permissions</a>.</p>
+
 			<div id="saving_media-test">
 				<p><input type="submit" class="button-primary" onclick="test_video_thumbnail('saving_media');" value="Test Image Downloading" /></p>
 			</div>

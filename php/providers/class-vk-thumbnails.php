@@ -35,7 +35,7 @@ class VK_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-		'#(//(?:www\.)?vk\.com/video_ext\.php\?oid=[0-9]+&id=[0-9]+&hash=[0-9a-zA-Z]+)#', // URL
+		'#(//(?:www\.)?vk\.com/video_ext\.php\?oid=\-?[0-9]+&id=\-?[0-9]+&hash=[0-9a-zA-Z]+)#', // URL
 	);
 
 	// Thumbnail URL

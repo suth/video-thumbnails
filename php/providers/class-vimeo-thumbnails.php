@@ -84,7 +84,7 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 			$response = $vimeo->call('vimeo.videos.getThumbnailUrls', array('video_id'=>$id));
 			$result = $response->thumbnails->thumbnail[count($response->thumbnails->thumbnail)-1]->_content;
 		} else {
-			$request = "http://vimeo.com/api/oembed.xml?url=http%3A//vimeo.com/$id";
+			$request = "http://vimeo.com/api/oembed.json?url=http%3A//vimeo.com/$id";
 			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 			if( is_wp_error( $response ) ) {
 				$result = new WP_Error( 'vimeo_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
@@ -93,8 +93,8 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 			} elseif ( $response['response']['code'] == 403 ) {
 				$result = new WP_Error( 'vimeo_info_retrieval', __( 'The Vimeo endpoint located at <a href="' . $request . '">' . $request . '</a> returned a 403 error.<br />This can occur when a video has embedding disabled or restricted to certain domains. Try entering API credentials in the provider settings.' ) );
 			} else {
-				$xml = new SimpleXMLElement( $response['body'] );
-				$result = (string) $xml->thumbnail_url;
+				$result = json_decode( $response['body'] );
+				$result = $result->thumbnail_url;
 			}
 		}
 		return $result;

@@ -330,6 +330,8 @@ class Video_Thumbnails {
 				$image_extension = '.jpg';
 			} elseif ( $image_type == 'image/png' ) {
 				$image_extension = '.png';
+			} elseif ( $image_type == 'image/gif' ) {
+				$image_extension = '.gif';
 			} else {
 				return new WP_Error( 'thumbnail_upload', __( 'Unsupported MIME type:' ) . ' ' . $image_type );
 			}

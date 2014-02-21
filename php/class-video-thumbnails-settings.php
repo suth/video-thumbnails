@@ -37,6 +37,8 @@ class Video_Thumbnails_Settings {
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 		// Initialize options
 		add_action( 'admin_init', array( &$this, 'initialize_options' ) );
+		// Custom field detection callback
+		add_action( 'wp_ajax_video_thumbnail_custom_field_detection', array( &$this, 'custom_field_detection_callback' ) );
 		// Ajax clear all callback
 		add_action( 'wp_ajax_clear_all_video_thumbnails', array( &$this, 'ajax_clear_all_callback' ) );
 		// Ajax test callbacks
@@ -133,8 +135,32 @@ class Video_Thumbnails_Settings {
 	}
 
 	function admin_scripts() {
-		wp_enqueue_script( 'video_thumbnails_test', plugins_url( 'js/test.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ) );
-		wp_enqueue_script( 'video_thumbnails_clear', plugins_url( 'js/clear.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ) );
+		wp_enqueue_script( 'video_thumbnails_settings', plugins_url( 'js/settings.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ), array( 'jquery' ), VIDEO_THUMBNAILS_VERSION );
+	}
+
+	function custom_field_detection_callback() {
+		if ( current_user_can( 'manage_options' ) ) {
+			echo $this->detect_custom_field();
+		}
+		die();
+	}
+
+	function detect_custom_field() {
+		global $video_thumbnails;
+		$latest_post = get_posts( array(
+			'posts_per_page'  => 1,
+			'post_type'  => $this->options['post_types'],
+			'orderby' => 'modified',
+		) );
+		$latest_post = $latest_post[0];
+		$custom = get_post_meta( $latest_post->ID );
+		foreach ( $custom as $name => $values ) {
+			foreach ($values as $value) {
+				if ( $video_thumbnails->get_first_thumbnail_url( $value ) ) {
+					return $name;
+				}
+			}
+		}
 	}
 
 	function ajax_clear_all_callback() {
@@ -322,7 +348,7 @@ class Video_Thumbnails_Settings {
 		$this->add_text_setting(
 			'custom_field',
 			'Custom Field (optional)',
-			'Enter the name of the custom field where your embed code or video URL is stored.'
+			'<a href="#" class="button" id="vt_detect_custom_field">Automatically Detect</a> Enter the name of the custom field where your embed code or video URL is stored.'
 		);
 		register_setting( 'video_thumbnails', 'video_thumbnails', array( &$this, 'sanitize_callback' ) );
 	}

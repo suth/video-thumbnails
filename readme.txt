@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -117,6 +117,11 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.6.2 =
+* Added feature to settings page that automatically detects the custom field
+* Switched to JSON for Vimeo's oEmbed endpoint
+* Added support for the "image/gif" MIME type
 
 = 2.6.1 =
 * Fixed VK bug caused by IDs with a negative int

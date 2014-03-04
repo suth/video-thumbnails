@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -117,6 +117,9 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.6.3 =
+* Better Google Drive detection (added support for underscores or dashes in the ID)
 
 = 2.6.2 =
 * Added feature to settings page that automatically detects the custom field

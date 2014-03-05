@@ -60,7 +60,7 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 			$request = "https://www.googleapis.com/drive/v2/files/$id?fields=thumbnailLink&key=$api_key";
 			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 			if( is_wp_error( $response ) ) {
-				$result = new WP_Error( 'googledrive_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+				$result = $this->construct_info_retrieval_error( $request, $response );
 			} else {
 				$json = json_decode( $response['body'] );
 				$result = $json->thumbnailLink;
@@ -78,25 +78,25 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 			'markup'        => '<iframe src="https://docs.google.com/file/d/0B2tG5YeQL99ZUHNja3l6am9jSGM/preview?pli=1" width="640" height="385"></iframe>',
 			'expected'      => 'https://lh3.googleusercontent.com/QL3d7Wh7V_qcXnMpXT6bio77RS0veyCZZ0zQbMX6gd-qH7aeIXBkXlcSJVDEyftiiA=s480',
 			'expected_hash' => '3bc674d8d77b342e633ab9e93e345462',
-			'name'          => 'iFrame embed'
+			'name'          => 'iFrame Embed'
 		),
 		array(
 			'markup'        => '<iframe height="385" src="https://docs.google.com/a/svpanthers.org/file/d/0BxQsabDaO6USYUgxSUJ3T0ZBa3M/preview" width="100%"></iframe>',
 			'expected'      => 'https://lh6.googleusercontent.com/WeOdCsaplJ3am25To1uLZiVYkyrilAQ5rxzhjnyyFc5GAF4QeCF1eq3EMpbP7O5dFg=s480',
 			'expected_hash' => 'f120755bbd1d35e381cb84a829ac0dfa',
-			'name'          => 'iFrame embed (Apps account)'
+			'name'          => 'iFrame Embed (Apps account)'
 		),
 		array(
 			'markup'        => '<object width="500" height="385" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><embed width="500" height="385" type="application/x-shockwave-flash" src="https://video.google.com/get_player?docid=0B92WKFCDHyg9NTRqYTFjVkZmNlk&amp;ps=docs&amp;partnerid=30&amp;cc_load_policy=1" allowFullScreen="true" allowScriptAccess="always" allowfullscreen="true" allowscriptaccess="always" /></object>',
 			'expected'      => 'https://lh3.googleusercontent.com/U_lqaX1o7E9iU75XwCrHZ4pdSi-Vch2F_GK5Ib7WAxgwKTvTl0kMHXm2GxKo1Pcp3Q=s480',
 			'expected_hash' => '31cf8e05f981c1beb6e04823ad54d267',
-			'name'          => 'Flash embed'
+			'name'          => 'Flash Embed'
 		),
 		array(
 			'markup'        => '<object style="" id="" data="https://youtube.com/get_player?el=leaf" wmode="opaque" allowfullscreen="true" allowscriptaccess="always" type="application/x-shockwave-flash" height="720px" width="1280px"><param value="true" name="allowFullScreen"><param value="always" name="allowscriptaccess"><param value="opaque" name="wmode"><param value="allow_embed=0&partnerid=30&autoplay=1&showinfo=0&docid=0B9VJd4kStxIVellHZEdXdmdSamM&el=leaf" name="flashvars"></object>',
 			'expected'      => 'https://lh5.googleusercontent.com/mHn5gESachhZHi-kbPCRbR6RVXZm3bR7oNNXL97LyYjpzV3Eqty71J2Waw0DPnXKKw=s480',
 			'expected_hash' => '2d0ad4881e4b38de0510a103d2f40dd1',
-			'name'          => 'Flash embed (YouTube player)'
+			'name'          => 'Flash Embed (YouTube player)'
 		),
 	);
 

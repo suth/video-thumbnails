@@ -81,6 +81,18 @@ class Video_Thumbnails_Providers {
 		return $videos;
 	}
 
+	/**
+	 * Constructs a WP_Error object after failed API retrieval
+	 * @param  string   $request  The URL wp_remote_get() failed to retrieve
+	 * @param  WP_Error $response A WP_Error object returned by the failed wp_remote_get()
+	 * @return WP_Error           An error object with a descriptive message including troubleshooting instructions
+	 */
+	function construct_info_retrieval_error( $request, $response ) {
+		$code = $this->service_slug . '_info_retrieval';
+		$message = sprintf( __( 'Error retrieving video information from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.' ), $request ) . '<br />' . __( 'Error Details:' ) . ' ' . $response->get_error_message();
+		return new WP_Error( $code, $message );
+	}
+
 	// // Requires PHP 5.3.0+	
 	// public static function register_provider( $providers ) {
 	// 	$providers[] = new static;

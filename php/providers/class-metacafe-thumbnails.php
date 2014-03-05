@@ -43,7 +43,7 @@ class Metacafe_Thumbnails extends Video_Thumbnails_Providers {
 		$request = "http://www.metacafe.com/api/item/$id/";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
-			$result = new WP_Error( 'metacafe_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$xml = new SimpleXMLElement( $response['body'] );
 			$result = $xml->xpath( "/rss/channel/item/media:thumbnail/@url" );
@@ -58,7 +58,7 @@ class Metacafe_Thumbnails extends Video_Thumbnails_Providers {
 			'markup'        => '<embed flashVars="playerVars=autoPlay=no" src="http://www.metacafe.com/fplayer/8456223/men_in_black_3_trailer_2.swf" width="440" height="248" wmode="transparent" allowFullScreen="true" allowScriptAccess="always" name="Metacafe_8456223" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>',
 			'expected'      => 'http://s4.mcstatic.com/thumb/8456223/22479418/4/catalog_item5/0/1/men_in_black_3_trailer_2.jpg',
 			'expected_hash' => 'df46215fef1d9fb68eea64ba3ed9a4fd',
-			'name'          => 'Embed'
+			'name'          => 'Flash Embed'
 		),
 	);
 

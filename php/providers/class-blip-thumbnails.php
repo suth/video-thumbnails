@@ -43,11 +43,11 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 		$request = "http://blip.tv/oembed?url=$url";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
-			$result = new WP_Error( 'blip_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$json = json_decode( $response['body'] );
 			if ( isset( $json->error ) ) {
-				$result = new WP_Error( 'blip_invalid_url', __( 'Error retrieving video information for <a href="' . $url . '">' . $url . '</a>. Check to be sure this is a valid Blip video URL.' ) );
+				$result = new WP_Error( 'blip_invalid_url', sprintf( __( 'Error retrieving video information for <a href="%1$s">%1$s</a>. Check to be sure this is a valid Blip video URL.' ), $url ) );
 			} else {
 				$result = $json->thumbnail_url;
 			}
@@ -64,16 +64,10 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 			'name'          => 'Video URL'
 		),
 		array(
-			'markup'        => '<iframe src="http://blip.tv/play/AYL1uFkC.html?p=1" width="780" height="438" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#AYL1uFkC" style="display:none"></embed>',
-			'expected'      => 'http://a.images.blip.tv/ReelScience-TheScientificMethodOfOz139.jpg',
-			'expected_hash' => 'bd2f58c2bc874e3a017167e74e5c842f',
-			'name'          => 'iFrame player'
-		),
-		array(
 			'markup'        => '<iframe src="http://blip.tv/play/AYLz%2BEsC.html?p=1" width="780" height="438" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#AYLz+EsC" style="display:none"></embed>',
 			'expected'      => 'http://a.images.blip.tv/GeekCrashCourse-TheAvengersMarvelMovieCatchUpGeekCrashCourse331.png',
 			'expected_hash' => '87efa9f6b0d9111b0826ae4fbdddec1b',
-			'name'          => 'iFrame player (special characters in ID)'
+			'name'          => 'iFrame Embed'
 		),
 	);
 

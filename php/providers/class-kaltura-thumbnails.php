@@ -43,14 +43,14 @@ class Kaltura_Thumbnails extends Video_Thumbnails_Providers {
 		$request = "http://www.kaltura.com/api_v3/?service=thumbAsset&action=getbyentryid&entryId=$id";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
-			$result = new WP_Error( 'kaltura_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$xml = new SimpleXMLElement( $response['body'] );
 			$result = (string) $xml->result->item->id;
 			$request = "http://www.kaltura.com/api_v3/?service=thumbAsset&action=geturl&id=$result";
 			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 			if( is_wp_error( $response ) ) {
-				$result = new WP_Error( 'kaltura_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+				$result = $this->construct_info_retrieval_error( $request, $response );
 			} else {
 				$xml = new SimpleXMLElement( $response['body'] );
 				$result = (string) $xml->result;
@@ -64,7 +64,7 @@ class Kaltura_Thumbnails extends Video_Thumbnails_Providers {
 		array(
 			'markup'   => '<script type="text/javascript" src="http://cdnapi.kaltura.com/p/1374841/sp/137484100/embedIframeJs/uiconf_id/12680902/partner_id/1374841?entry_id=1_y7xzqsxw&playerId=kaltura_player_1363589321&cache_st=1363589321&autoembed=true&width=400&height=333&"></script>',
 			'expected' => 'http://example.com/thumbnail.jpg',
-			'name'     => 'Auto embed'
+			'name'     => 'Auto Embed'
 		),
 	);
 

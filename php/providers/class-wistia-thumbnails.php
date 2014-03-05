@@ -65,7 +65,7 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 		$request = "http://fast.wistia.com/oembed?url=$id";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
-			$result = new WP_Error( 'wistia_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$result = json_decode( $response['body'] );
 			$result = $result->thumbnail_url;
@@ -81,13 +81,13 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 			'markup'        => '<iframe src="http://fast.wistia.net/embed/iframe/po4utu3zde?controlsVisibleOnLoad=true&version=v1&videoHeight=360&videoWidth=640&volumeControl=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="640" height="360"></iframe>',
 			'expected'      => 'https://embed-ssl.wistia.com/deliveries/6928fcba8355e38de4d95863a659e1de23cb2071.jpg',
 			'expected_hash' => 'bc4a2cec9ac97e2ccdae2c7387a01cb4',
-			'name'          => 'Inline player'
+			'name'          => 'iFrame Embed'
 		),
 		array(
 			'markup'        => '<div class=\'wistia_embed\' data-video-height=\'312\' data-video-width=\'499\' id=\'wistia_j1qd2lvys1\'></div> <script charset=\'ISO-8859-1\' src=\'http://fast.wistia.com/static/concat/E-v1.js\'></script> <script> var platform = ( Modernizr.touch ) ? "html5" : "flash"; wistiaEmbed = Wistia.embed("j1qd2lvys1", { version: "v1", videoWidth: 499, videoHeight: 312, playButton: Modernizr.touch, smallPlayButton: Modernizr.touch, playbar: Modernizr.touch, platformPreference: platform, chromeless: Modernizr.touch ? false : true, fullscreenButton: false, autoPlay: !Modernizr.touch, videoFoam: true }); </script>',
 			'expected'      => 'https://embed-ssl.wistia.com/deliveries/a086707fe096e7f3fbefef1d1dcba1488d23a3e9.jpg',
 			'expected_hash' => '4c63d131604bfc07b5178413ab245813',
-			'name'          => 'JavaScript API embedding'
+			'name'          => 'JavaScript Embed'
 		),
 	);
 

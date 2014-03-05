@@ -87,7 +87,7 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 			$request = "http://vimeo.com/api/oembed.json?url=http%3A//vimeo.com/$id";
 			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 			if( is_wp_error( $response ) ) {
-				$result = new WP_Error( 'vimeo_info_retrieval', __( 'Error retrieving video information from the URL <a href="' . $request . '">' . $request . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+				$result = $this->construct_info_retrieval_error( $request, $response );
 			} elseif ( $response['response']['code'] == 404 ) {
 				$result = new WP_Error( 'vimeo_info_retrieval', __( 'The Vimeo endpoint located at <a href="' . $request . '">' . $request . '</a> returned a 404 error.<br />Details: ' . $response['response']['message'] ) );
 			} elseif ( $response['response']['code'] == 403 ) {
@@ -106,13 +106,13 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 			'markup'        => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
 			'expected'      => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
 			'expected_hash' => 'c60989d7ef599cfd07ec196c35a43623',
-			'name'          => 'iFrame'
+			'name'          => 'iFrame Embed'
 		),
 		array(
 			'markup'        => '<object width="500" height="281"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="281"></embed></object>',
 			'expected'      => 'http://b.vimeocdn.com/ts/287/850/287850781_1280.jpg',
 			'expected_hash' => 'c60989d7ef599cfd07ec196c35a43623',
-			'name'          => 'Old embed'
+			'name'          => 'Flash Embed'
 		),
 		array(
 			'markup'        => 'https://vimeo.com/channels/soundworkscollection/44520894',

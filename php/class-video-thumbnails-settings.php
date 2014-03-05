@@ -216,7 +216,7 @@ class Video_Thumbnails_Settings {
 			$passed = 0;
 			$failed = 0;
 			foreach ( $video_thumbnails->providers as $provider ) {
-				foreach ( $provider->test_cases as $test_case ) {
+				foreach ( $provider->get_test_cases() as $test_case ) {
 					echo '<tr>';
 					echo '<td><strong>' . $provider->service_name . '</strong> - ' . $test_case['name'] . '</td>';
 					$result = $video_thumbnails->get_first_thumbnail_url( $test_case['markup'] );

@@ -53,20 +53,22 @@ class Youku_Thumbnails extends Video_Thumbnails_Providers {
 	}
 
 	// Test cases
-	public $test_cases = array(
-		array(
-			'markup'        => '<embed src="http://player.youku.com/player.php/sid/XMzQyMzk5MzQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" allowFullscreen="true" type="application/x-shockwave-flash"></embed>',
-			'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
-			'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
-			'name'          => 'Flash Embed'
-		),
-		array(
-			'markup'        => 'http://v.youku.com/v_show/id_XMzQyMzk5MzQ4.html',
-			'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
-			'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
-			'name'          => 'Video URL'
-		),
-	);
+	public static function get_test_cases() {
+		return array(
+			array(
+				'markup'        => '<embed src="http://player.youku.com/player.php/sid/XMzQyMzk5MzQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" allowFullscreen="true" type="application/x-shockwave-flash"></embed>',
+				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
+				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
+				'name'          => 'Flash Embed'
+			),
+			array(
+				'markup'        => 'http://v.youku.com/v_show/id_XMzQyMzk5MzQ4.html',
+				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
+				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
+				'name'          => 'Video URL'
+			),
+		);
+	}
 
 }
 

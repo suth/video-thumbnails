@@ -53,20 +53,22 @@ class Rutube_Thumbnails extends Video_Thumbnails_Providers {
 	}
 
 	// Test cases
-	public $test_cases = array(
-		array(
-			'markup'        => 'http://rutube.ru/video/ca8607cd4f7ef28516e043dde0068564/',
-			'expected'      => 'http://pic.rutube.ru/video/3a/c8/3ac8c1ded16501002d20fa3ba3ed3d61.jpg',
-			'expected_hash' => '85ad79c118ee82c7c2a756ba29a96354',
-			'name'          => 'Video URL'
-		),
-		array(
-			'markup'        => '<iframe width="720" height="405" src="//rutube.ru/video/embed/6608735" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>',
-			'expected'      => 'http://pic.rutube.ru/video/3a/c8/3ac8c1ded16501002d20fa3ba3ed3d61.jpg',
-			'expected_hash' => '85ad79c118ee82c7c2a756ba29a96354',
-			'name'          => 'iFrame Embed'
-		),
-	);
+	public static function get_test_cases() {
+		return array(
+			array(
+				'markup'        => 'http://rutube.ru/video/ca8607cd4f7ef28516e043dde0068564/',
+				'expected'      => 'http://pic.rutube.ru/video/3a/c8/3ac8c1ded16501002d20fa3ba3ed3d61.jpg',
+				'expected_hash' => '85ad79c118ee82c7c2a756ba29a96354',
+				'name'          => 'Video URL'
+			),
+			array(
+				'markup'        => '<iframe width="720" height="405" src="//rutube.ru/video/embed/6608735" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>',
+				'expected'      => 'http://pic.rutube.ru/video/3a/c8/3ac8c1ded16501002d20fa3ba3ed3d61.jpg',
+				'expected_hash' => '85ad79c118ee82c7c2a756ba29a96354',
+				'name'          => 'iFrame Embed'
+			),
+		);
+	}
 
 }
 

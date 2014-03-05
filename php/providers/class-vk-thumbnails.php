@@ -60,14 +60,16 @@ class VK_Thumbnails extends Video_Thumbnails_Providers {
 	}
 
 	// Test cases
-	public $test_cases = array(
-		array(
-			'markup'        => '<iframe src="http://vk.com/video_ext.php?oid=157000410&id=164106383&hash=0fdb5f49218be7c2&hd=1" width="607" height="360" frameborder="0"></iframe>',
-			'expected'      => 'http://cs513416.vk.me/u157000410/video/l_73b292cc.jpg',
-			'expected_hash' => '6d4b086ff1a55c9b48f56bc7848e6c84',
-			'name'          => 'iFrame Embed'
-		),
-	);
+	public static function get_test_cases() {
+		return array(
+			array(
+				'markup'        => '<iframe src="http://vk.com/video_ext.php?oid=157000410&id=164106383&hash=0fdb5f49218be7c2&hd=1" width="607" height="360" frameborder="0"></iframe>',
+				'expected'      => 'http://cs513416.vk.me/u157000410/video/l_73b292cc.jpg',
+				'expected_hash' => '6d4b086ff1a55c9b48f56bc7848e6c84',
+				'name'          => 'iFrame Embed'
+			),
+		);
+	}
 
 }
 

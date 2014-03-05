@@ -66,7 +66,7 @@ class Vine_Thumbnails extends Video_Thumbnails_Providers {
 				'markup'        => '<iframe class="vine-embed" src="https://vine.co/v/bpj7Km0T3d5/embed/simple" width="600" height="600" frameborder="0"></iframe><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>',
 				'expected'      => 'https://v.cdn.vine.co/v/thumbs/D6DDE013-F8DA-4929-9BED-49568F424343-184-00000008A20C1AEC_1.0.6.mp4.jpg',
 				'expected_hash' => '7cca5921108abe15b8c1c1f884a5b3ac',
-				'name'          => 'iFrame Embed/Video URL'
+				'name'          => __( 'iFrame Embed/Video URL' )
 			),
 		);
 	}

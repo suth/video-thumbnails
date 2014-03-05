@@ -315,7 +315,7 @@ class Video_Thumbnails {
 		$error = '';
 		$response = wp_remote_get( $image_url, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
-			$error = new WP_Error( 'thumbnail_retrieval', sprintf( __( 'Error retrieving a thumbnail from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.' ), $image_url ) . '<br>' . __( 'Details:' ) . ' ' . $response->get_error_message() );
+			$error = new WP_Error( 'thumbnail_retrieval', sprintf( __( 'Error retrieving a thumbnail from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.' ), $image_url ) . '<br>' . __( 'Error Details:' ) . ' ' . $response->get_error_message() );
 		} else {
 			$image_contents = $response['body'];
 			$image_type = wp_remote_retrieve_header( $response, 'content-type' );

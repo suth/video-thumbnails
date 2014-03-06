@@ -55,8 +55,17 @@
 }
 
 #vt-bulk-scan-results .stats {
+	width: 100%;
 	margin-top: 1em;
 	text-align: center;
+}
+
+#vt-bulk-scan-results .stats .scanned,
+#vt-bulk-scan-results .stats .found-new,
+#vt-bulk-scan-results .stats .found-existing {
+	font-size: 24px;
+	font-weight: bold;
+	width: 33%;
 }
 
 #vt-bulk-scan-results .log {

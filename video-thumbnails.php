@@ -7,6 +7,8 @@ Author: Sutherland Boswell
 Author URI: http://sutherlandboswell.com
 Version: 2.6.3
 License: GPL2
+Text Domain: video-thumbnails
+Domain Path: /languages/
 */
 /*  Copyright 2014 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
@@ -95,6 +97,22 @@ class Video_Thumbnails {
 		// Bulk tool page
 		if ( 'tools_page_video-thumbnails-bulk' == $hook ) {
 			wp_enqueue_script( 'video-thumbnails-bulk-js', plugins_url( '/js/bulk.js' , __FILE__ ), array( 'jquery' ), VIDEO_THUMBNAILS_VERSION );
+			wp_localize_script( 'video-thumbnails-bulk-js', 'video_thumbnails_bulk_language', array(
+				'working'              => __( 'Working...' ),
+				'started'              => __( 'Started Scanning' ),
+				'resumed'              => __( 'Resumed Scanning' ),
+				'paused'               => __( 'Paused Scanning' ),
+				'done'                 => __( 'Done!' ),
+				'final_count_singular' => __( 'Scanned 1 post' ),
+				'final_count_plural'   => __( 'Scanned %d posts' ),
+				'queue_singular'       => __( '1 post in queue' ),
+				'queue_plural'         => __( '%d posts in queue' ),
+				'scanning_of'          => __( 'Scanning %1$s of %2$s' ),
+				'no_thumbnail'         => __( 'No thumbnail' ),
+				'new_thumbnail'        => __( 'New thumbnail:' ),
+				'existing_thumbnail'   => __( 'Existing thumbnail:' ),
+				'error'                => __( 'Error:' ),
+			) );
 			wp_enqueue_style( 'video-thumbnails-bulk-css', plugins_url('/css/bulk.css', __FILE__), false, VIDEO_THUMBNAILS_VERSION );
 		}
 	}
@@ -497,10 +515,20 @@ class Video_Thumbnails {
 					<span class="percentage">0%</span>
 					<div class="progress-bar">&nbsp;</div>
 				</div>
-				<div class="stats">
-					<div class="scanned"></div>
-					<div class="found"></div>
-				</div>
+				<table class="stats">
+					<thead>
+						<tr>
+							<th><?php _e( 'Scanned' ); ?></th>
+							<th><?php _e( 'New Thumbnails' ); ?></th>
+							<th><?php _e( 'Existing' ); ?></th>
+						</tr>
+					</thead>
+					<tr>
+						<td class="scanned">0</td>
+						<td class="found-new">0</td>
+						<td class="found-existing">0</td>
+					</tr>
+				</table>
 				<ul class="log"></ul>
 			</div>
 

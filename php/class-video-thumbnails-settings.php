@@ -136,6 +136,11 @@ class Video_Thumbnails_Settings {
 
 	function admin_scripts() {
 		wp_enqueue_script( 'video_thumbnails_settings', plugins_url( 'js/settings.js' , VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php' ), array( 'jquery' ), VIDEO_THUMBNAILS_VERSION );
+		wp_localize_script( 'video_thumbnails_settings', 'video_thumbnails_settings_language', array(
+			'detection_failed'       => __( 'We were unable to find a video in the custom fields of your most recently updated post.', 'video-thumbnails' ),
+			'working'                => __( 'Working...', 'video-thumbnails' ),
+			'clear_all_confirmation' => __( 'Are you sure you want to clear all video thumbnails? This cannot be undone.', 'video-thumbnails' ),
+		) );
 	}
 
 	function custom_field_detection_callback() {

@@ -38,7 +38,6 @@ jQuery(function ($) {
 		$('#queue-count').text(this.language.working);
 		$.post(ajaxurl, data, function(response) {
 			self.posts = $.parseJSON( response );
-			console.log('test');
 			if ( self.posts.length == 1 ) {
 				queueText = self.language.queue_singular;
 			} else {

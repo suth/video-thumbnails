@@ -89,7 +89,7 @@ class Video_Thumbnails_Providers {
 	 */
 	function construct_info_retrieval_error( $request, $response ) {
 		$code = $this->service_slug . '_info_retrieval';
-		$message = sprintf( __( 'Error retrieving video information from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.' ), $request ) . '<br />' . __( 'Error Details:' ) . ' ' . $response->get_error_message();
+		$message = sprintf( __( 'Error retrieving video information from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.', 'video-thumbnails' ), $request ) . '<br />' . __( 'Error Details:', 'video-thumbnails' ) . ' ' . $response->get_error_message();
 		return new WP_Error( $code, $message );
 	}
 

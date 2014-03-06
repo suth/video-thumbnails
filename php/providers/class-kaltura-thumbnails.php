@@ -65,7 +65,7 @@ class Kaltura_Thumbnails extends Video_Thumbnails_Providers {
 			array(
 				'markup'   => '<script type="text/javascript" src="http://cdnapi.kaltura.com/p/1374841/sp/137484100/embedIframeJs/uiconf_id/12680902/partner_id/1374841?entry_id=1_y7xzqsxw&playerId=kaltura_player_1363589321&cache_st=1363589321&autoembed=true&width=400&height=333&"></script>',
 				'expected' => 'http://example.com/thumbnail.jpg',
-				'name'     => __( 'Auto Embed' )
+				'name'     => __( 'Auto Embed', 'video-thumbnails' )
 			),
 		);
 	}

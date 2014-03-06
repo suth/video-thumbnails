@@ -47,7 +47,7 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 		} else {
 			$json = json_decode( $response['body'] );
 			if ( isset( $json->error ) ) {
-				$result = new WP_Error( 'blip_invalid_url', sprintf( __( 'Error retrieving video information for <a href="%1$s">%1$s</a>. Check to be sure this is a valid Blip video URL.' ), $url ) );
+				$result = new WP_Error( 'blip_invalid_url', sprintf( __( 'Error retrieving video information for <a href="%1$s">%1$s</a>. Check to be sure this is a valid Blip video URL.', 'video-thumbnails' ), $url ) );
 			} else {
 				$result = $json->thumbnail_url;
 			}
@@ -62,13 +62,13 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 				'markup'        => 'http://blip.tv/cranetv/illustrator-katie-scott-6617917',
 				'expected'      => 'http://a.images.blip.tv/CraneTV-IllustratorKatieScott610.jpg',
 				'expected_hash' => '26a622f72bd4bdb3f8189f85598dd95d',
-				'name'          => __( 'Video URL' )
+				'name'          => __( 'Video URL', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<iframe src="http://blip.tv/play/AYLz%2BEsC.html?p=1" width="780" height="438" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#AYLz+EsC" style="display:none"></embed>',
 				'expected'      => 'http://a.images.blip.tv/GeekCrashCourse-TheAvengersMarvelMovieCatchUpGeekCrashCourse331.png',
 				'expected_hash' => '87efa9f6b0d9111b0826ae4fbdddec1b',
-				'name'          => __( 'iFrame Embed' )
+				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}

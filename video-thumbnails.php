@@ -50,6 +50,9 @@ class Video_Thumbnails {
 
 	function __construct() {
 
+		// Load translations
+		add_action( 'plugins_loaded', array( &$this, 'plugin_textdomain' ));
+
 		// Create provider array
 		$this->providers = apply_filters( 'video_thumbnail_providers', $this->providers );
 
@@ -84,6 +87,13 @@ class Video_Thumbnails {
 		// Get the thumbnail for an individual post
 		add_action('wp_ajax_video_thumbnails_get_thumbnail_for_post', array( &$this, 'get_thumbnail_for_post_callback' ) );
 
+	}
+
+	/**
+	 * Load language files
+	 */
+	function plugin_textdomain() {
+		load_plugin_textdomain( 'video-thumbnails', false, VIDEO_THUMBNAILS_PATH . '/languages/' );
 	}
 
 	/**

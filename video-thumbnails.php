@@ -93,7 +93,7 @@ class Video_Thumbnails {
 	 * Load language files
 	 */
 	function plugin_textdomain() {
-		load_plugin_textdomain( 'video-thumbnails', false, VIDEO_THUMBNAILS_PATH . '/languages/' );
+		load_plugin_textdomain( 'video-thumbnails', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**

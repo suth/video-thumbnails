@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -117,6 +117,10 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.7.2 =
+* Added support for Youku iFrame embed code
+* Fixed Vimeo channel URL test
 
 = 2.7.1 =
 * Fixed load_plugin_textdomain() path

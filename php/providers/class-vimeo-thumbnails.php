@@ -117,8 +117,8 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 			),
 			array(
 				'markup'        => 'https://vimeo.com/channels/soundworkscollection/44520894',
-				'expected'      => 'http://b.vimeocdn.com/ts/313/130/313130530_640.jpg',
-				'expected_hash' => 'e9fd72872a39272f6c540ee66b1ecf28',
+				'expected'      => 'http://i.vimeocdn.com/video/313130530_1280.jpg',
+				'expected_hash' => '32f742bbe980e5d98d8aa0256026b459',
 				'name'          => __( 'Channel URL', 'video-thumbnails' )
 			),
 		);

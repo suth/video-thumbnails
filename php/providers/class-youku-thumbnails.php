@@ -35,6 +35,7 @@ class Youku_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
+		'#http://player\.youku\.com/embed/([A-Za-z0-9]+)#', // iFrame
 		'#http://player\.youku\.com/player\.php/sid/([A-Za-z0-9]+)/v\.swf#', // Flash
 		'#http://v\.youku\.com/v_show/id_([A-Za-z0-9]+)\.html#' // Link
 	);
@@ -55,6 +56,12 @@ class Youku_Thumbnails extends Video_Thumbnails_Providers {
 	// Test cases
 	public static function get_test_cases() {
 		return array(
+			array(
+				'markup'        => '<iframe height=498 width=510 src="http://player.youku.com/embed/XMzQyMzk5MzQ4" frameborder=0 allowfullscreen></iframe>',
+				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
+				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
+				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+			),
 			array(
 				'markup'        => '<embed src="http://player.youku.com/player.php/sid/XMzQyMzk5MzQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" allowFullscreen="true" type="application/x-shockwave-flash"></embed>',
 				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',

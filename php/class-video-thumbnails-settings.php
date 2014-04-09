@@ -43,7 +43,8 @@ class Video_Thumbnails_Settings {
 		add_action( 'wp_ajax_clear_all_video_thumbnails', array( &$this, 'ajax_clear_all_callback' ) );
 		// Ajax test callbacks
 		add_action( 'wp_ajax_video_thumbnail_provider_test', array( &$this, 'provider_test_callback' ) ); // Provider test
-		add_action( 'wp_ajax_video_thumbnail_saving_media_test', array( &$this, 'saving_media_test_callback' ) ); // Saving media test
+		add_action( 'wp_ajax_video_thumbnail_image_download_test', array( &$this, 'image_download_test_callback' ) ); // Saving media test
+		add_action( 'wp_ajax_video_thumbnail_delete_test_images', array( &$this, 'delete_test_images_callback' ) ); // Delete test images
 		add_action( 'wp_ajax_video_thumbnail_markup_detection_test', array( &$this, 'markup_detection_test_callback' ) ); // Markup input test
 		// Settings page actions
 		if ( isset ( $_GET['page'] ) && ( $_GET['page'] == 'video_thumbnails' ) ) {
@@ -274,20 +275,42 @@ class Video_Thumbnails_Settings {
 		<?php die();
 	} // End provider test callback
 
-	function saving_media_test_callback() {
+	function image_download_test_callback() {
 
 		// Try saving 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg' to media library
 		$attachment_id = Video_Thumbnails::save_to_media_library( 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg', 1 );
 		if ( is_wp_error( $attachment_id ) ) {
 			echo '<p><span style="color:red;">&#10006;</span> ' . $attachment_id->get_error_message() . '</p>';
 		} else {
-			echo '<p><span style="color:green;">&#10004;</span> ' . sprintf( __( 'Attachment created with an ID of %d', 'video-thumbnails' ), $attachment_id ) . '</p>';
-			wp_delete_attachment( $attachment_id, true );
-			echo '<p><span style="color:green;">&#10004;</span> ' . sprintf( __( 'Attachment with an ID of %d deleted', 'video-thumbnails' ), $attachment_id ) . '</p>';			
+			update_post_meta( $attachment_id, 'video_thumbnail_test_image', '1' );
+			$image = wp_get_attachment_image_src( $attachment_id, 'full' );
+			echo '<img src="' . $image[0] . '" style="float:left; max-width: 250px; margin-right: 10px;">';
+			echo '<p><span style="color:green;">&#10004;</span> ' . __( 'Attachment created', 'video-thumbnails' ) . '</p>';
+			echo '<p><a href="' . get_edit_post_link( $attachment_id ) . '">' . __( 'View in Media Library', 'video-thumbnails' ) . '</a></p>';
+			echo '<a href="' . $image[0] . '" target="_blank">' . __( 'View full size', 'video-thumbnails' ) . '</a>';
+			echo '<span style="display:block;clear:both;"></span>';
 		}
 
 		die();
 	} // End saving media test callback
+
+	function delete_test_images_callback() {
+		global $wpdb;
+		// Clear images from media library
+		$media_library_items = get_posts( array(
+			'showposts'  => -1,
+			'post_type'  => 'attachment',
+			'meta_key'   => 'video_thumbnail_test_image',
+			'meta_value' => '1',
+			'fields'     => 'ids'
+		) );
+		foreach ( $media_library_items as $item ) {
+			wp_delete_attachment( $item, true );
+		}
+		echo '<p><span style="color:green">&#10004;</span> ' . sprintf( _n( '1 attachment deleted', '%s attachments deleted', count( $media_library_items ), 'video-thumbnails' ), count( $media_library_items ) ) . '</p>';
+
+		die();
+	} // End delete test images callback
 
 	function markup_detection_test_callback() {
 
@@ -555,9 +578,12 @@ class Video_Thumbnails_Settings {
 
 			<p><?php _e( 'Also be sure to test that you can manually upload an image to your site. If you\'re unable to upload images, you may need to <a href="http://codex.wordpress.org/Changing_File_Permissions">change file permissions</a>.', 'video-thumbnails' ); ?></p>
 
-			<div id="saving_media-test">
-				<p><input type="submit" class="button-primary" onclick="test_video_thumbnail('saving_media');" value="<?php esc_attr_e( 'Test Image Downloading', 'video-thumbnails' ); ?>" /></p>
-			</div>
+			<p>
+				<input type="submit" id="test-video-thumbnail-saving-media" class="button-primary" value="<?php esc_attr_e( 'Download Test Image', 'video-thumbnails' ); ?>" />
+				<input type="submit" id="delete-video-thumbnail-test-images" class="button" value="<?php esc_attr_e( 'Delete Test Images', 'video-thumbnails' ); ?>" />
+			</p>
+
+			<div id="media-test-result"></div>
 
 			<h3><?php _e( 'Installation Information', 'video-thumbnails' ); ?></h3>
 			<table class="widefat">

@@ -15,6 +15,28 @@ jQuery(function ($) {
 		});
 	});
 
+	$('#test-video-thumbnail-saving-media').on('click',function(e) {
+		$('#media-test-result').html( '<p>' + video_thumbnails_settings_language.working + '</p>' );
+		e.preventDefault();
+		var data = {
+			action: 'video_thumbnail_image_download_test'
+		};
+		$.post(ajaxurl, data, function(response){
+			$('#media-test-result').html(response);
+		});
+	});
+
+	$('#delete-video-thumbnail-test-images').on('click',function(e) {
+		$('#media-test-result').html( '<p>' + video_thumbnails_settings_language.working + '</p>' );
+		e.preventDefault();
+		var data = {
+			action: 'video_thumbnail_delete_test_images'
+		};
+		$.post(ajaxurl, data, function(response){
+			$('#media-test-result').html(response);
+		});
+	});
+
 });
 
 // Test actions

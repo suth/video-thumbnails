@@ -170,6 +170,7 @@ class Video_Thumbnails_Settings {
 	}
 
 	function ajax_clear_all_callback() {
+		if ( !current_user_can( 'manage_options' ) ) die();
 		if ( wp_verify_nonce( $_POST['nonce'], 'clear_all_video_thumbnails' ) ) {
 			global $wpdb;
 			// Clear images from media library
@@ -205,6 +206,8 @@ class Video_Thumbnails_Settings {
 	}
 
 	function provider_test_callback() {
+
+		if ( !current_user_can( 'manage_options' ) ) die();
 
 		global $video_thumbnails;
 
@@ -277,6 +280,8 @@ class Video_Thumbnails_Settings {
 
 	function image_download_test_callback() {
 
+		if ( !current_user_can( 'manage_options' ) ) die();
+
 		// Try saving 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg' to media library
 		$attachment_id = Video_Thumbnails::save_to_media_library( 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg', 1 );
 		if ( is_wp_error( $attachment_id ) ) {
@@ -295,6 +300,9 @@ class Video_Thumbnails_Settings {
 	} // End saving media test callback
 
 	function delete_test_images_callback() {
+
+		if ( !current_user_can( 'manage_options' ) ) die();
+
 		global $wpdb;
 		// Clear images from media library
 		$media_library_items = get_posts( array(
@@ -313,6 +321,8 @@ class Video_Thumbnails_Settings {
 	} // End delete test images callback
 
 	function markup_detection_test_callback() {
+
+		if ( !current_user_can( 'manage_options' ) ) die();
 
 		$new_thumbnail = null;
 

@@ -228,7 +228,8 @@ class Video_Thumbnails_Settings {
 				foreach ( $provider->get_test_cases() as $test_case ) {
 					echo '<tr>';
 					echo '<td><strong>' . $provider->service_name . '</strong> - ' . $test_case['name'] . '</td>';
-					$result = $video_thumbnails->get_first_thumbnail_url( $test_case['markup'] );
+					$markup = apply_filters( 'the_content', $test_case['markup'] );
+					$result = $video_thumbnails->get_first_thumbnail_url( $markup );
 					if ( is_wp_error( $result ) ) {
 						$error_string = $result->get_error_message();
 						echo '<td style="color:red;">&#10007; ' . __( 'Failed', 'video-thumbnails' ) . '</td>';
@@ -328,7 +329,9 @@ class Video_Thumbnails_Settings {
 
 		global $video_thumbnails;
 
-		$new_thumbnail = $video_thumbnails->get_first_thumbnail_url( stripslashes( $_POST['markup'] ) );
+		$markup = apply_filters( 'the_content', stripslashes( $_POST['markup'] ) );
+
+		$new_thumbnail = $video_thumbnails->get_first_thumbnail_url( $markup );
 
 		if ( $new_thumbnail == null ) {
 			// No thumbnail

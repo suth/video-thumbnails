@@ -35,12 +35,13 @@ class VK_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-		'#(//(?:www\.)?vk\.com/video_ext\.php\?oid=\-?[0-9]+&id=\-?[0-9]+&hash=[0-9a-zA-Z]+)#', // URL
+		'#(//(?:www\.)?vk\.com/video_ext\.php\?oid=\-?[0-9]+(?:&|&\#038;|&amp;)id=\-?[0-9]+(?:&|&\#038;|&amp;)hash=[0-9a-zA-Z]+)#', // URL
 	);
 
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
 		$request = "http:$id";
+		$request = html_entity_decode( $request );
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );

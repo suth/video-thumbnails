@@ -36,7 +36,7 @@ define( 'VIDEO_THUMBNAILS_VERSION', '2.7.4' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-video-thumbnails-providers.php' );
 
 // Extensions
-require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/class-video-thumbnails-extension.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/extensions.php' );
 
 // Settings
 require_once( VIDEO_THUMBNAILS_PATH . '/php/class-video-thumbnails-settings.php' );

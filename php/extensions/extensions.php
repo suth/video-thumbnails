@@ -1,6 +1,6 @@
 <?php
 
-/*  Copyright 2013 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
+/*  Copyright 2014 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -16,15 +16,8 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-class Video_Thumbnails_Extension {
-
-	function __construct() {
-		if ( method_exists( $this, 'settings_section') ) add_action( 'video_thumbnails_provider_options', array( &$this, 'settings_section' ) );
-	}
-
-}
-
-require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/class-simple-video-embedder-thumbnails.php' );
-require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/class-ayvp-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/automatic-youtube-video-posts.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/simple-video-embedder.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/wp-robot.php' );
 
 ?>

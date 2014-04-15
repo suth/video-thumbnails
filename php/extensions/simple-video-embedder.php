@@ -1,6 +1,6 @@
 <?php
 
-/*  Copyright 2013 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
+/*  Copyright 2014 Sutherland Boswell  (email : sutherland.boswell@gmail.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -16,23 +16,16 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Require thumbnail extension class
-require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/class-video-thumbnails-extension.php' );
-
-class Simple_Video_Embedder_Thumbnails extends Video_Thumbnails_Extension {
-
-	public static function markup( $markup, $post_id ) {
-		if ( function_exists( 'p75HasVideo' ) ) {
-			if ( p75HasVideo( $post_id ) ) {
-				$markup .= ' ' . p75GetVideo( $post_id );
-			}
+function simple_video_embedder_video_thumbnail_markup_filter( $markup, $post_id ) {
+	if ( function_exists( 'p75HasVideo' ) ) {
+		if ( p75HasVideo( $post_id ) ) {
+			$markup .= ' ' . p75GetVideo( $post_id );
 		}
-		return $markup;
 	}
-
+	return $markup;
 }
 
 // Add filter to modify markup
-add_filter( 'video_thumbnail_markup', array( 'Simple_Video_Embedder_Thumbnails', 'markup' ), 10, 2 );
+add_filter( 'video_thumbnail_markup', 'simple_video_embedder_video_thumbnail_markup_filter', 10, 2 );
 
 ?>

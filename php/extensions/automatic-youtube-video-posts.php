@@ -16,32 +16,25 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Require thumbnail extension class
-require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/class-video-thumbnails-extension.php' );
-
 // Require YouTube provider class
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youtube-thumbnails.php' );
 
-class AYVP_Thumbnails extends Video_Thumbnails_Extension {
-
-	public static function new_thumbnail( $new_thumbnail, $post_id ) {
-		// When publishing a post during import, use the global variable to generate thumbnail
-		global $tern_wp_youtube_array;
-		if ( $new_thumbnail == null ) {
-			if ( isset( $tern_wp_youtube_array['_tern_wp_youtube_video'] ) && $tern_wp_youtube_array['_tern_wp_youtube_video'] != '' ) {
-				$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $tern_wp_youtube_array['_tern_wp_youtube_video'] );
-			}
+function ayvp_new_video_thumbnail_url_filter( $new_thumbnail, $post_id ) {
+	// When publishing a post during import, use the global variable to generate thumbnail
+	global $tern_wp_youtube_array;
+	if ( $new_thumbnail == null ) {
+		if ( isset( $tern_wp_youtube_array['_tern_wp_youtube_video'] ) && $tern_wp_youtube_array['_tern_wp_youtube_video'] != '' ) {
+			$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $tern_wp_youtube_array['_tern_wp_youtube_video'] );
 		}
-		// When automatic publishing is disabled or rescanning an existing post, use custom field data to generate thumbnail
-		if ( $new_thumbnail == null ) {
-			$youtube_id = get_post_meta( $post_id, '_tern_wp_youtube_video', true );
-			if ( $youtube_id != '' ) {
-				$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $youtube_id );
-			}
-		}
-		return $new_thumbnail;
 	}
-
+	// When automatic publishing is disabled or rescanning an existing post, use custom field data to generate thumbnail
+	if ( $new_thumbnail == null ) {
+		$youtube_id = get_post_meta( $post_id, '_tern_wp_youtube_video', true );
+		if ( $youtube_id != '' ) {
+			$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $youtube_id );
+		}
+	}
+	return $new_thumbnail;
 }
 
 // Make sure we can use is_plugin_active()
@@ -49,7 +42,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 // If AYVP is active, add filter
 if ( is_plugin_active( 'automatic-youtube-video-posts/tern_wp_youtube.php' ) ) {
-	add_filter( 'new_video_thumbnail_url', array( 'AYVP_Thumbnails', 'new_thumbnail' ), 10, 2 );
+	add_filter( 'new_video_thumbnail_url', 'ayvp_new_video_thumbnail_url_filter', 10, 2 );
 	remove_filter( 'post_thumbnail_html', 'WP_ayvpp_thumbnail' );
 	remove_filter( 'post_thumbnail_size', 'WP_ayvpp_thumbnail_size' );
 }

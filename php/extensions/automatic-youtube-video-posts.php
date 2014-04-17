@@ -19,10 +19,31 @@
 // Require YouTube provider class
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youtube-thumbnails.php' );
 
+/**
+ * Checks if AYVP is importing
+ * @return boolean True if importing, false if not
+ */
+function is_ayvp_importing() {
+	// Global variables used by AYVP
+	global $getWP, $tern_wp_youtube_options, $tern_wp_youtube_o;
+	// Check for the class used by AYVP
+	if ( class_exists( 'ternWP' ) && isset( $getWP ) ) {
+		// Load the AYVP options
+		$tern_wp_youtube_o = $getWP->getOption( 'tern_wp_youtube', $tern_wp_youtube_options );
+		if ( $tern_wp_youtube_o['is_importing'] && $tern_wp_youtube_o['is_importing'] !== false ) {
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
 function ayvp_new_video_thumbnail_url_filter( $new_thumbnail, $post_id ) {
 	// When publishing a post during import, use the global variable to generate thumbnail
-	global $tern_wp_youtube_array;
-	if ( $new_thumbnail == null ) {
+	if ( $new_thumbnail == null && is_ayvp_importing() ) {
+		global $tern_wp_youtube_array;
 		if ( isset( $tern_wp_youtube_array['_tern_wp_youtube_video'] ) && $tern_wp_youtube_array['_tern_wp_youtube_video'] != '' ) {
 			$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $tern_wp_youtube_array['_tern_wp_youtube_video'] );
 		}

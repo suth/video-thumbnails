@@ -3,18 +3,20 @@ Contributors: sutherlandboswell
 Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
-Tested up to: 3.8.2
-Stable tag: 2.7.4
+Tested up to: 3.9
+Stable tag: 2.7.5
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
 == Description ==
 
-Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and locate the thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
+Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and retrieve a thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
 
-**New!** [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails) gives you even more power. Enjoy features like maximum image sizes, widescreen cropping, more powerful bulk scanning options, a customizable upload directory, and more!
+= Video Thumbnails Pro =
 
-Video Thumbnails currently supports these video services:
+[Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails) adds new options like maximum image sizes, widescreen cropping, more powerful bulk scanning, a customizable upload directory, and more!
+
+= Supported Sites =
 
 * YouTube
 * Vimeo
@@ -34,24 +36,30 @@ Video Thumbnails currently supports these video services:
 * Youku
 * Rutube
 
-Video Thumbnails even works with most video embedding plugins, including:
+Video Thumbnails even works with most video plugins, including:
 
 * [Refactored Video Importer](https://refactored.co/plugins/video-importer)
 * Viper's Video Quicktags
-* Automatic Youtube Video Posts Plugin
 * WP YouTube Lyte
 
-Video Thumbnails will always be totally free while remaining a full-featured plugin, but if you'd like to support the developer consider purchasing [Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails). The pro version runs alongside the standard version and adds additional features like maximum image sizes, more powerful bulk scanning options, a customizable upload directory, and more!
+= Help Translate =
 
-Some functions are available to advanced users who want to customize their theme:
+[Register on our translation site](http://translate.refactored.co/blog/) to help bring Video Thumbnails to more languages.
 
-* `<?php video_thumbnail(); ?>` will echo a thumbnail URL or the default image located at `wp-content/plugins/video-thumbnails/default.jpg` if a thumbnail cannot be found. Here is an example: `<img src="<?php video_thumbnail(); ?>" width="300" />`
-* `<?php $video_thumbnail = get_video_thumbnail(); ?>` will return the thumbnail URL or return NULL if none is found. In this example, a thumbnail is only shown if one is found: `<?php if( ( $video_thumbnail = get_video_thumbnail() ) != null ) { echo "<img src='" . $video_thumbnail . "' />"; } ?>`
+= Our Other Plugins =
+
+[Video Thumbnails Pro](https://refactored.co/plugins/video-thumbnails) | [Video Importer](https://refactored.co/plugins/video-importer) | [Retinamatic](http://retinamatic.com/)
+
 
 == Installation ==
 
 1. Upload the `/video-thumbnails/` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
+
+Some functions are available to advanced users who want to customize their theme:
+
+* `<?php video_thumbnail(); ?>` will echo a thumbnail URL or the default image located at `wp-content/plugins/video-thumbnails/default.jpg` if a thumbnail cannot be found. Here is an example: `<img src="<?php video_thumbnail(); ?>" width="300" />`
+* `<?php $video_thumbnail = get_video_thumbnail(); ?>` will return the thumbnail URL or return NULL if none is found. In this example, a thumbnail is only shown if one is found: `<?php if( ( $video_thumbnail = get_video_thumbnail() ) != null ) { echo "<img src='" . $video_thumbnail . "' />"; } ?>`
 
 == Frequently Asked Questions ==
 
@@ -72,6 +80,10 @@ Video Thumbnails uses high-resolution widescreen thumbnails whenever they are av
 = Can I get thumbnails from a specific time? =
 
 No, Video Thumbnails only uses thumbnails provided by the source. If you're posting videos from your own account, many providers allow you to choose the thumbnail.
+
+= Can it get thumbnails for my self-hosted videos? =
+
+No, it will only fetch thumbnails for videos from the list of supported sites. Decoding local video files to create thumbnails would require server resources and packages unavailable to most users, so the plugin focuses on .
 
 = My theme isn't showing thumbnails, what's wrong? =
 
@@ -117,6 +129,11 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.7.5 =
+* Better support for WP Robot
+* Fixed bug related to Automatic YouTube Video Posts
+* Reorganized video thumbnail extensions
 
 = 2.7.4 =
 * Improved VK detection

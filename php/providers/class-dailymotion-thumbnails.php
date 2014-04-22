@@ -36,7 +36,7 @@ class Dailymotion_Thumbnails extends Video_Thumbnails_Providers {
 	// Regex strings
 	public $regexes = array(
 		'#<object[^>]+>.+?http://www\.dailymotion\.com/swf/video/([A-Za-z0-9]+).+?</object>#s', // Dailymotion flash
-		'#https?://www\.dailymotion\.com/embed/video/([A-Za-z0-9]+)#', // Dailymotion iframe
+		'#//www\.dailymotion\.com/embed/video/([A-Za-z0-9]+)#', // Dailymotion iframe
 		'#(?:https?://)?(?:www\.)?dailymotion\.com/video/([A-Za-z0-9]+)#' // Dailymotion URL
 	);
 

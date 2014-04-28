@@ -40,7 +40,7 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
+	public static function get_thumbnail_url( $id ) {
 		return 'https://graph.facebook.com/' . $id . '/picture';
 	}
 

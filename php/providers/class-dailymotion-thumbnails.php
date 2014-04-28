@@ -41,7 +41,7 @@ class Dailymotion_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
+	public static function get_thumbnail_url( $id ) {
 		$request = "https://api.dailymotion.com/video/$id?fields=thumbnail_url";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

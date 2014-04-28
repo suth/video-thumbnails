@@ -71,7 +71,7 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
+	public static function get_thumbnail_url( $id ) {
 		// Get our settings
 		$client_id = ( isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
 		$client_secret = ( isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );

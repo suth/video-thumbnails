@@ -39,7 +39,7 @@ class Blip_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $url ) {
+	public static function get_thumbnail_url( $url ) {
 		$request = "http://blip.tv/oembed?url=$url";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

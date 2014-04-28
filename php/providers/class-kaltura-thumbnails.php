@@ -39,7 +39,7 @@ class Kaltura_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
+	public static function get_thumbnail_url( $id ) {
 		$request = "http://www.kaltura.com/api_v3/?service=thumbAsset&action=getbyentryid&entryId=$id";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

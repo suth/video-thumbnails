@@ -40,7 +40,7 @@ class Mpora_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public function get_thumbnail_url( $id ) {
+	public static function get_thumbnail_url( $id ) {
 		return 'http://ugc4.mporatrons.com/thumbs/' . $id . '_640x360_0000.jpg';
 	}
 

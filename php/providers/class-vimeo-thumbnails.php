@@ -73,10 +73,10 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Providers {
 	// Thumbnail URL
 	public static function get_thumbnail_url( $id ) {
 		// Get our settings
-		$client_id = ( isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
-		$client_secret = ( isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );
-		$access_token = ( isset( $this->options['access_token'] ) && $this->options['access_token'] != '' ? $this->options['access_token'] : false );
-		$access_token_secret = ( isset( $this->options['access_token_secret'] ) && $this->options['access_token_secret'] != '' ? $this->options['access_token_secret'] : false );
+		$client_id = ( isset( $this ) && isset( $this->options['client_id'] ) && $this->options['client_id'] != '' ? $this->options['client_id'] : false );
+		$client_secret = ( isset( $this ) && isset( $this->options['client_secret'] ) && $this->options['client_secret'] != '' ? $this->options['client_secret'] : false );
+		$access_token = ( isset( $this ) && isset( $this->options['access_token'] ) && $this->options['access_token'] != '' ? $this->options['access_token'] : false );
+		$access_token_secret = ( isset( $this ) && isset( $this->options['access_token_secret'] ) && $this->options['access_token_secret'] != '' ? $this->options['access_token_secret'] : false );
 		// If API credentials are entered, use the API
 		if ( $client_id && $client_secret && $access_token && $access_token_secret ) {
 			$vimeo = new phpVimeo( $this->options['client_id'], $this->options['client_secret'] );

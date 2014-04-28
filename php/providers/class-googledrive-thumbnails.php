@@ -52,7 +52,7 @@ class GoogleDrive_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		// Get our API key
 		$api_key = ( isset( $this->options['api_key'] ) && $this->options['api_key'] != '' ? $this->options['api_key'] : false );
 

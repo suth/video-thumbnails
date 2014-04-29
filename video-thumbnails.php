@@ -282,6 +282,9 @@ class Video_Thumbnails {
 				// Save as Attachment if enabled
 				if ( $this->settings->options['save_media'] == 1 ) {
 					$attachment_id = $this->save_to_media_library( $new_thumbnail, $post_id );
+					if ( is_wp_error( $attachment_id ) ) {
+						return $attachment_id;
+					}
 					$new_thumbnail = wp_get_attachment_image_src( $attachment_id, 'full' );
 					$new_thumbnail = $new_thumbnail[0];
 				}

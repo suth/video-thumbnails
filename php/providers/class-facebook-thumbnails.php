@@ -35,13 +35,28 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-		'#"http://www\.facebook\.com/v/([0-9]+)"#', // Flash Embed
-		'#"https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)"#' // iFrame Embed
+		'#http://www\.facebook\.com/v/([0-9]+)#', // Flash Embed
+		'#https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)#' // iFrame Embed
 	);
 
 	// Thumbnail URL
 	public static function get_thumbnail_url( $id ) {
-		return 'https://graph.facebook.com/' . $id . '/picture';
+		$request = 'https://graph.facebook.com/' . $id . '/picture?redirect=false';
+		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		if( is_wp_error( $response ) ) {
+			$result = $this->construct_info_retrieval_error( $request, $response );
+		} else {
+			$result = json_decode( $response['body'] );
+			$result = $result->data->url;
+			$high_res = str_replace( '_t.jpg', '_b.jpg', $result);
+			if ( $high_res != $result ) {
+				$response = wp_remote_head( $high_res );
+				if ( !is_wp_error( $response ) && $response['response']['code'] == '200' ) {
+					$result = $high_res;
+				}
+			}
+		}
+		return $result;
 	}
 
 	// Test cases

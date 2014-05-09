@@ -65,13 +65,13 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 			array(
 				'markup'        => '<object width=420 height=180><param name=allowfullscreen value=true></param><param name=allowscriptaccess value=always></param><param name=movie value="http://www.facebook.com/v/2560032632599"></param><embed src="http://www.facebook.com/v/2560032632599" type="application/x-shockwave-flash" allowscriptaccess=always allowfullscreen=true width=420 height=180></embed></object>',
 				'expected'      => 'https://graph.facebook.com/2560032632599/picture',
-				'expected_hash' => '619591ec126ad889799ad992a227c75e',
+				'expected_hash' => 'fa4a6b4b7a0f056a7558dc9ccacb34c3',
 				'name'          => __( 'Flash Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<iframe src="https://www.facebook.com/video/embed?video_id=2560032632599" width="960" height="720" frameborder="0"></iframe>',
 				'expected'      => 'https://graph.facebook.com/2560032632599/picture',
-				'expected_hash' => '619591ec126ad889799ad992a227c75e',
+				'expected_hash' => 'fa4a6b4b7a0f056a7558dc9ccacb34c3',
 				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);

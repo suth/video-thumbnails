@@ -41,7 +41,11 @@ class Rutube_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Thumbnail URL
 	public static function get_thumbnail_url( $id ) {
-		$request = "http://rutube.ru/api/video/$id/?format=json";
+		if ( strlen( $id ) < 32 ) {
+			$request = "http://rutube.ru/api/oembed/?url=http%3A//rutube.ru/tracks/$id.html&format=json";
+		} else {
+			$request = "http://rutube.ru/api/video/$id/?format=json";
+		}
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );

@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 2.7.8
+Stable tag: 2.7.9
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -83,7 +83,7 @@ No, Video Thumbnails only uses thumbnails provided by the source. If you're post
 
 = Can it get thumbnails for my self-hosted videos? =
 
-No, it will only fetch thumbnails for videos from the list of supported sites. Decoding local video files to create thumbnails would require server resources and packages unavailable to most users, so the plugin focuses on .
+No, it will only fetch thumbnails for videos from the list of supported sites. Decoding local video files to create thumbnails would require server resources and packages unavailable to most users, so we only focus on supporting major video sites.
 
 = My theme isn't showing thumbnails, what's wrong? =
 
@@ -129,6 +129,11 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.7.9 =
+* Better compatibility with image plugins
+* Better Rutube support
+* Fixed bug that prevented API retrieval error messages
 
 = 2.7.8 =
 * Improved Facebook detection

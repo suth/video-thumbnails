@@ -35,8 +35,7 @@ class Rutube_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-		'#(?:https?://)?(?:www\.)?rutube\.ru/video/([A-Za-z0-9]+)#', // Video link
-		'#(?:https?:)?//rutube\.ru/video/embed/([0-9]+)#', // Embed src
+		'#(?:https?://)?(?:www\.)?rutube\.ru/video/(?:embed/)?([A-Za-z0-9]+)#', // Video link/Embed src
 	);
 
 	// Thumbnail URL

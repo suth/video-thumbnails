@@ -41,18 +41,20 @@ function is_ayvp_importing() {
 }
 
 function ayvp_new_video_thumbnail_url_filter( $new_thumbnail, $post_id ) {
+	global $video_thumbnails;
+	if ( !isset( $video_thumbnails->providers['youtube'] ) ) return false;
 	// When publishing a post during import, use the global variable to generate thumbnail
 	if ( $new_thumbnail == null && is_ayvp_importing() ) {
 		global $tern_wp_youtube_array;
 		if ( isset( $tern_wp_youtube_array['_tern_wp_youtube_video'] ) && $tern_wp_youtube_array['_tern_wp_youtube_video'] != '' ) {
-			$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $tern_wp_youtube_array['_tern_wp_youtube_video'] );
+			$new_thumbnail = $video_thumbnails->providers['youtube']->get_thumbnail_url( $tern_wp_youtube_array['_tern_wp_youtube_video'] );
 		}
 	}
 	// When automatic publishing is disabled or rescanning an existing post, use custom field data to generate thumbnail
 	if ( $new_thumbnail == null ) {
 		$youtube_id = get_post_meta( $post_id, '_tern_wp_youtube_video', true );
 		if ( $youtube_id != '' ) {
-			$new_thumbnail = YouTube_Thumbnails::get_thumbnail_url( $youtube_id );
+			$new_thumbnail = $video_thumbnails->providers['youtube']->get_thumbnail_url( $youtube_id );
 		}
 	}
 	return $new_thumbnail;

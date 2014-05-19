@@ -43,6 +43,7 @@ class VK_Thumbnails extends Video_Thumbnails_Providers {
 		$request = "http:$id";
 		$request = html_entity_decode( $request );
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$result = false;
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
@@ -64,9 +65,9 @@ class VK_Thumbnails extends Video_Thumbnails_Providers {
 	public static function get_test_cases() {
 		return array(
 			array(
-				'markup'        => '<iframe src="http://vk.com/video_ext.php?oid=157000410&id=164108685&hash=d9a2915c4d4c2bb4&hd=3" width="607" height="360" frameborder="0"></iframe>',
-				'expected'      => 'http://cs518315.vk.me/u157000410/video/l_5ed29d68.jpg',
-				'expected_hash' => '2d603fbec41701cf6db9b5402c1e90f0',
+				'markup'        => '<iframe src="http://vk.com/video_ext.php?oid=220943440&id=168591360&hash=75a37bd3930f4fab&hd=1" width="607" height="360" frameborder="0"></iframe>',
+				'expected'      => 'http://cs540302.vk.me/u220943440/video/l_afc9770f.jpg',
+				'expected_hash' => 'fd8c2af4ad5cd4e55afe129d80b42d8b',
 				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);

@@ -40,7 +40,7 @@ class Facebook_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		$request = 'https://graph.facebook.com/' . $id . '/picture?redirect=false';
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

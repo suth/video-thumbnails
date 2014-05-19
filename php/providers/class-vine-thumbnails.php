@@ -39,7 +39,7 @@ class Vine_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		$request = "https://vine.co/v/$id";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

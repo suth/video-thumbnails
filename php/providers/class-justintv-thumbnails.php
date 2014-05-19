@@ -39,7 +39,7 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		$request = "http://api.justin.tv/api/clip/show/$id.xml";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {

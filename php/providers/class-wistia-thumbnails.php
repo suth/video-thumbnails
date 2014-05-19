@@ -52,7 +52,7 @@ class Wistia_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 
 		// ID is an image URL, return it
 		if ( substr( $id, -4 ) == '.jpg' ) return $id;

@@ -43,7 +43,7 @@ class YouTube_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		$maxres = 'http://img.youtube.com/vi/' . $id . '/maxresdefault.jpg';
 		$response = wp_remote_head( $maxres );
 		if ( !is_wp_error( $response ) && $response['response']['code'] == '200' ) {

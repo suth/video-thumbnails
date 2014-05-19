@@ -39,7 +39,7 @@ class Rutube_Thumbnails extends Video_Thumbnails_Providers {
 	);
 
 	// Thumbnail URL
-	public static function get_thumbnail_url( $id ) {
+	public function get_thumbnail_url( $id ) {
 		if ( strlen( $id ) < 32 ) {
 			$request = "http://rutube.ru/api/oembed/?url=http%3A//rutube.ru/tracks/$id.html&format=json";
 		} else {

@@ -383,22 +383,28 @@ class Video_Thumbnails {
 
 				do_action( 'video_thumbnails/image_downloaded', $upload['file'] );
 
-				$image_url = $upload['url'];
+				$wp_filetype = wp_check_filetype( basename( $upload['file'] ), null );
 
-				$filename = $upload['file'];
+				$upload = apply_filters( 'wp_handle_upload', array(
+					'file' => $upload['file'],
+					'url'  => $upload['url'],
+					'type' => $wp_filetype['type']
+				), 'sideload' );
 
-				$wp_filetype = wp_check_filetype( basename( $filename ), null );
+				// Contstruct the attachment array
 				$attachment = array(
-					'post_mime_type'	=> $wp_filetype['type'],
+					'post_mime_type'	=> $upload['type'],
 					'post_title'		=> get_the_title( $post_id ),
 					'post_content'		=> '',
 					'post_status'		=> 'inherit'
 				);
-				$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+				// Insert the attachment
+				$attach_id = wp_insert_attachment( $attachment, $upload['file'], $post_id );
+
 				// you must first include the image.php file
 				// for the function wp_generate_attachment_metadata() to work
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
-				$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $upload['file'] );
 				wp_update_attachment_metadata( $attach_id, $attach_data );
 
 				// Add field to mark image as a video thumbnail

@@ -6,11 +6,19 @@ jQuery(function ($) {
 		var data = {
 			action: 'video_thumbnail_custom_field_detection'
 		};
-		$.post(ajaxurl, data, function(response){
-			if (response) {
-				$('#custom_field').val(response);
-			} else {
-				alert(video_thumbnails_settings_language.detection_failed);
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: data,
+			success: function(response){
+				if (response) {
+					$('#custom_field').val(response);
+				} else {
+					alert(video_thumbnails_settings_language.detection_failed);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText);
 			}
 		});
 	});
@@ -21,8 +29,16 @@ jQuery(function ($) {
 		var data = {
 			action: 'video_thumbnail_image_download_test'
 		};
-		$.post(ajaxurl, data, function(response){
-			$('#media-test-result').html(response);
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: data,
+			success: function(response){
+				$('#media-test-result').html(response);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				$('#media-test-result').html('<p>' + video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + '</p>');
+			}
 		});
 	});
 
@@ -32,8 +48,16 @@ jQuery(function ($) {
 		var data = {
 			action: 'video_thumbnail_delete_test_images'
 		};
-		$.post(ajaxurl, data, function(response){
-			$('#media-test-result').html(response);
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: data,
+			success: function(response){
+				$('#media-test-result').html(response);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				$('#media-test-result').html('<p>' + video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + '</p>');
+			}
 		});
 	});
 
@@ -45,8 +69,16 @@ function test_video_thumbnail( test_type ) {
 		action: 'video_thumbnail_' + test_type + '_test'
 	};
 	document.getElementById( test_type + '-test' ).innerHTML = video_thumbnails_settings_language.working;
-	jQuery.post(ajaxurl, data, function(response){
-		document.getElementById( test_type + '-test' ).innerHTML = response;
+	jQuery.ajax({
+		type: "POST",
+		url: ajaxurl,
+		data: data,
+		success: function(response){
+			document.getElementById( test_type + '-test' ).innerHTML = response;
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			document.getElementById( test_type + '-test' ).innerHTML = '<p>' + video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + '</p>';
+		}
 	});
 };
 
@@ -56,8 +88,16 @@ function test_video_thumbnail_markup_detection() {
 		markup: jQuery('#markup-input').val()
 	};
 	document.getElementById( 'markup-test-result' ).innerHTML = '<p>' + video_thumbnails_settings_language.working + '</p>';
-	jQuery.post(ajaxurl, data, function(response){
-		document.getElementById( 'markup-test-result' ).innerHTML = response;
+	jQuery.ajax({
+		type: "POST",
+		url: ajaxurl,
+		data: data,
+		success: function(response){
+			document.getElementById( 'markup-test-result' ).innerHTML = response;
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			document.getElementById( 'markup-test-result' ).innerHTML = '<p>' + video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + '</p>';
+		}
 	});
 }
 
@@ -70,8 +110,16 @@ function clear_all_video_thumbnails( nonce ) {
 			nonce: nonce
 		};
 		document.getElementById( 'clear-all-video-thumbnails-result' ).innerHTML = '<p>' + video_thumbnails_settings_language.working + '</p>';
-		jQuery.post(ajaxurl, data, function(response){
-			document.getElementById( 'clear-all-video-thumbnails-result' ).innerHTML = response;
+		jQuery.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: data,
+			success: function(response){
+				document.getElementById( 'clear-all-video-thumbnails-result' ).innerHTML = response;
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				document.getElementById( 'clear-all-video-thumbnails-result' ).innerHTML = '<p>' + video_thumbnails_settings_language.ajax_error + ' ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + '</p>';
+			}
 		});
 	}
 	else{

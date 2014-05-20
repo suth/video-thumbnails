@@ -140,6 +140,7 @@ class Video_Thumbnails_Settings {
 		wp_localize_script( 'video_thumbnails_settings', 'video_thumbnails_settings_language', array(
 			'detection_failed'       => __( 'We were unable to find a video in the custom fields of your most recently updated post.', 'video-thumbnails' ),
 			'working'                => __( 'Working...', 'video-thumbnails' ),
+			'ajax_error'             => __( 'AJAX Error:', 'video-thumbnails' ),
 			'clear_all_confirmation' => __( 'Are you sure you want to clear all video thumbnails? This cannot be undone.', 'video-thumbnails' ),
 		) );
 	}

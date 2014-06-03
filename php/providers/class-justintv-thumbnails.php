@@ -35,18 +35,18 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 
 	// Regex strings
 	public $regexes = array(
-	    '#archive_id=([0-9]+)#' // Archive ID
+	    '#//(?:www\.)?justin\.tv/swflibs/JustinPlayer\.swf\?channel=([a-zA-Z0-9_]+)#' // Channel player
 	);
 
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
-		$request = "http://api.justin.tv/api/clip/show/$id.xml";
+		$request = "http://api.justin.tv/api/channel/show/$id.json";
 		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
-			$xml = new SimpleXMLElement( $response['body'] );
-			$result = (string) $xml->object->image_url_large;
+			$result = json_decode( $response['body'] );
+			$result = $result->screen_cap_url_huge;
 		}
 		return $result;
 	}
@@ -55,9 +55,9 @@ class Justintv_Thumbnails extends Video_Thumbnails_Providers {
 	public static function get_test_cases() {
 		return array(
 			array(
-				'markup'        => '<object type="application/x-shockwave-flash" height="300" width="400" id="clip_embed_player_flash" data="http://www-cdn.jtvnw.net/swflibs/JustinPlayer.swf" bgcolor="#000000"><param name="movie" value="http://www-cdn.jtvnw.net/swflibs/JustinPlayer.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="auto_play=false&start_volume=25&title=Title&channel=twit&archive_id=514664554" /></object>',
-				'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-514664554-320x240.jpg',
-				'expected_hash' => '6745705c1930d0c60559bbb700175711',
+				'markup'        => '<object type="application/x-shockwave-flash" data="http://www.justin.tv/swflibs/JustinPlayer.swf?channel=twit" id="live_embed_player_flash" height="300" width="400" bgcolor="#000000"><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.justin.tv/swflibs/JustinPlayer.swf" /><param name="flashvars" value="hostname=www.justin.tv&channel=twit&auto_play=false&start_volume=25" /></object>',
+				'expected'      => 'http://static-cdn.jtvnw.net/previews/live_user_twit-630x473.jpg',
+				'expected_hash' => 'b8c0dd6565f34e6bfbbddbb07ff0df74',
 				'name'          => __( 'Flash Embed', 'video-thumbnails' )
 			),
 		);

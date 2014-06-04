@@ -115,6 +115,7 @@ require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-mpora-thumbnails.php
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-wistia-thumbnails.php' );
 // require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-kaltura-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-youku-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-tudou-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-collegehumor-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-rutube-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-sapo-thumbnails.php' );

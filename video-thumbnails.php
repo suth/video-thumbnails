@@ -33,7 +33,7 @@ define( 'VIDEO_THUMBNAILS_FIELD', '_video_thumbnail' );
 define( 'VIDEO_THUMBNAILS_VERSION', '2.9' );
 
 // Providers
-require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-video-thumbnails-providers.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/providers.php' );
 
 // Extensions
 require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/extensions.php' );

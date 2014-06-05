@@ -126,9 +126,6 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Provider {
 
 }
 
-// Add to provider array
-add_filter( 'video_thumbnail_providers', array( 'Vimeo_Thumbnails', 'register_provider' ) );
-
 // Vimeo API class
 if( !class_exists( 'phpVimeo' ) ) :
 class phpVimeo

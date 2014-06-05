@@ -75,7 +75,4 @@ class Vk_Thumbnails extends Video_Thumbnails_Provider {
 
 }
 
-// Add to provider array
-add_filter( 'video_thumbnail_providers', array( 'Vk_Thumbnails', 'register_provider' ) );
-
 ?>

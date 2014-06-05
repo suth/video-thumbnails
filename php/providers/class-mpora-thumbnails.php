@@ -64,7 +64,4 @@ class Mpora_Thumbnails extends Video_Thumbnails_Provider {
 
 }
 
-// Add to provider array
-add_filter( 'video_thumbnail_providers', array( 'Mpora_Thumbnails', 'register_provider' ) );
-
 ?>

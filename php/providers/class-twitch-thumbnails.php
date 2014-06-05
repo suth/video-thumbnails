@@ -17,9 +17,9 @@
 */
 
 // Require thumbnail provider class
-require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-video-thumbnails-providers.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-video-thumbnails-provider.php' );
 
-class Twitch_Thumbnails extends Video_Thumbnails_Providers {
+class Twitch_Thumbnails extends Video_Thumbnails_Provider {
 
 	// Human-readable name of the video provider
 	public $service_name = 'Twitch';

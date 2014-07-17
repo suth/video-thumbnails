@@ -1,0 +1,80 @@
+/**
+ * Tests
+ */
+
+.video-thumbnails-test {
+	border-bottom: 1px solid #ccc;
+}
+
+.video-thumbnails-test .widefat:last-child {
+	margin-bottom: 1em;
+}
+
+.video-thumbnails-test .title-test-link {
+	text-decoration: none;
+}
+
+.video-thumbnails-test h3.test-title {
+	padding-left: 16px;
+}
+
+.video-thumbnails-test h3.test-title::before {
+	content: "\25bc";
+	color: #888;
+	font-size: 75%;
+	display: block;
+	position: absolute;
+	left: 0;
+	-webkit-transition: 0.1s all ease-in-out;
+	-o-transition: 0.1s all ease-in-out;
+	transition: 0.1s all ease-in-out;
+}
+.video-thumbnails-test.closed h3.test-title::before {
+	/*content: "\25b6";*/
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.video-thumbnails-test .video-thumbnails-test-content {
+	display: block;
+}
+.video-thumbnails-test.closed .video-thumbnails-test-content {
+	display: none;
+}
+
+.video-thumbnails-test .show-hide-test-link {
+	float: right;
+}
+
+.video-thumbnails-test .show-hide-test-link .show {
+	display: none;
+}
+.video-thumbnails-test .show-hide-test-link .hide {
+	display: inline;
+}
+
+.video-thumbnails-test.closed .show-hide-test-link .show {
+	display: inline;
+}
+.video-thumbnails-test.closed .show-hide-test-link .hide {
+	display: none;
+}
+
+.test-working .test-results {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+
+.single-provider-test-results {
+	border-top: 1px solid #e4e4e4;
+}
+
+.retest-video-provider {
+float: right;
+}

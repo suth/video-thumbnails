@@ -281,8 +281,8 @@ class Video_Thumbnails_Settings {
 
 		if ( !current_user_can( 'manage_options' ) ) die();
 
-		// Try saving 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg' to media library
-		$attachment_id = Video_Thumbnails::save_to_media_library( 'http://img.youtube.com/vi/dMH0bHeiRNg/0.jpg', 1 );
+		// Try saving 'http://img.youtube.com/vi/aKAGU2jkaNg/maxresdefault.jpg' to media library
+		$attachment_id = Video_Thumbnails::save_to_media_library( 'http://img.youtube.com/vi/aKAGU2jkaNg/maxresdefault.jpg', 1 );
 		if ( is_wp_error( $attachment_id ) ) {
 			echo '<p><span style="color:red;">&#10006;</span> ' . $attachment_id->get_error_message() . '</p>';
 		} else {

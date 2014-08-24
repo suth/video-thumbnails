@@ -404,7 +404,9 @@ class Video_Thumbnails {
 				// you must first include the image.php file
 				// for the function wp_generate_attachment_metadata() to work
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
+				do_action( 'video_thumbnails/pre_generate_attachment_metadata', $attach_id, $upload['file'] );
 				$attach_data = wp_generate_attachment_metadata( $attach_id, $upload['file'] );
+				do_action( 'video_thumbnails/after_generate_attachment_metadata', $attach_id, $upload['file'] );
 				wp_update_attachment_metadata( $attach_id, $attach_data );
 
 				// Add field to mark image as a video thumbnail

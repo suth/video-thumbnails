@@ -41,12 +41,12 @@ class Ted_Thumbnails extends Video_Thumbnails_Provider {
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
 		$request = "http://www.ted.com/talks/oembed.json?url=http%3A%2F%2Fwww.ted.com%2Ftalks%2F$id";
-		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $request );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$result = json_decode( $response['body'] );
-			$result = $result->thumbnail_url;
+			$result = str_replace( '240x180.jpg', '480x360.jpg', $result->thumbnail_url );
 		}
 		return $result;
 	}

@@ -41,7 +41,7 @@ class Sapo_Thumbnails extends Video_Thumbnails_Provider {
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
 		$request = "http://videos.sapo.pt/$id";
-		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $request );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
@@ -51,7 +51,9 @@ class Sapo_Thumbnails extends Video_Thumbnails_Provider {
 			for ( $i = 0; $i < $metas->length; $i++ ) {
 				$meta = $metas->item( $i );
 				if ( $meta->getAttribute( 'property' ) == 'og:image' ) {
-					$result = $meta->getAttribute( 'content' );
+					$og_image = $meta->getAttribute( 'content' );
+					parse_str( parse_url( $og_image, PHP_URL_QUERY ), $image_array );
+					$result = $image_array['pic'];
 					break;
 				}
 			}
@@ -64,8 +66,8 @@ class Sapo_Thumbnails extends Video_Thumbnails_Provider {
 		return array(
 			array(
 				'markup'        => '<iframe src="http://rd3.videos.sapo.pt/playhtml?file=http://rd3.videos.sapo.pt/ddACsFSuDEZZRWfNHTTy/mov/1" frameborder="0" scrolling="no" width="640" height="360" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>',
-				'expected'      => 'http://cache12.stormap.sapo.pt/vidstore14/thumbnais/74/5f/4c/7038488_tf9s9.jpg',
-				'expected_hash' => '0f95b2d32f3989a5d10d4d249f40b989',
+				'expected'      => 'http://cache02.stormap.sapo.pt/vidstore14/thumbnais/e9/08/37/7038489_l5VMt.jpg',
+				'expected_hash' => 'd8a74c3d4e054263a37abe9ceed782fd',
 				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);

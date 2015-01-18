@@ -42,7 +42,7 @@ class Vk_Thumbnails extends Video_Thumbnails_Provider {
 	public function get_thumbnail_url( $id ) {
 		$request = "http:$id";
 		$request = html_entity_decode( $request );
-		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $request );
 		$result = false;
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );

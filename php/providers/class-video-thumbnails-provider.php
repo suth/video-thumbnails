@@ -82,6 +82,16 @@ class Video_Thumbnails_Provider {
 	}
 
 	/**
+	 * Drops the parameters from a thumbnail URL
+	 * @param  string $url
+	 * @return string
+	 */
+	static function drop_url_parameters( $url ) {
+		$url = explode( '?', $url );
+		return $url[0];
+	}
+
+	/**
 	 * Constructs a WP_Error object after failed API retrieval
 	 * @param  string   $request  The URL wp_remote_get() failed to retrieve
 	 * @param  WP_Error $response A WP_Error object returned by the failed wp_remote_get()

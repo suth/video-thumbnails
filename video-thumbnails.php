@@ -344,7 +344,7 @@ class Video_Thumbnails {
 	public static function save_to_media_library( $image_url, $post_id ) {
 
 		$error = '';
-		$response = wp_remote_get( $image_url, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $image_url );
 		if( is_wp_error( $response ) ) {
 			$error = new WP_Error( 'thumbnail_retrieval', sprintf( __( 'Error retrieving a thumbnail from the URL <a href="%1$s">%1$s</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.', 'video-thumbnails' ), $image_url ) . '<br>' . __( 'Error Details:', 'video-thumbnails' ) . ' ' . $response->get_error_message() );
 		} else {

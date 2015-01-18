@@ -36,13 +36,14 @@ class Facebook_Thumbnails extends Video_Thumbnails_Provider {
 	// Regex strings
 	public $regexes = array(
 		'#http://www\.facebook\.com/v/([0-9]+)#', // Flash Embed
-		'#https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)#' // iFrame Embed
+		'#https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)#', // iFrame Embed
+		'#https?://www\.facebook\.com/video\.php\?v=([0-9]+)#'
 	);
 
 	// Thumbnail URL
 	public function get_thumbnail_url( $id ) {
 		$request = 'https://graph.facebook.com/' . $id . '/picture?redirect=false';
-		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $request );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
@@ -64,15 +65,21 @@ class Facebook_Thumbnails extends Video_Thumbnails_Provider {
 		return array(
 			array(
 				'markup'        => '<object width=420 height=180><param name=allowfullscreen value=true></param><param name=allowscriptaccess value=always></param><param name=movie value="http://www.facebook.com/v/2560032632599"></param><embed src="http://www.facebook.com/v/2560032632599" type="application/x-shockwave-flash" allowscriptaccess=always allowfullscreen=true width=420 height=180></embed></object>',
-				'expected'      => 'https://graph.facebook.com/2560032632599/picture',
-				'expected_hash' => 'fa4a6b4b7a0f056a7558dc9ccacb34c3',
+				'expected'      => 'https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p160x160/50796_2560034672650_2560032632599_65313_313_b.jpg?oh=e8c767b1efafa6d8a4b672bad7be38d6&oe=55364081&__gda__=1428807476_a4d83140019b11ad602f2ef9960a364e',
+				'expected_hash' => '6b033d8f16dbf273048c5771d32ede64',
 				'name'          => __( 'Flash Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<iframe src="https://www.facebook.com/video/embed?video_id=2560032632599" width="960" height="720" frameborder="0"></iframe>',
-				'expected'      => 'https://graph.facebook.com/2560032632599/picture',
-				'expected_hash' => 'fa4a6b4b7a0f056a7558dc9ccacb34c3',
+				'expected'      => 'https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xap1/v/t15.0-10/p160x160/50796_2560034672650_2560032632599_65313_313_b.jpg?oh=e8c767b1efafa6d8a4b672bad7be38d6&oe=55364081&__gda__=1428807476_a4d83140019b11ad602f2ef9960a364e',
+				'expected_hash' => '6b033d8f16dbf273048c5771d32ede64',
 				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+			),
+			array(
+				'markup'        => '<div id="fb-root"></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, \'script\', \'facebook-jssdk\'));</script><div class="fb-post" data-href="https://www.facebook.com/video.php?v=10150326323406807" data-width="466"><div class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/video.php?v=10150326323406807">Post</a> by <a href="https://www.facebook.com/PeterJacksonNZ">Peter Jackson</a>.</div></div>',
+				'expected'      => 'https://fbcdn-vthumb-a.akamaihd.net/hvthumb-ak-xfa1/v/t15.0-10/p128x128/244423_10150326375786807_10150326323406807_4366_759_b.jpg?oh=013ce21bb54de51c383071598b269a91&oe=552CD270&__gda__=1428479462_339647870ec32227c391e98000935aec',
+				'expected_hash' => '184d20db21ac8edef9c9cee291be5ee6',
+				'name'          => __( 'FBML Embed', 'video-thumbnails' )
 			),
 		);
 	}

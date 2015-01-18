@@ -63,12 +63,12 @@ class Wistia_Thumbnails extends Video_Thumbnails_Provider {
 		// ID should now be an embed URL, use oEmbed to find thumbnail URL
 		$id = urlencode( $id );
 		$request = "http://fast.wistia.com/oembed?url=$id";
-		$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $request );
 		if( is_wp_error( $response ) ) {
 			$result = $this->construct_info_retrieval_error( $request, $response );
 		} else {
 			$result = json_decode( $response['body'] );
-			$result = $result->thumbnail_url;
+			$result = $this->drop_url_parameters( $result->thumbnail_url );
 		}
 
 		return $result;

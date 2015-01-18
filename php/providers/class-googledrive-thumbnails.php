@@ -58,7 +58,7 @@ class Googledrive_Thumbnails extends Video_Thumbnails_Provider {
 
 		if ( $api_key ) {
 			$request = "https://www.googleapis.com/drive/v2/files/$id?fields=thumbnailLink&key=$api_key";
-			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+			$response = wp_remote_get( $request );
 			if( is_wp_error( $response ) ) {
 				$result = $this->construct_info_retrieval_error( $request, $response );
 			} else {

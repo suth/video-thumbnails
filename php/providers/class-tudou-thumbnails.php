@@ -56,7 +56,7 @@ class Tudou_Thumbnails extends Video_Thumbnails_Provider {
 
 		if ( $app_key ) {
 			$request = "http://api.tudou.com/v6/video/info?app_key=$app_key&format=json&itemCodes=$id";
-			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+			$response = wp_remote_get( $request );
 			if( is_wp_error( $response ) ) {
 				$result = $this->construct_info_retrieval_error( $request, $response );
 			} else {

@@ -85,7 +85,7 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Provider {
 			$result = $response->thumbnails->thumbnail[count($response->thumbnails->thumbnail)-1]->_content;
 		} else {
 			$request = "http://vimeo.com/api/oembed.json?url=http%3A//vimeo.com/$id";
-			$response = wp_remote_get( $request, array( 'sslverify' => false ) );
+			$response = wp_remote_get( $request );
 			if( is_wp_error( $response ) ) {
 				$result = $this->construct_info_retrieval_error( $request, $response );
 			} elseif ( $response['response']['code'] == 404 ) {
@@ -117,8 +117,8 @@ class Vimeo_Thumbnails extends Video_Thumbnails_Provider {
 			),
 			array(
 				'markup'        => 'https://vimeo.com/channels/soundworkscollection/44520894',
-				'expected'      => 'http://i.vimeocdn.com/video/313130530_1280.jpg',
-				'expected_hash' => '32f742bbe980e5d98d8aa0256026b459',
+				'expected'      => 'http://i.vimeocdn.com/video/502998892_1280.jpg',
+				'expected_hash' => 'fde254d7ef7b6463cbd2451a99f2ddb1',
 				'name'          => __( 'Channel URL', 'video-thumbnails' )
 			),
 		);

@@ -206,7 +206,7 @@ class Video_Thumbnails_Settings {
 	}
 
 	function get_file_hash( $url ) {
-		$response = wp_remote_get( $url, array( 'sslverify' => false ) );
+		$response = wp_remote_get( $url );
 		if( is_wp_error( $response ) ) {
 			$result = false;
 		} else {
@@ -246,8 +246,6 @@ class Video_Thumbnails_Settings {
 						echo '</td>';
 						$failed++;
 					} else {
-						$result = explode( '?', $result );
-						$result = $result[0];
 						$result_hash = false;
 						if ( $result == $test_case['expected'] ) {
 							$matched = true;

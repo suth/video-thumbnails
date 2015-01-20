@@ -35,7 +35,7 @@ class Ted_Thumbnails extends Video_Thumbnails_Provider {
 
 	// Regex strings
 	public $regexes = array(
-		'#//embed\.ted\.com/talks/([A-Za-z0-9_-]+)\.html#', // iFrame SRC
+		'#//embed(?:\-ssl)?\.ted\.com/talks/([A-Za-z0-9_-]+)\.html#', // iFrame SRC
 	);
 
 	// Thumbnail URL

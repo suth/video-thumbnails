@@ -36,6 +36,7 @@ require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-sapo-thumbnails.php'
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-ted-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-twitch-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-googledrive-thumbnails.php' );
+require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-yahooscreen-thumbnails.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-livestream-thumbnails.php' );
 // require_once( VIDEO_THUMBNAILS_PATH . '/php/providers/class-kaltura-thumbnails.php' );
 
@@ -59,6 +60,7 @@ add_filter( 'video_thumbnail_providers', array( 'Sapo_Thumbnails', 'register_pro
 add_filter( 'video_thumbnail_providers', array( 'Ted_Thumbnails', 'register_provider' ) );
 add_filter( 'video_thumbnail_providers', array( 'Twitch_Thumbnails', 'register_provider' ) );
 add_filter( 'video_thumbnail_providers', array( 'Googledrive_Thumbnails', 'register_provider' ) );
+add_filter( 'video_thumbnail_providers', array( 'Yahooscreen_Thumbnails', 'register_provider' ) );
 add_filter( 'video_thumbnail_providers', array( 'Livestream_Thumbnails', 'register_provider' ) );
 // add_filter( 'video_thumbnail_providers', array( 'Kaltura_Thumbnails', 'register_provider' ) );
 

@@ -4,7 +4,7 @@ Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
 Tested up to: 4.1
-Stable tag: 2.11
+Stable tag: 2.12
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
@@ -33,6 +33,7 @@ Video Thumbnails makes it easy to automatically display video thumbnails in your
 * CollegeHumor
 * MPORA
 * Livestream
+* Yahoo Screen
 * Wistia
 * Youku
 * Tudou
@@ -131,6 +132,9 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.12 =
+* Added support for Yahoo Screen
 
 = 2.11 =
 * Added support for Livestream

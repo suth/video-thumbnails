@@ -103,6 +103,10 @@ class Video_Thumbnails {
 		add_management_page( __( 'Bulk Video Thumbnails', 'video-thumbnails' ), __( 'Bulk Video Thumbs', 'video-thumbnails' ), 'manage_options', 'video-thumbnails-bulk', array( &$this, 'bulk_scanning_page' ) );
 	}
 
+	/**
+	 * Enqueues necessary admin scripts
+	 * @param  string $hook A hook for the current admin page
+	 */
 	function admin_scripts( $hook ) {
 		// Bulk tool page
 		if ( 'tools_page_video-thumbnails-bulk' == $hook ) {
@@ -127,7 +131,9 @@ class Video_Thumbnails {
 		}
 	}
 
-	// Initialize meta box on edit page
+	/**
+	 * Initialize meta box on edit page
+	 */
 	function meta_box_init() {
 		if ( is_array( $this->settings->options['post_types'] ) ) {
 			foreach ( $this->settings->options['post_types'] as $type ) {
@@ -136,7 +142,9 @@ class Video_Thumbnails {
 		}
 	}
 
-	// Construct the meta box
+	/**
+	 * Renders the video thumbnail meta box
+	 */
 	function meta_box() {
 		global $post;
 		// Add hidden troubleshooting info
@@ -243,7 +251,11 @@ class Video_Thumbnails {
 		return $thumbnail;
 	}
 
-	// The main event
+	/**
+	 * Finds the video thumbnail for a post, saves/sets as featured image if enabled, saves image URL to custom field and then returns the URL
+	 * @param  int   $post_id An optional post ID (can be left blank in a loop)
+	 * @return mixed          A string with an image URL if successful or null if there is no video thumbnail
+	 */
 	function get_video_thumbnail( $post_id = null ) {
 
 		// Get the post ID if none is provided
@@ -340,7 +352,12 @@ class Video_Thumbnails {
 		return $filename;
 	}
 
-	// Saves to media library
+	/**
+	 * Saves a remote image to the media library
+	 * @param  string $image_url URL of the image to save
+	 * @param  int    $post_id   ID of the post to attach image to
+	 * @return int               ID of the attachment
+	 */
 	public static function save_to_media_library( $image_url, $post_id ) {
 
 		$error = '';
@@ -418,9 +435,11 @@ class Video_Thumbnails {
 
 		return $attach_id;
 
-	} // End of save to media library function
+	}
 
-	// Post editor Ajax reset script
+	/**
+	 * Ajax reset script for post editor
+	 */
 	function ajax_reset_script() {
 		echo '<!-- Video Thumbnails Ajax Search -->' . PHP_EOL;
 		echo '<script type="text/javascript">' . PHP_EOL;
@@ -437,7 +456,9 @@ class Video_Thumbnails {
 		echo '</script>' . PHP_EOL;
 	}
 
-	// Ajax reset callback
+	/**
+	 * Ajax callback for resetting a video thumbnail in the post editor
+	 */
 	function ajax_reset_callback() {
 		global $wpdb; // this is how you get access to the database
 
@@ -458,6 +479,9 @@ class Video_Thumbnails {
 		die();
 	}
 
+	/**
+	 * Ajax callback used to get all the post IDs to be scanned in bulk
+	 */
 	function bulk_posts_query_callback() {
 		// Some default args
 		$args = array(
@@ -476,6 +500,9 @@ class Video_Thumbnails {
 		die();
 	}
 
+	/**
+	 * Ajax callback used to get the video thumbnail for an individual post in the process of running the bulk tool
+	 */
 	function get_thumbnail_for_post_callback() {
 
 		$post_id = $_POST['post_id'];
@@ -504,6 +531,9 @@ class Video_Thumbnails {
 		die();
 	}
 
+	/**
+	 * A function that renders the bulk scanning page
+	 */
 	function bulk_scanning_page() {
 
 		if ( ! current_user_can( 'manage_options' ) ) {

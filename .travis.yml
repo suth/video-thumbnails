@@ -11,13 +11,14 @@ php:
 env:
   - WP_VERSION=latest WP_MULTISITE=0
   - WP_VERSION=4.1 WP_MULTISITE=0
-  - WP_VERSION=3.7 WP_MULTISITE=0
 
 install:
   - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:~1.0
 
 before_script:
+  - phpenv global 5.3
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - phpenv global "$TRAVIS_PHP_VERSION"
   - mkdir -p build/logs
 
 script:

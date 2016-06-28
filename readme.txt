@@ -10,6 +10,8 @@ Video Thumbnails simplifies the process of automatically displaying video thumbn
 
 == Description ==
 
+**HEADS UP:** This branch is currently under development. Some features may be broken or missing. Please do not use in production sites.
+
 Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and retrieve a thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
 
 = Video Thumbnails Pro =
@@ -27,13 +29,11 @@ Video Thumbnails makes it easy to automatically display video thumbnails in your
 * Metacafe
 * TED
 * VK
-* Blip
 * Google Drive
 * Funny or Die
 * CollegeHumor
 * MPORA
 * Livestream
-* Yahoo Screen
 * Wistia
 * Youku
 * Tudou

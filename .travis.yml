@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.2.4
+  - 5.2
   - 5.3
   - 5.4
   - 5.5
@@ -11,7 +11,7 @@ php:
 env:
   - WP_VERSION=latest WP_MULTISITE=0
   - WP_VERSION=4.1 WP_MULTISITE=0
-  - WP_VERSION=3.2 WP_MULTISITE=0
+  - WP_VERSION=3.7 WP_MULTISITE=0
 
 install:
   - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:~1.0
@@ -25,3 +25,7 @@ script:
 
 after_success:
   - travis_retry php vendor/bin/coveralls -v
+
+notifications:
+  slack:
+    secure: FVONKno2ZcX4ZFcoIIcoxBQNi8BO3wOXRH5qpVYlsPK7sMcGrlLOCSzMnbDnCiKI/VR/5EQ9BfrMk+74or9ok/oE+pqp43rT+I4ApbnG+iVfKtofAxsjsi3Bq+5WKKvNnYJYmWwiUWySlbCseMvw4UTDZASwETl2PrwNL5Uoc2Eh0xQjof9cniDWncv/Pe2scfU2XevGC1elEvWOh6mhAxaUAbDcF3cEfjgcE6agnAp6W5uYnhhnwiR+RvcyLModAs98KKMGmzWocuPA8ybpOeemqV2klDUfxg31EaNZ3JGWttU2fTCIS6+Gig/0bw2kp/KbHiYwRUZV2TzxsMxewVYqM1s/VHRHcWs4EoRWZYK0JV2Jdv3IAUwhagayHk9Q4P+UCupqKgtwHfvv0xVGVJCQu6B6EPQjOo7Tjlg+a7MwHvm8EH9SCrWI4E9mUKDAMeDzesCsuqiSjJijoxOG1CHy5Fg1SRblAoi2Yt4dTiFjeyPQ/dFWysQKYYci8GAg9xkoY9AGfzb5e7yyUTQ01EkyETfOBIqi5YN4Xf17EeDYpu6RX/Vc4sEIekz2fdPauDf6jFuYNyXk5ZmlvE1ry/SM1hxRSZMCYt+3TFFHefKGgNW2b8kNc0xbdzppDJpqIWRzcMVfz3/8QZRGhEFGjcPiFhpmJOt2VSxVPV1cIqw=

@@ -27,15 +27,15 @@ class FunnyOrDie_Thumbnails extends Video_Thumbnails_Provider
 			array(
 				'markup'     => '<iframe src="http://www.funnyordie.com/embed/5325b03b52" width="640" height="400" frameborder="0"></iframe>',
                 'expected'   => '5325b03b52',
-				'image_url'  => 'http://t.fod4.com/t/5325b03b52/c480x270_17.jpg',
-				'image_hash' => '5aafa4a5f27bd4aead574db38a9e8b2b',
+				'image_url'  => 'http://t.fod4.com/t/5325b03b52/c1920x1080_17.jpg',
+				'image_hash' => '44bca5f3775ef56e5c3d4ac5b299a8ba',
 				'name'       => __( 'iFrame Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'     => '<object width="640" height="400" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="ordie_player_5325b03b52"><param name="movie" value="http://player.ordienetworks.com/flash/fodplayer.swf" /><param name="flashvars" value="key=5325b03b52" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always"><embed width="640" height="400" flashvars="key=5325b03b52" allowfullscreen="true" allowscriptaccess="always" quality="high" src="http://player.ordienetworks.com/flash/fodplayer.swf" name="ordie_player_5325b03b52" type="application/x-shockwave-flash"></embed></object>',
                 'expected'   => '5325b03b52',
-				'image_url'  => 'http://t.fod4.com/t/5325b03b52/c480x270_17.jpg',
-				'image_hash' => '5aafa4a5f27bd4aead574db38a9e8b2b',
+				'image_url'  => 'http://t.fod4.com/t/5325b03b52/c1920x1080_17.jpg',
+				'image_hash' => '44bca5f3775ef56e5c3d4ac5b299a8ba',
 				'name'       => __( 'Flash Embed', 'video-thumbnails' )
 			),
 		);

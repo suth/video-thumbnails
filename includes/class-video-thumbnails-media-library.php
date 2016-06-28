@@ -123,4 +123,10 @@ class Video_Thumbnails_Media_Library {
 
 		return $attach_id;
 	}
+
+    public static function get_image_url( $attachment_id )
+    {
+        $attachment = wp_get_attachment_image_src( $attachment_id, 'full' );
+        return $attachment[0];
+    }
 }

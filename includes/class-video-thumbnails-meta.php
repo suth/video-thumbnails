@@ -58,4 +58,15 @@ class Video_Thumbnails_Meta {
     public static function set( $post_id, $value ) {
         return update_post_meta( $post_id, self::getKey(), $value );
     }
+
+    public static function get_as_url( $post_id )
+    {
+        $meta = self::get( $post_id );
+
+        if ( is_numeric( $meta ) ) {
+            $meta = Video_Thumbnails_Media_Library::get_image_url( $meta );
+        }
+
+        return $meta;
+    }
 }

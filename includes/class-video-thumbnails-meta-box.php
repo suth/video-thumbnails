@@ -68,18 +68,29 @@ class Video_Thumbnails_Meta_Box {
 	public function render() {
 		global $post;
 
-		$video_thumbnail = Video_Thumbnails_Meta::get( $post->ID );
+        self::render_for_post_id( $post->ID );
+	}
+
+    private static function render_for_post_id( $post_id )
+    {
+		$video_thumbnail = Video_Thumbnails_Meta::get_as_url( $post_id );
 
 		if ( $video_thumbnail ) {
-            self::render_has_thumbnail( $post->ID, $video_thumbnail );
+            self::render_has_thumbnail( $post_id, $video_thumbnail );
         } else {
-            self::render_no_thumbnail( $post->ID );
+            self::render_no_thumbnail( $post_id );
         }
-	}
+    }
 
     private static function render_has_thumbnail( $post_id, $src )
     {
-        echo '<p id="video-thumbnails-preview"><img src="' . $src . '" style="max-width:100%;" /></p>';
+        if ( $src !== Video_Thumbnails_Media_Library::get_image_url( get_post_thumbnail_id( $post_id ) ) ) {
+            echo '<p id="video-thumbnails-preview"><img src="' . $src . '" style="max-width:100%;" /></p>';
+        } else {
+            echo '<p><span class="dashicons dashicons-yes" style="color: #fff;background: #79ba49;display: block;width: 20px;height: 20px;text-align: center;border-radius: 10px;float: left;margin-right: 6px;line-height: 20px;"></span> ';
+            echo __( 'Same as featured image', 'video-thumbnails' );
+            echo '</p>';
+        }
         echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post_id . '\' );">';
         echo __( 'Reset Video Thumbnail', 'video-thumbnails' );
         echo '</a></p>';

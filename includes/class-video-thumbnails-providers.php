@@ -53,23 +53,23 @@ class Video_Thumbnails_Providers {
     {
         $providers = apply_filters('video_thumbnails/providers', array(
             'collegehumor' => 'CollegeHumor_Thumbnails',
-//            'dailymotion',
-//            'facebook',
-//            'funnyordie',
-//            'googledrive',
-//            'livestream',
-//            'metacafe',
-//            'mpora',
-//            'rutube',
-//            'sapo',
-//            'ted',
-//            'tudou',
-//            'twitch',
-//            'vimeo',
-//            'vine',
-//            'vk',
-//            'wistia',
-//            'youku',
+            'dailymotion' => 'Dailymotion_Thumbnails',
+            'facebook' => 'Facebook_Thumbnails',
+            'funnyordie' => 'FunnyOrDie_Thumbnails',
+            'googledrive' => 'GoogleDrive_Thumbnails',
+            'livestream' => 'Livestream_Thumbnails',
+            'metacafe' => 'Metacafe_Thumbnails',
+            'mpora' => 'Mpora_Thumbnails',
+            'rutube' => 'Rutube_Thumbnails',
+            'sapo' => 'Sapo_Thumbnails',
+            'ted' => 'Ted_Thumbnails',
+            'tudou' => 'Tudou_Thumbnails',
+            'twitch' => 'Twitch_Thumbnails',
+            'vimeo' => 'Vimeo_Thumbnails',
+            'vine' => 'Vine_Thumbnails',
+            'vk' => 'Vk_Thumbnails',
+            'wistia' => 'Wistia_Thumbnails',
+            'youku' => 'Youku_Thumbnails',
             'youtube' => 'YouTube_Thumbnails',
         ));
 
@@ -77,6 +77,11 @@ class Video_Thumbnails_Providers {
             require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/providers/class-' . $key . '-thumbnails.php';
             $this->providers[$key] = new $class_name( $this->settings );
         }
+    }
+
+    public function get_providers()
+    {
+        return $this->providers;
     }
 
     protected function init_providers()

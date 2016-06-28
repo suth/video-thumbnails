@@ -22,6 +22,11 @@ class Video_Thumbnails_Provider
         }
     }
 
+    public function setting( $field )
+    {
+        return $this->plugin_settings->{$this->key}->{$field}->getValue();
+    }
+
     public function parse( $markup ) {
 		$videos = array();
 		foreach ( $this->regexes as $regex ) {

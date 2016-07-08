@@ -36,6 +36,11 @@ class Video_Thumbnails_Settings {
             ->description(__('Things should work out of the box, but some users may need the options below.', 'video-thumbnails'));
 
         $fields = array(
+            Refactored_Settings_Field_0_5_0::withKey('set_featured')
+                ->type('checkbox')
+                ->name('Featured Image')
+                ->description(__('Automatically set video thumbnails as the featured image.', 'video-thumbnails'))
+                ->defaultValue(true),
             Refactored_Settings_Field_0_5_0::withKey('post_types')
                 ->type('post_types')
                 ->name('Post Types')

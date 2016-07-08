@@ -131,5 +131,9 @@ class Video_Thumbnails_Post_Service {
         }
 
         Video_Thumbnails_Meta::set( $post_id, $attachment_id );
+
+        if ( $this->settings->basic->set_featured->getValue() ) {
+            set_post_thumbnail( $post_id, $attachment_id );
+        }
     }
 }

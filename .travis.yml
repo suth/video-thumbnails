@@ -1,29 +1,60 @@
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
+sudo: false
 
-env:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=4.1 WP_MULTISITE=0
+matrix:
+  allow_failures:
+    - php: hhvm
+  include:
+    - php: 7.0
+      env: WP_VERSION=master WP_MULTISITE=1 PHPLINT=1 COVERAGE=1
+    - php: 5.2
+      env: WP_VERSION=4.5 WP_MULTISITE=1 PHPLINT=1
+    - php: 7.0
+      env: WP_VERSION=4.5
+    - php: 7.0
+      env: WP_VERSION=4.4
+    - php: 7.0
+      env: WP_VERSION=4.3
+    - php: 5.6
+      env: WP_VERSION=4.5
+    - php: 5.5
+      env: WP_VERSION=4.5
+    - php: 5.4
+      env: WP_VERSION=4.5
+    - php: 5.3
+      env: WP_VERSION=4.5
+    - php: hhvm
+      env: WP_VERSION=4.5
 
-install:
-  - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:~1.0
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
 
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-  - mkdir -p build/logs
+- phpenv local 5.6
+- composer selfupdate 1.0.0 --no-interaction
+- composer install --no-interaction
+- phpenv local --unset
+- PLUGIN_SLUG=$(basename $(pwd))
+- export WP_DEVELOP_DIR=/tmp/wordpress/
+- git clone --depth=50 --branch="$WP_VERSION" git://develop.git.wordpress.org/ /tmp/wordpress
+- cd ..
+- cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
+- cd /tmp/wordpress/
+- cp wp-tests-config-sample.php wp-tests-config.php
+- sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
+- sed -i "s/yourusernamehere/travis/" wp-tests-config.php
+- sed -i "s/yourpasswordhere//" wp-tests-config.php
+- mysql -e "CREATE DATABASE wordpress_tests;" -uroot
+- cd "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
+- phpenv rehash
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-
-after_success:
-  - travis_retry php vendor/bin/coveralls -v
+- if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l; fi
+- if [[ "$COVERAGE" == "1" ]]; then phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; else phpunit -c phpunit.xml; fi
+- if [[ "$COVERAGE" == "1" ]]; then travis_retry php vendor/bin/coveralls -v; fi
 
 notifications:
-  slack:
-    secure: 4GPJ/BMHcMGSKDDBz2DYfBtJq1L4xktnHNo16B94KEqIJsUSycoJALcsIPKlj+Fgpl6urNXLVwDEecGiGvm8BjV7lpHwFQc4NAsLokYNLIQOsxYC/zzJTrs7c1CG5ysIMCXXFMklKAUluaFHJ9/KZ1I0gLqXELqGW6vpVbVro2+cqtpeZxMJszx8tIXQwwy6bdzFK3OFFKN3z3+4ddvLMEuJdasPdNdGu6IwYNRHm3FovG8HfioV/PaKGcNU/7CE8dcqfkG1Y7EQguqdKf5U/+te7x0HU/loMjRKTi/Gp5O/vbAV5KNMkPwjfoQiBocv2TfAu9NFZENS3/De1YyZ4JEKyZFGqbww1cOnI/p5oQRRNwaIAsouYT9k/HR6izVk34J02oOd5j/haVmvSBBTWwRq6KMkHWQ+90lRPqUP5ljIK8wfyv9bnSyP4+qIUzqq2P888TjTLXSP95VcnKhmVfdnEArFJBlEW5PAi8mf7veqZlUqDBBIODgIH4j+mBixzQUtvrkqpeEqxtcPKGUqfbPibymIuszMv02EBB8CLQW24LjGlbG3k2fajxjRSHGvp8mDecLdx4R0oM/WC0DTuMWIrLRxFYd9vTOAP89E28LbX9z5YBJV8GtbGfeCqo8ybnsM0dd/YKnXyVppeA7JagChOFgjMUGzZCZnys51hN4=
+  email: false

@@ -1,0 +1,39 @@
+{
+	"name": "suth/video-thumbnails",
+	"description": "Automatically download video thumbnails for your WordPress posts.",
+	"keywords": [
+		"wordpress",
+		"video",
+        "thumbnails"
+	],
+	"homepage": "https://refactored.co/plugins/video-thumbnails",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Sutherland Boswell",
+			"email": "sutherland@refactored.co",
+			"homepage": "https://refactored.co"
+		}
+	],
+	"type": "wordpress-plugin",
+	"require": {
+		"composer/installers": "~1.0",
+		"xrstf/composer-php52": "^1.0.20"
+	},
+	"require-dev": {
+        "satooshi/php-coveralls": "~1.0"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		"post-install-cmd": [
+			"xrstf\\Composer52\\Generator::onPostInstallCmd"
+		],
+		"post-update-cmd": [
+			"xrstf\\Composer52\\Generator::onPostInstallCmd"
+		],
+		"post-autoload-dump": [
+			"xrstf\\Composer52\\Generator::onPostInstallCmd"
+		]
+	}
+}

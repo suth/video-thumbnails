@@ -5,21 +5,22 @@
  * @package video-thumbnails
  */
 
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
-if ( ! $_tests_dir ) {
-	$_tests_dir = '/tmp/wordpress-tests-lib';
+// disable xdebug backtrace
+if ( function_exists( 'xdebug_disable' ) ) {
+	xdebug_disable();
 }
 
-// Give access to tests_add_filter() function.
-require_once $_tests_dir . '/includes/functions.php';
-
-/**
- * Manually load the plugin being tested.
- */
-function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/video-thumbnails.php';
+if ( false !== getenv( 'WP_PLUGIN_DIR' ) ) {
+	define( 'WP_PLUGIN_DIR', getenv( 'WP_PLUGIN_DIR' ) );
 }
-tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
-// Start up the WP testing environment.
-require $_tests_dir . '/includes/bootstrap.php';
+$GLOBALS['wp_tests_options'] = array(
+	'active_plugins' => array( 'video-thumbnails/video-thumbnails.php' ),
+);
+
+if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
+	require getenv( 'WP_DEVELOP_DIR' ) . 'tests/phpunit/includes/bootstrap.php';
+}
+else {
+	require '../../../../tests/phpunit/includes/bootstrap.php';
+}

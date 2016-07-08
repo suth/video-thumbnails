@@ -22,7 +22,7 @@
  */
 class Video_Thumbnails_Provider_Test extends WP_UnitTestCase {
 
-    private $parser;
+    private $providers;
 
     /** @before */
     public function setUpProviders()

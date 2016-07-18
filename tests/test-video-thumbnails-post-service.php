@@ -6,16 +6,18 @@ class Video_Thumbnails_Post_Service_Test extends WP_UnitTestCase {
 
     private $service;
 
-    /** @before */
-    public function setUpService()
+    public function __construct()
     {
+        parent::__construct();
+
         $providers = $this->getMockBuilder('Video_Thumbnails_Providers')
             ->setMethods(array('parse'))
             ->setConstructorArgs(array('video-thumbnails', '3.0', Video_Thumbnails_Settings::get()))
             ->getMock();
 
-        $providers->method('parse')
-            ->willReturn(array());
+        $providers->expects($this->any())
+            ->method('parse')
+            ->will($this->returnValue(array()));
 
         $this->service = new Video_Thumbnails_Post_Service(
             'video-thumbnails',

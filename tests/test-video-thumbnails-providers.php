@@ -22,11 +22,12 @@
  */
 class Video_Thumbnails_Provider_Test extends WP_UnitTestCase {
 
-    private $parser;
+    private $providers;
 
-    /** @before */
-    public function setUpProviders()
+    public function __construct()
     {
+        parent::__construct();
+
         $this->providers = new Video_Thumbnails_Providers(
             'video-thumbnails',
             '3.0',

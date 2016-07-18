@@ -12,13 +12,18 @@ class Video_Thumbnails_Match_Test extends WP_UnitTestCase {
     {
         $match = new Video_Thumbnails_Match(
             'id_data',
-            function( $data ) { return $data . '.jpg'; }
+            array( $this, 'fake_callback' )
         );
 
         $this->assertEquals(
             'id_data.jpg',
             $match->get_image_url()
         );
+    }
+
+    public function fake_callback( $data )
+    {
+        return $data . '.jpg';
     }
 }
 

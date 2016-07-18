@@ -35,7 +35,7 @@ class Video_Thumbnails_Meta_Box_Test extends WP_UnitTestCase {
 
         $obj->expects($this->once())
             ->method('get_post_types')
-            ->willReturn(array('posts'));
+            ->will($this->returnValue(array('posts')));
 
         $obj->register();
 

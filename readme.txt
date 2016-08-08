@@ -3,14 +3,16 @@ Contributors: sutherlandboswell
 Donate link: http://wie.ly/u/donate
 Tags: Video, Thumbnails, YouTube, Vimeo, Vine, Twitch, Dailymotion, Youku, Rutube, Featured Image
 Requires at least: 3.2
-Tested up to: 4.1
-Stable tag: 2.12.1
+Tested up to: 4.5
+Stable tag: 2.12.2
 
 Video Thumbnails simplifies the process of automatically displaying video thumbnails in your WordPress template.
 
 == Description ==
 
 Video Thumbnails makes it easy to automatically display video thumbnails in your template. When you publish a post, this plugin will find the first video embedded and retrieve a thumbnail for you. Thumbnails can be saved to your media library and set as a featured image automatically. There's even support for custom post types and custom fields!
+
+**Version 3.0** is on the way soon!
 
 = Video Thumbnails Pro =
 
@@ -132,6 +134,10 @@ The Vimeo API has a rate limit, so in rare cases you may exceed this limit. Try 
 1. Settings page
 
 == Changelog ==
+
+= 2.12.2 =
+* Added support for new Facebook embed code
+* Documentation prep for release of version 3.0
 
 = 2.12.1 =
 * Support for TED when using foreign languages
@@ -486,4 +492,4 @@ This version adds the thumbnail URL to the post's meta data, meaning any outside
 
 == Roadmap ==
 
-With the release of 2.0, focus will be put on ensuring more widespread support and providing tools for other developers.
+Version 3.0 is being finished up for release soon.

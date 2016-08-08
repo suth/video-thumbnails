@@ -35,6 +35,7 @@ class Facebook_Thumbnails extends Video_Thumbnails_Provider {
 
 	// Regex strings
 	public $regexes = array(
+        '#(?://|\%2F\%2F)(?:www\.)?facebook\.com(?:/|\%2F)(?:[a-zA-Z0-9]+)(?:/|\%2F)videos(?:/|\%2F)([0-9]+)#', // URL Embed
 		'#http://www\.facebook\.com/v/([0-9]+)#', // Flash Embed
 		'#https?://www\.facebook\.com/video/embed\?video_id=([0-9]+)#', // iFrame Embed
 		'#https?://www\.facebook\.com/video\.php\?v=([0-9]+)#'

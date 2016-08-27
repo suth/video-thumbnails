@@ -166,7 +166,7 @@ class Video_Thumbnails {
 				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
 			} else {
 				echo '<p id="video-thumbnails-preview">' . __( 'No video thumbnail for this post.', 'video-thumbnails' ) . '</p>';
-				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Search Again', 'video-thumbnails' ) . '</a> <a href="#TB_inline?width=400&height=600&inlineId=video-thumbnail-not-found-troubleshooting" class="thickbox" style="float:right;">' . __( 'Troubleshoot', 'video-thumbnails' ) . '<a/></p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Search Again', 'video-thumbnails' ) . '</a> <a href="#TB_inline?width=400&height=600&inlineId=video-thumbnail-not-found-troubleshooting" class="thickbox" style="float:right;">' . __( 'Troubleshoot', 'video-thumbnails' ) . '</a></p>';
 			}
 		} else {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {

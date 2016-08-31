@@ -5,7 +5,7 @@ Plugin URI: https://refactored.co/plugins/video-thumbnails
 Description: Automatically retrieve video thumbnails for your posts and display them in your theme. Supports YouTube, Vimeo, Facebook, Vine, Justin.tv, Twitch, Dailymotion, Metacafe, VK, Blip, Google Drive, Funny or Die, CollegeHumor, MPORA, Wistia, Youku, and Rutube.
 Author: Sutherland Boswell
 Author URI: http://sutherlandboswell.com
-Version: 2.12.3
+Version: 2.12.4beta
 License: GPL2
 Text Domain: video-thumbnails
 Domain Path: /languages/

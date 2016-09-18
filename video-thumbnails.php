@@ -172,7 +172,8 @@ class Video_Thumbnails {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
 				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
 			} else {
-				echo '<p>' . __( 'A video thumbnail will be found for this post when it is published.', 'video-thumbnails' ) . '</p>';
+				echo '<p id="video-thumbnails-preview">' . __( 'A video thumbnail will be found for this post when it is published.', 'video-thumbnails' ) . '</p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Search Now', 'video-thumbnails' ) . '</a></p>';
 			}
 		}
 	}

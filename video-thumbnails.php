@@ -109,7 +109,7 @@ class Video_Thumbnails {
 	 */
 	function admin_scripts( $hook ) {
 		// Bulk tool page
-		if ( 'tools_page_video-thumbnails-bulk' == $hook ) {
+		if ( 'tools_page_video-thumbnails-bulk' === $hook ) {
 			wp_enqueue_script( 'video-thumbnails-bulk-js', plugins_url( '/js/bulk.js' , __FILE__ ), array( 'jquery' ), VIDEO_THUMBNAILS_VERSION );
 			wp_localize_script( 'video-thumbnails-bulk-js', 'video_thumbnails_bulk_language', array(
 				'working'              => __( 'Working...', 'video-thumbnails' ),
@@ -151,7 +151,7 @@ class Video_Thumbnails {
 		add_thickbox();
 		?>
 		<div id="video-thumbnail-not-found-troubleshooting" style="display:none;">
-			<h2><?php _e( 'Troubleshooting Video Thumbnails', 'video-thumbnails' ); ?></h2>
+			<h2><?php esc_html_e( 'Troubleshooting Video Thumbnails', 'video-thumbnails' ); ?></h2>
 			<?php $this->no_video_thumbnail_troubleshooting_instructions(); ?>
 		</div>
 		<?php
@@ -159,20 +159,20 @@ class Video_Thumbnails {
 		if ( isset( $custom[VIDEO_THUMBNAILS_FIELD][0] ) ) $video_thumbnail = $custom[VIDEO_THUMBNAILS_FIELD][0];
 
 		if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
-			echo '<p id="video-thumbnails-preview"><img src="' . $video_thumbnail . '" style="max-width:100%;" /></p>';	}
+			echo '<p id="video-thumbnails-preview"><img src="' . esc_url( $video_thumbnail ) . '" style="max-width:100%;" /></p>';	}
 
-		if ( get_post_status() == 'publish' || get_post_status() == 'private' ) {
+		if ( get_post_status() === 'publish' || get_post_status() === 'private' ) {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
-				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . esc_js( $post->ID ) . '\' );return false;">' . esc_html__( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
 			} else {
-				echo '<p id="video-thumbnails-preview">' . __( 'No video thumbnail for this post.', 'video-thumbnails' ) . '</p>';
-				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Search Again', 'video-thumbnails' ) . '</a> <a href="#TB_inline?width=400&height=600&inlineId=video-thumbnail-not-found-troubleshooting" class="thickbox" style="float:right;">' . __( 'Troubleshoot', 'video-thumbnails' ) . '</a></p>';
+				echo '<p id="video-thumbnails-preview">' . esc_html__( 'No video thumbnail for this post.', 'video-thumbnails' ) . '</p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . esc_js( $post->ID ) . '\' );return false;">' . esc_html__( 'Search Again', 'video-thumbnails' ) . '</a> <a href="#TB_inline?width=400&height=600&inlineId=video-thumbnail-not-found-troubleshooting" class="thickbox" style="float:right;">' . esc_html__( 'Troubleshoot', 'video-thumbnails' ) . '</a></p>';
 			}
 		} else {
 			if ( isset( $video_thumbnail ) && $video_thumbnail != '' ) {
-				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . $post->ID . '\' );return false;">' . __( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
+				echo '<p><a href="#" id="video-thumbnails-reset" onclick="video_thumbnails_reset(\'' . esc_js( $post->ID ) . '\' );return false;">' . esc_html__( 'Reset Video Thumbnail', 'video-thumbnails' ) . '</a></p>';
 			} else {
-				echo '<p>' . __( 'A video thumbnail will be found for this post when it is published.', 'video-thumbnails' ) . '</p>';
+				echo '<p>' . esc_html__( 'A video thumbnail will be found for this post when it is published.', 'video-thumbnails' ) . '</p>';
 			}
 		}
 	}
@@ -496,7 +496,7 @@ class Video_Thumbnails {
 		$args = apply_filters( 'video_thumbnails/bulk_posts_query', $args, $form_data );
 
 		$query = new WP_Query( $args );
-		echo json_encode( $query->posts );
+		echo wp_json_encode( $query->posts );
 		die();
 	}
 
@@ -505,7 +505,7 @@ class Video_Thumbnails {
 	 */
 	function get_thumbnail_for_post_callback() {
 
-		$post_id = $_POST['post_id'];
+		$post_id = (int) $_POST['post_id'];
 		$thumb = get_post_meta( $post_id, VIDEO_THUMBNAILS_FIELD, true );
 
 		if ( $thumb == '' ) {
@@ -527,7 +527,7 @@ class Video_Thumbnails {
 			$result = array();
 		}
 
-		echo json_encode( $result );
+		echo wp_json_encode( $result );
 		die();
 	}
 
@@ -537,15 +537,15 @@ class Video_Thumbnails {
 	function bulk_scanning_page() {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'You do not have sufficient permissions to access this page.', 'video-thumbnails' ) );
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'video-thumbnails' ) );
 		}
 
 		?>
 		<div class="wrap">
 
-			<div id="icon-tools" class="icon32"></div><h2><?php _e( 'Bulk Video Thumbnail Generator', 'video-thumbnails' ); ?></h2>
+			<div id="icon-tools" class="icon32"></div><h2><?php esc_html_e( 'Bulk Video Thumbnail Generator', 'video-thumbnails' ); ?></h2>
 
-			<p><?php _e( 'Use this tool to scan all of your posts for Video Thumbnails.', 'video-thumbnails' ); ?></p>
+			<p><?php esc_html_e( 'Use this tool to scan all of your posts for Video Thumbnails.', 'video-thumbnails' ); ?></p>
 
 			<form id="video-thumbnails-bulk-scan-options">
 				<table class="form-table">
@@ -569,9 +569,9 @@ class Video_Thumbnails {
 				<table class="stats">
 					<thead>
 						<tr>
-							<th><?php _e( 'Scanned', 'video-thumbnails' ); ?></th>
-							<th><?php _e( 'New Thumbnails', 'video-thumbnails' ); ?></th>
-							<th><?php _e( 'Existing', 'video-thumbnails' ); ?></th>
+							<th><?php esc_html_e( 'Scanned', 'video-thumbnails' ); ?></th>
+							<th><?php esc_html_e( 'New Thumbnails', 'video-thumbnails' ); ?></th>
+							<th><?php esc_html_e( 'Existing', 'video-thumbnails' ); ?></th>
 						</tr>
 					</thead>
 					<tr>

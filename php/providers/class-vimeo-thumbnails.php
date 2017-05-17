@@ -673,5 +673,3 @@ endif;
 if( !class_exists( 'VimeoAPIException' ) ) {
     class VimeoAPIException extends Exception {}
 }
-
-?>

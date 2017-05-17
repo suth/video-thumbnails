@@ -70,5 +70,3 @@ class Ted_Thumbnails extends Video_Thumbnails_Provider {
 	}
 
 }
-
-?>

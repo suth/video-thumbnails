@@ -88,5 +88,3 @@ class Tudou_Thumbnails extends Video_Thumbnails_Provider {
 	}
 
 }
-
-?>

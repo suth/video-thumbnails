@@ -19,5 +19,3 @@
 require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/automatic-youtube-video-posts.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/simple-video-embedder.php' );
 require_once( VIDEO_THUMBNAILS_PATH . '/php/extensions/wp-robot.php' );
-
-?>

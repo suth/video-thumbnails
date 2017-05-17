@@ -86,7 +86,7 @@ class Video_Thumbnails_Settings {
 			$post_types = get_option( 'video_thumbnails_post_types' );
 
 			// If there is a a post type option we know there should be others
-			if ( $post_types !== false ) {
+			if ( false !== $post_types ) {
 
 				$options['post_types'] = $post_types;
 				delete_option( 'video_thumbnails_post_types' );
@@ -330,7 +330,7 @@ class Video_Thumbnails_Settings {
 
 		$new_thumbnail = $video_thumbnails->get_first_thumbnail_url( $markup );
 
-		if ( $new_thumbnail === null ) {
+		if ( null === $new_thumbnail ) {
 			// No thumbnail
 			echo '<p><span style="color:red;">&#10006;</span> ' . esc_html__( 'No thumbnail found', 'video-thumbnails' ) . '</p>';
 		} elseif ( is_wp_error( $new_thumbnail ) ) {
@@ -343,7 +343,7 @@ class Video_Thumbnails_Settings {
 				// WP Error trying to read image from remote server
 				echo '<p><span style="color:red;">&#10006;</span> ' . esc_html__( 'Thumbnail found, but there was an error retrieving the URL.', 'video-thumbnails' ) . '</p>';
 				echo '<p>' . esc_html__( 'Error Details:', 'video-thumbnails' ) . ' ' . $remote_response->get_error_message() . '</p>';
-			} elseif ( $remote_response['response']['code'] != '200' ) {
+			} elseif ( '200' !== $remote_response['response']['code'] ) {
 				// Response code isn't okay
 				echo '<p><span style="color:red;">&#10006;</span> ' . esc_html__( 'Thumbnail found, but it may not exist on the source server. If opening the URL below in your web browser returns an error, the source is providing an invalid URL.', 'video-thumbnails' ) . '</p>';
 				echo '<p>' . esc_html__( 'Thumbnail URL:', 'video-thumbnails' ) . ' <a href="' . esc_url( $new_thumbnail ) . '" target="_blank">' . esc_html( $new_thumbnail ) . '</a>';
@@ -397,7 +397,7 @@ class Video_Thumbnails_Settings {
 		// General settings
 		if ( !isset( $input['provider_options'] ) ) {
 			foreach( $current_settings as $key => $value ) {
-				if ( $key == 'version' OR $key == 'providers' ) {
+				if ( 'version' === $key || 'providers' === $key ) {
 					$output[$key] = $current_settings[$key];
 				} elseif ( isset( $input[$key] ) ) {
 					$output[$key] = $input[$key];
@@ -509,7 +509,7 @@ class Video_Thumbnails_Settings {
 
 			<?php
 			// Main settings
-			if ( $active_tab == 'general_settings' ) {
+			if ( 'general_settings' === $active_tab ) {
 			?>
 			<h3><?php esc_html_e( 'Getting started', 'video-thumbnails' ); ?></h3>
 
@@ -527,7 +527,7 @@ class Video_Thumbnails_Settings {
 			// End main settings
 			}
 			// Provider Settings
-			if ( $active_tab == 'provider_settings' ) {
+			if ( 'provider_settings' === $active_tab ) {
 			?>
 
 			<form method="post" action="options.php">
@@ -541,7 +541,7 @@ class Video_Thumbnails_Settings {
 			// End provider settings
 			}
 			// Scan all posts
-			if ( $active_tab == 'mass_actions' ) {
+			if ( 'mass_actions' === $active_tab ) {
 			?>
 			<h3><?php esc_html_e( 'Scan All Posts', 'video-thumbnails' ); ?></h3>
 
@@ -561,7 +561,7 @@ class Video_Thumbnails_Settings {
 			// End scan all posts
 			}
 			// Debugging
-			if ( $active_tab == 'debugging' ) {
+			if ( 'debugging' === $active_tab ) {
 			?>
 
 			<p><?php esc_html_e( 'Use these tests to help diagnose any problems. Please include results when requesting support.', 'video-thumbnails' ); ?></p>
@@ -702,7 +702,7 @@ class Video_Thumbnails_Settings {
 			// End debugging
 			}
 			// Support
-			if ( $active_tab == 'support' ) {
+			if ( 'support' === $active_tab ) {
 
 				Video_Thumbnails::no_video_thumbnail_troubleshooting_instructions();
 
@@ -727,5 +727,3 @@ class Video_Thumbnails_Settings {
 	}
 
 }
-
-?>

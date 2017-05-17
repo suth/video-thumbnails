@@ -69,5 +69,3 @@ if ( is_plugin_active( 'automatic-youtube-video-posts/tern_wp_youtube.php' ) ) {
 	remove_filter( 'post_thumbnail_html', 'WP_ayvpp_thumbnail' );
 	remove_filter( 'post_thumbnail_size', 'WP_ayvpp_thumbnail_size' );
 }
-
-?>

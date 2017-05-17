@@ -610,5 +610,3 @@ function video_thumbnail( $post_id = null ) {
 	if ( ( $video_thumbnail = get_video_thumbnail( $post_id ) ) === null ) { echo esc_url( plugins_url() ) . '/video-thumbnails/default.jpg'; }
 	else { echo $video_thumbnail; }
 }
-
-?>

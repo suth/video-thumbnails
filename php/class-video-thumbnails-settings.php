@@ -30,7 +30,7 @@ class Video_Thumbnails_Settings {
 	function __construct() {
 		// Activation and deactivation hooks
 		register_activation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_activation' ) );
-		register_uninstall_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_deactivation' ) );
+		register_uninstall_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( 'Video_Thumbnails_Settings', 'plugin_deactivation' ) );
 		// Set current options
 		add_action( 'plugins_loaded', array( &$this, 'set_options' ) );
 		// Add options page to menu
@@ -58,7 +58,7 @@ class Video_Thumbnails_Settings {
 	}
 
 	// Deactivation hook
-	function plugin_deactivation() {
+	public static function plugin_deactivation() {
 		delete_option( 'video_thumbnails' );
 	}
 
@@ -161,6 +161,99 @@ class Video_Thumbnails_Settings {
 		die();
 	}
 
+	/**
+	 * Frees up memory for long running processes.
+	 */
+	function stop_the_insanity() {
+		global $wpdb, $wp_actions, $wp_filter, $wp_object_cache;
+		//reset queries
+		$wpdb->queries = array();
+		// Prevent wp_actions from growing out of control
+		$wp_actions = array();
+		if ( is_object( $wp_object_cache ) ) {
+			$wp_object_cache->group_ops      = array();
+			$wp_object_cache->stats          = array();
+			$wp_object_cache->memcache_debug = array();
+			$wp_object_cache->cache          = array();
+			if ( method_exists( $wp_object_cache, '__remoteset' ) ) {
+				$wp_object_cache->__remoteset();
+			}
+		}
+		/*
+		 * The WP_Query class hooks a reference to one of its own methods
+		 * onto filters if update_post_term_cache or
+		 * update_post_meta_cache are true, which prevents PHP's garbage
+		 * collector from cleaning up the WP_Query instance on long-
+		 * running processes.
+		 *
+		 * By manually removing these callbacks (often created by things
+		 * like get_posts()), we're able to properly unallocate memory
+		 * once occupied by a WP_Query object.
+		 *
+		 */
+		if ( isset( $wp_filter['get_term_metadata'] ) ) {
+			/*
+			 * WordPress 4.7 has a new Hook infrastructure, so we need to make sure
+			 * we're accessing the global array properly.
+			 */
+			if ( class_exists( 'WP_Hook' ) && $wp_filter['get_term_metadata'] instanceof \WP_Hook ) {
+				$filter_callbacks = &$wp_filter['get_term_metadata']->callbacks;
+			} else {
+				$filter_callbacks = &$wp_filter['get_term_metadata'];
+			}
+			if ( isset( $filter_callbacks[10] ) ) {
+				foreach ( $filter_callbacks[10] as $hook => $content ) {
+					if ( preg_match( '#^[0-9a-f]{32}lazyload_term_meta$#', $hook ) ) {
+						unset( $filter_callbacks[10][ $hook ] );
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Runs through all posts and executes the provided callback for each post.
+	 *
+	 * @param array $query_args
+	 * @param callable $callback
+	 *
+	 * @return int
+	 */
+	protected function all_posts( $query_args, $callback) {
+		if ( ! is_callable( $callback ) ) {
+			return;
+		}
+
+		$default_args = array(
+			'post_type'              => 'post',
+			'posts_per_page'         => 200,
+			'post_status'            => array( 'publish', 'pending', 'draft', 'future', 'private' ),
+			'cache_results '         => false,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'offset'                 => 0,
+		);
+
+		$query_args = wp_parse_args( $query_args, $default_args );
+		$query      = new \WP_Query( $query_args );
+		$counter     = 0;
+
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$callback();
+
+			$counter++;
+			if ( 0 === $counter % $query_args['posts_per_page'] ) {
+				$this->stop_the_insanity();
+				$query_args['offset'] += $query_args['posts_per_page'];
+				$query = new \WP_Query( $query_args );
+			}
+		}
+		wp_reset_postdata();
+
+		return $counter;
+	}
+
 	function detect_custom_field() {
 		global $video_thumbnails;
 		$latest_post = get_posts( array(
@@ -180,21 +273,23 @@ class Video_Thumbnails_Settings {
 	}
 
 	function ajax_clear_all_callback() {
-		if ( !current_user_can( 'manage_options' ) ) die();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			die();
+		}
 		if ( wp_verify_nonce( $_POST['nonce'], 'clear_all_video_thumbnails' ) ) {
 			global $wpdb;
+
 			// Clear images from media library
-			$media_library_items = get_posts( array(
-				'showposts'  => -1,
+			$media_library_items = $this->all_posts( array(
 				'post_type'  => 'attachment',
 				'meta_key'   => 'video_thumbnail',
 				'meta_value' => '1',
 				'fields'     => 'ids'
-			) );
-			foreach ( $media_library_items as $item ) {
-				wp_delete_attachment( $item, true );
-			}
-			echo '<p><span style="color:green">&#10004;</span> ' . sprintf( esc_html( _n( '1 attachment deleted', '%s attachments deleted', count( $media_library_items ), 'video-thumbnails' ) ), count( $media_library_items ) ) . '</p>';
+			), function () {
+				wp_delete_attachment( get_the_ID(), true );
+			} );
+
+			echo '<p><span style="color:green">&#10004;</span> ' . sprintf( esc_html( _n( '1 attachment deleted', '%s attachments deleted', $media_library_items, 'video-thumbnails' ) ), $media_library_items ) . '</p>';
 			// Clear custom fields
 			$custom_fields_cleared = $wpdb->query( "DELETE FROM $wpdb->postmeta WHERE meta_key='_video_thumbnail'" );
 			echo '<p><span style="color:green">&#10004;</span> ' . sprintf( esc_html( _n( '1 custom field cleared', '%s custom fields cleared', $custom_fields_cleared, 'video-thumbnails' ) ), $custom_fields_cleared ) . '</p>';

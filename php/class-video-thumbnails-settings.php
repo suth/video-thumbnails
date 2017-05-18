@@ -30,7 +30,7 @@ class Video_Thumbnails_Settings {
 	function __construct() {
 		// Activation and deactivation hooks
 		register_activation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_activation' ) );
-		register_deactivation_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_deactivation' ) );
+		register_uninstall_hook( VIDEO_THUMBNAILS_PATH . '/video-thumbnails.php', array( &$this, 'plugin_deactivation' ) );
 		// Set current options
 		add_action( 'plugins_loaded', array( &$this, 'set_options' ) );
 		// Add options page to menu
@@ -385,8 +385,8 @@ class Video_Thumbnails_Settings {
 		);
 		$this->add_text_setting(
 			'custom_field',
-			esc_html__( 'Custom Field (optional)', 'video-thumbnails' ),
-			'<a href="#" class="button" id="vt_detect_custom_field">' . esc_html__( 'Automatically Detect', 'video-thumbnails' ) . '</a> ' . __( 'Enter the name of the custom field where your embed code or video URL is stored.', 'video-thumbnails' )
+			__( 'Custom Field (optional)', 'video-thumbnails' ),
+			'<a href="#" class="button" id="vt_detect_custom_field">' . esc_html__( 'Automatically Detect', 'video-thumbnails' ) . '</a> ' . esc_html__( 'Enter the name of the custom field where your embed code or video URL is stored.', 'video-thumbnails' )
 		);
 		register_setting( 'video_thumbnails', 'video_thumbnails', array( &$this, 'sanitize_callback' ) );
 	}
@@ -482,7 +482,7 @@ class Video_Thumbnails_Settings {
 
 	function text_field_callback( $args ) {
 		$html = '<input type="text" id="' . esc_attr( $args['slug'] ) . '" name="video_thumbnails[' . esc_attr( $args['slug'] ) . ']" value="' . esc_attr( $this->options[$args['slug']] ) . '"/>';
-		$html .= '<label for="' . esc_attr( $args['slug'] ) . '"> ' . esc_html( $args['description'] ) . '</label>';
+		$html .= '<label for="' . esc_attr( $args['slug'] ) . '"> ' . $args['description'] . '</label>';
 		echo $html;
 	}
 

@@ -31,5 +31,3 @@ function video_thumbnails_wpr_after_post_action( $post_id ) {
 }
 
 add_action( 'wpr_after_post', 'video_thumbnails_wpr_after_post_action', 10, 1 );
-
-?>

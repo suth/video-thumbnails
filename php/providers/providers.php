@@ -63,5 +63,3 @@ add_filter( 'video_thumbnail_providers', array( 'Googledrive_Thumbnails', 'regis
 add_filter( 'video_thumbnail_providers', array( 'Yahooscreen_Thumbnails', 'register_provider' ) );
 add_filter( 'video_thumbnail_providers', array( 'Livestream_Thumbnails', 'register_provider' ) );
 // add_filter( 'video_thumbnail_providers', array( 'Kaltura_Thumbnails', 'register_provider' ) );
-
-?>

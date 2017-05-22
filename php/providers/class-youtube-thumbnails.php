@@ -61,29 +61,27 @@ class Youtube_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe width="560" height="315" src="http://www.youtube.com/embed/Fp0U2Vglkjw" frameborder="0" allowfullscreen></iframe>',
 				'expected'      => 'http://img.youtube.com/vi/Fp0U2Vglkjw/maxresdefault.jpg',
 				'expected_hash' => 'c66256332969c38790c2b9f26f725e7a',
-				'name'          => __( 'iFrame Embed HD', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed HD', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/Fp0U2Vglkjw?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Fp0U2Vglkjw?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object>',
 				'expected'      => 'http://img.youtube.com/vi/Fp0U2Vglkjw/maxresdefault.jpg',
 				'expected_hash' => 'c66256332969c38790c2b9f26f725e7a',
-				'name'          => __( 'Flash Embed HD', 'video-thumbnails' )
+				'name'          => esc_html__( 'Flash Embed HD', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<iframe width="560" height="315" src="http://www.youtube.com/embed/vv_AitYPjtc" frameborder="0" allowfullscreen></iframe>',
 				'expected'      => 'http://img.youtube.com/vi/vv_AitYPjtc/0.jpg',
 				'expected_hash' => '6c00b9ab335a6ea00b0fb964c39a6dc9',
-				'name'          => __( 'iFrame Embed SD', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed SD', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/vv_AitYPjtc?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/vv_AitYPjtc?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object>',
 				'expected'      => 'http://img.youtube.com/vi/vv_AitYPjtc/0.jpg',
 				'expected_hash' => '6c00b9ab335a6ea00b0fb964c39a6dc9',
-				'name'          => __( 'Flash Embed SD', 'video-thumbnails' )
+				'name'          => esc_html__( 'Flash Embed SD', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

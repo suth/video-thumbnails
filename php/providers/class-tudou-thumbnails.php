@@ -82,11 +82,9 @@ class Tudou_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe src="http://www.tudou.com/programs/view/html5embed.action?type=1&code=V-TeNdhKVCA&lcode=eNoG-G9OkrQ&resourceId=0_06_05_99" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:480px;height:400px;"></iframe>',
 				'expected'      => 'http://g3.tdimg.com/83fedbc41cf9055dce9182a0c07da601/w_2.jpg',
 				'expected_hash' => '3a5e656f8c302ae5b23665f22d296ae1',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

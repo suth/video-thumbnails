@@ -51,11 +51,9 @@ class Livestream_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe width="560" height="340" src="http://cdn.livestream.com/embed/WFMZ_Traffic?layout=4&amp;height=340&amp;width=560&amp;autoplay=false" style="border:0;outline:0" frameborder="0" scrolling="no"></iframe>',
 				'expected'      => 'http://thumbnail.api.livestream.com/thumbnail?name=WFMZ_Traffic',
 				'expected_hash' => '1be02799b2fab7a4749b2187f7687412',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

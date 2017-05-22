@@ -60,23 +60,21 @@ class Youku_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe height=498 width=510 src="http://player.youku.com/embed/XMzQyMzk5MzQ4" frameborder=0 allowfullscreen></iframe>',
 				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
 				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<embed src="http://player.youku.com/player.php/sid/XMzQyMzk5MzQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" allowFullscreen="true" type="application/x-shockwave-flash"></embed>',
 				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
 				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
-				'name'          => __( 'Flash Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'Flash Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => 'http://v.youku.com/v_show/id_XMzQyMzk5MzQ4.html',
 				'expected'      => 'http://g1.ykimg.com/1100641F464F0FB57407E2053DFCBC802FBBC4-E4C5-7A58-0394-26C366F10493',
 				'expected_hash' => 'deac7bb89058a8c46ae2350da9d33ba8',
-				'name'          => __( 'Video URL', 'video-thumbnails' )
+				'name'          => esc_html__( 'Video URL', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

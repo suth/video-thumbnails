@@ -60,17 +60,15 @@ class Twitch_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => 'http://www.twitch.tv/jodenstone/c/5793313',
 				'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-605904705-320x240.jpg',
 				'expected_hash' => '1b2c51fc7380c74d1b2d34751d73e4cb',
-				'name'          => __( 'Video URL', 'video-thumbnails' )
+				'name'          => esc_html__( 'Video URL', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<object bgcolor="#000000" data="http://www.twitch.tv/swflibs/TwitchPlayer.swf" height="378" id="clip_embed_player_flash" type="application/x-shockwave-flash" width="620"><param name="movie" value="http://www.twitch.tv/swflibs/TwitchPlayer.swf" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="channel=jodenstone&auto_play=false&start_volume=25&videoId=c5793313&device_id=bbe9fbac133ab340" /></object>',
 				'expected'      => 'http://static-cdn.jtvnw.net/jtv.thumbs/archive-605904705-320x240.jpg',
 				'expected_hash' => '1b2c51fc7380c74d1b2d34751d73e4cb',
-				'name'          => __( 'Flash Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'Flash Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

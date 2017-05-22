@@ -27,5 +27,3 @@ function simple_video_embedder_video_thumbnail_markup_filter( $markup, $post_id 
 
 // Add filter to modify markup
 add_filter( 'video_thumbnail_markup', 'simple_video_embedder_video_thumbnail_markup_filter', 10, 2 );
-
-?>

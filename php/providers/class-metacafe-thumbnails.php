@@ -60,11 +60,9 @@ class Metacafe_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<embed flashVars="playerVars=autoPlay=no" src="http://www.metacafe.com/fplayer/8456223/men_in_black_3_trailer_2.swf" width="440" height="248" wmode="transparent" allowFullScreen="true" allowScriptAccess="always" name="Metacafe_8456223" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>',
 				'expected'      => 'http://s4.mcstatic.com/thumb/8456223/22479418/4/catalog_item5/0/1/men_in_black_3_trailer_2.jpg',
 				'expected_hash' => '977187bfb00df55b39724d7de284f617',
-				'name'          => __( 'Flash Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'Flash Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

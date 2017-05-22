@@ -66,11 +66,9 @@ class Yahooscreen_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe width="640" height="360" scrolling="no" frameborder="0" src="https://screen.yahoo.com/first-u-bitcoin-exchange-opens-140857495.html?format=embed" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowtransparency="true"></iframe>',
 				'expected'      => 'http://media.zenfs.com/en-US/video/video.abcnewsplus.com/7c70071008e3711818517f19b6ad9629',
 				'expected_hash' => '22c2b172b297cf09511d832ddab7b9f5',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

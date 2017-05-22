@@ -82,17 +82,15 @@ class Wistia_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe src="http://fast.wistia.net/embed/iframe/po4utu3zde?controlsVisibleOnLoad=true&version=v1&videoHeight=360&videoWidth=640&volumeControl=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="640" height="360"></iframe>',
 				'expected'      => 'https://embed-ssl.wistia.com/deliveries/6928fcba8355e38de4d95863a659e1de23cb2071.jpg',
 				'expected_hash' => 'bc4a2cec9ac97e2ccdae2c7387a01cb4',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<div class=\'wistia_embed\' data-video-height=\'312\' data-video-width=\'499\' id=\'wistia_j1qd2lvys1\'></div> <script charset=\'ISO-8859-1\' src=\'http://fast.wistia.com/static/concat/E-v1.js\'></script> <script> var platform = ( Modernizr.touch ) ? "html5" : "flash"; wistiaEmbed = Wistia.embed("j1qd2lvys1", { version: "v1", videoWidth: 499, videoHeight: 312, playButton: Modernizr.touch, smallPlayButton: Modernizr.touch, playbar: Modernizr.touch, platformPreference: platform, chromeless: Modernizr.touch ? false : true, fullscreenButton: false, autoPlay: !Modernizr.touch, videoFoam: true }); </script>',
 				'expected'      => 'https://embed-ssl.wistia.com/deliveries/a086707fe096e7f3fbefef1d1dcba1488d23a3e9.jpg',
 				'expected_hash' => '4c63d131604bfc07b5178413ab245813',
-				'name'          => __( 'JavaScript Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'JavaScript Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

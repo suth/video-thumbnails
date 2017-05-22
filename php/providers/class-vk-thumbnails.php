@@ -68,11 +68,9 @@ class Vk_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => '<iframe src="http://vk.com/video_ext.php?oid=220943440&id=168591360&hash=75a37bd3930f4fab&hd=1" width="607" height="360" frameborder="0"></iframe>',
 				'expected'      => 'http://cs540302.vk.me/u220943440/video/l_afc9770f.jpg',
 				'expected_hash' => 'fd8c2af4ad5cd4e55afe129d80b42d8b',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>

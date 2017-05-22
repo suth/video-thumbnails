@@ -62,17 +62,15 @@ class Blip_Thumbnails extends Video_Thumbnails_Provider {
 				'markup'        => 'http://blip.tv/cranetv/illustrator-katie-scott-6617917',
 				'expected'      => 'http://a.images.blip.tv/CraneTV-IllustratorKatieScott610.jpg',
 				'expected_hash' => '26a622f72bd4bdb3f8189f85598dd95d',
-				'name'          => __( 'Video URL', 'video-thumbnails' )
+				'name'          => esc_html__( 'Video URL', 'video-thumbnails' )
 			),
 			array(
 				'markup'        => '<iframe src="http://blip.tv/play/AYLz%2BEsC.html?p=1" width="780" height="438" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#AYLz+EsC" style="display:none"></embed>',
 				'expected'      => 'http://a.images.blip.tv/GeekCrashCourse-TheAvengersMarvelMovieCatchUpGeekCrashCourse331.png',
 				'expected_hash' => '87efa9f6b0d9111b0826ae4fbdddec1b',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => esc_html__( 'iFrame Embed', 'video-thumbnails' )
 			),
 		);
 	}
 
 }
-
-?>
